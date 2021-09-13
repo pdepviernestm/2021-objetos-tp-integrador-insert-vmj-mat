@@ -1,0 +1,18 @@
+import wollok.game.*
+import example.*
+    
+
+program juego {
+	game.cellSize(32)
+	game.height(10)
+	game.width(10)
+	
+	game.addVisual(personaje)
+	game.addVisual(enemigo)
+
+	game.boardGround(background.image())
+
+	keyboard.x().onPressDo {turno.comenzarTurno()}
+
+	game.start()
+}
