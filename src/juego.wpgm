@@ -1,6 +1,8 @@
 import wollok.game.*
-import example.*
-    
+import enemigo.*
+import menu.*
+import personaje.*
+import turnos.*
 
 program juego {
 	game.cellSize(32)
@@ -12,13 +14,13 @@ program juego {
 	menu.menuActivo().display()			//agregue un display para que muestre el menu del principio
 	game.addVisual(puntero)
 	
-
 	game.boardGround(background.image())
-
-	keyboard.x().onPressDo {turno.comenzarTurno()}
+	keyboard.x().onPressDo{turno.comenzarTurno()}
 	keyboard.down().onPressDo { puntero.moverCursor(abajo) }
 	keyboard.up().onPressDo { puntero.moverCursor(arriba) }
 	
-
 	game.start()
+
+
 }
+
