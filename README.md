@@ -10,7 +10,7 @@ Si no, el enunciado es: https://docs.google.com/document/d/1-6pTgw9TTKHtsh7j7aIB
 
 ## Equipo
 
-**Nombre del equipo:** Insert vmj ~ mar
+**Nombre del equipo:** Insert vmj ~ mat
 
 **Nombres de los integrantes:**
 - Tomás Antonio
