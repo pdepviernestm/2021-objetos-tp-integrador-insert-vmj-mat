@@ -10,10 +10,15 @@ Si no, el enunciado es: https://docs.google.com/document/d/1-6pTgw9TTKHtsh7j7aIB
 
 ## Equipo
 
-**Nombre del equipo:** 
+**Nombre del equipo:** Insert vmj ~ mar
 
 **Nombres de los integrantes:**
-- 
+- Tomás Antonio
+- Agustina Garro
+- Milagros Ramos
+- Valentina Rau
+- Martina Recalde
+- Julián Waibschnaider
 
 
 ## Objetivos
