@@ -5,22 +5,21 @@ import personaje.*
 import turnos.*
 
 program juego {
+	
 	game.cellSize(32)
 	game.height(10)
 	game.width(20)
+	game.boardGround(background.image())
 	
 	game.addVisual(personaje)
 	game.addVisual(enemigo)
 	menu.menuActivo().display()			//agregue un display para que muestre el menu del principio
 	game.addVisual(puntero)
 	
-	game.boardGround(background.image())
-	keyboard.x().onPressDo{turno.comenzarTurno()}
+	keyboard.x().onPressDo{ turno.comenzarTurno() }
 	keyboard.down().onPressDo { puntero.moverCursor(abajo) }
 	keyboard.up().onPressDo { puntero.moverCursor(arriba) }
 	
 	game.start()
 
-
 }
-

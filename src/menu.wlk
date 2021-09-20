@@ -2,6 +2,7 @@ import wollok.game.*
 import enemigo.*
 import personaje.*
 import turnos.*
+import ataques.*
 
 object menu {
 	var property menuActivo = menuPrincipal
@@ -21,6 +22,7 @@ object menu {
 
 object menuPrincipal{
 	const atacar = ataque
+	const magia = fulgor
 	//const items
 	//const magia
 	
@@ -28,11 +30,13 @@ object menuPrincipal{
 	
 	method display(){
 		game.addVisual(ataque)
+		game.addVisual(fulgor)
         //...
 	}
 
     method notDisplay() {
         game.removeVisual(ataque)
+        game.removeVisual(fulgor)
         //...
     }
 	
@@ -93,7 +97,6 @@ object arriba {
 	var lugares = 0
 	const property opuesto = abajo
 	
-	
 	method lugares() = lugares
 	method mover(posicionActual){
 		return posicionActual.up(1)
@@ -130,7 +133,16 @@ object ataque {
 	const property image = "background/ataque2.png"
 	const property position = game.at(1, 3)
 	method accion(quienAtaca){
-		// quienAtaca.atacar(quienAtaca.objetivo())
-        personaje.proximaAccion("atacar")
+        //personaje.proximaAccion("atacar")
+        turno.accionElegida(ataqueFisico)
+	}
+}
+
+object fulgor {
+	const property image = "background/ataque2.png"
+	const property position = game.at(1, 2)
+	method accion(quienAtaca) {
+		//personaje.proximaAccion("fulgor")
+		turno.accionElegida(hechizoFulgor)
 	}
 }
