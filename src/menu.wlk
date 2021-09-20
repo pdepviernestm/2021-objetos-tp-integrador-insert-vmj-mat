@@ -21,12 +21,6 @@ object menu {
 }
 
 object menuPrincipal{
-	const atacar = ataque
-	const magia = fulgor
-	//const items
-	//const magia
-	
-	//const enemigo
 	
 	method display(){
 		game.addVisual(ataque)
@@ -66,7 +60,7 @@ object puntero {
 
 	const posicionInicial = game.at(1,3)
 	var position = posicionInicial
-	var menuActual = menu.menuActivo()
+	const menuActual = menu.menuActivo()
 	method position() = position
 	method image() = "background/cursor3.png"
 	
@@ -133,7 +127,6 @@ object ataque {
 	const property image = "background/ataque2.png"
 	const property position = game.at(1, 3)
 	method accion(quienAtaca){
-        //personaje.proximaAccion("atacar")
         turno.accionElegida(ataqueFisico)
 	}
 }
@@ -142,7 +135,6 @@ object fulgor {
 	const property image = "background/ataque2.png"
 	const property position = game.at(1, 2)
 	method accion(quienAtaca) {
-		//personaje.proximaAccion("fulgor")
 		turno.accionElegida(hechizoFulgor)
 	}
 }

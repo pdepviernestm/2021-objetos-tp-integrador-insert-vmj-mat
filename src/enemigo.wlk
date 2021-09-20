@@ -22,7 +22,11 @@ object enemigo {
 	
 	method reducirHP(danio) {
 		hp -= danio.max(0)
-		if (hp <= 0) game.removeVisual(self)
+		if (hp <= 0) {
+			game.removeVisual(self)
+			game.say(personaje, "Ganaste!")
+			game.schedule(500, { => game.stop()})
+			}
 		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + self.hp().toString())
 	}
 }

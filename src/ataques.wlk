@@ -16,3 +16,6 @@ object hechizoFulgor {
 		atacado.reducirHP(potencia)
 	}
 }
+
+//Con este archivo, podemos modelar muchos ataques y además reutilizarlos.
+//Por ejemplo, ambos usan "ataqueFisico" porque es el ataque básico.

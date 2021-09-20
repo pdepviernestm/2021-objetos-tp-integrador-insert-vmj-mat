@@ -8,7 +8,6 @@ object personaje {
 	var image = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png"
 	const property position = game.at(5, 5)
 	var property objetivo = enemigo		// en el caso de que haya mas enemigos puedo elegir cual, o si quiero curar un companiero tambien
-	// var property turno = true		// si le toca
 	
 	var hp = 100
 	const property fuerza = 20 // ataque fisico
@@ -46,7 +45,11 @@ object personaje {
 	
 	method reducirHP(danio) {
 		hp -= danio.max(0)
-		if (hp <= 0) game.removeVisual(self)
+		if (hp <= 0) {
+			game.removeVisual(self)
+			game.say(enemigo, "Game over...")
+			game.schedule(500, { => game.stop() })
+			}
 		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + self.hp().toString())
 	}
 }
