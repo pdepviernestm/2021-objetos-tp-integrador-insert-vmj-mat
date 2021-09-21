@@ -17,8 +17,8 @@ program juego {
 	game.addVisual(puntero)
 	
 	keyboard.x().onPressDo{ turno.comenzarTurno() }
-	keyboard.down().onPressDo { puntero.moverCursor(abajo) }
-	keyboard.up().onPressDo { puntero.moverCursor(arriba) }
+	keyboard.down().onPressDo{ puntero.moverCursor(abajo) }
+	keyboard.up().onPressDo{ puntero.moverCursor(arriba) }
 	
 	game.start()
 	

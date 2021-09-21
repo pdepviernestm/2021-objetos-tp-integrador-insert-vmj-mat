@@ -14,8 +14,6 @@ object personaje {
 	const property vigor = 30 // defensa fisica
 	const property intelecto = 25 // ataque magico
 	const property mente = 20 // defensa magica
-
-	var property proximaAccion
 	
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
@@ -30,11 +28,6 @@ object personaje {
 	method estaMuerto(){
 		return hp <= 0
 	}
-
-	method realizarAccion() {
-		if (proximaAccion == "atacar") ataqueFisico.realizar(self, enemigo)
-		if (proximaAccion == "fulgor") hechizoFulgor.realizar(self, enemigo)
-	}
 	
 	method animarAtaque() {
 		self.image("Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png")
@@ -45,11 +38,11 @@ object personaje {
 	
 	method reducirHP(danio) {
 		hp -= danio.max(0)
-		if (hp <= 0) {
+		if (self.estaMuerto()) {
 			game.removeVisual(self)
 			game.say(enemigo, "Game over...")
 			game.schedule(500, { => game.stop() })
 			}
-		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + self.hp().toString())
+		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + hp.toString())
 	}
 }

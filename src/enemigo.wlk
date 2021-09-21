@@ -27,6 +27,6 @@ object enemigo {
 			game.say(personaje, "Ganaste!")
 			game.schedule(500, { => game.stop()})
 			}
-		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + self.hp().toString())
+		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + hp.toString())
 	}
 }
