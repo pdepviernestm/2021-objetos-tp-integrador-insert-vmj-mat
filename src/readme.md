@@ -58,15 +58,18 @@ Bio
 
 **Objetivos para 01/10**
 
-Primer objetivo: tener una pelea entre 2 personajes en el que se pueda elegir que ataque usar. El oponente podría hacer siempre lo mismo (lo más simple posible).
 
-Segundo objetivo: el oponente puede tener varios ataques y puede elegir entre ellos.
+
+✅ Primer objetivo: tener una pelea entre 2 personajes en el que se pueda elegir que ataque usar. El oponente podría hacer siempre lo mismo (lo más simple posible).
+
+✅ Segundo objetivo: el oponente puede tener varios ataques y puede elegir entre ellos.
 Por ahora, podemos limitar a una cantidad hardcodeada de ataques/opciones en el menú.
 
-Tercer objetivo: que el daño de los ataques sea calculado a partir de los ataques en sí y de las características de los personajes.
+✅ Tercer objetivo: que el daño de los ataques sea calculado a partir de los ataques en sí y de las características de los personajes.
 
-Cuarto objetivo: Tener diferentes personajes que puedan pelear y que se pueda elegir cuales usar.
+✅ Cuarto objetivo: Tener diferentes personajes que puedan pelear y que se pueda elegir cuales usar.
 
-Quinto objetivo: tener al menos 2 tipos de ataques (podría ser por ej. físicos y mágicos) que calculen su daño de manera distinta.
+✅ Quinto objetivo: tener al menos 2 tipos de ataques (podría ser por ej. físicos y mágicos) que calculen su daño de manera distinta.
 
 Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como testeamos eso.
+

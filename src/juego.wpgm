@@ -11,7 +11,8 @@ program juego {
 	game.width(20)
 	game.boardGround(background.image())
 	
-	game.addVisual(personaje)
+	game.addVisual(ladron)
+	game.addVisual(clerigo)
 	game.addVisual(enemigo)
 	menu.menuActivo().display()			//agregue un display para que muestre el menu del principio
 	game.addVisual(puntero)

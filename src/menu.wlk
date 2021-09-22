@@ -43,8 +43,8 @@ object menuPrincipal{
 		direccion.opuesto().sumarLugares()
 	}
         
-	method seleccionarOpcion(opcion){
-		opcion.accion(personaje)
+	method seleccionarOpcion(opcion, quienAtaca){
+		opcion.accion(quienAtaca)
 	}
 }
 
@@ -127,7 +127,8 @@ object ataque {
 	const property image = "background/ataque2.png"
 	const property position = game.at(1, 3)
 	method accion(quienAtaca){
-        turno.accionElegida(ataqueFisico)
+		if (quienAtaca == ladron) turno.accionLadron(ataqueFisico)
+        else if (quienAtaca == clerigo) turno.accionClerigo(ataqueFisico)
 	}
 }
 
@@ -135,6 +136,8 @@ object fulgor {
 	const property image = "background/ataque2.png"
 	const property position = game.at(1, 2)
 	method accion(quienAtaca) {
-		turno.accionElegida(hechizoFulgor)
+		if (quienAtaca == ladron) turno.accionLadron(hechizoFulgor)
+        else if (quienAtaca == clerigo) turno.accionClerigo(hechizoFulgor)
 	}
 }
+

@@ -4,34 +4,69 @@ import menu.*
 import turnos.*
 import ataques.*
 
-object personaje {
-	var image = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png"
-	const property position = game.at(5, 5)
-	var property objetivo = enemigo		// en el caso de que haya mas enemigos puedo elegir cual, o si quiero curar un companiero tambien
+const ladron = new Personaje (
+	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
+	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
+	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	position = game.at(5, 5),
+	objetivo = enemigo,
+
+	hp = 100,
+	fuerza = 20,
+	vigor = 30,
+	intelecto = 25, 
+	mente = 30
+)
+
+const clerigo = new Personaje (
+	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
+	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
+	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	// cambiar imágenes
+	position = game.at(5, 3),
+	objetivo = enemigo,
+
+	hp = 120,
+	fuerza = 20,
+	vigor = 30,
+	intelecto = 25,
+	mente = 30
+	// cambiar estadísticas
+)
+
+class Personaje {
+	const property position
+	var property objetivo
+
+	var hp
+	const property fuerza 		// ataque fisico
+	const property vigor  		// defensa fisica
+	const property intelecto   	// ataque magico
+	const property mente  		// defensa magica
+
+	const property imagenInicial
+	const property imagenAtaque
+	const property imagenMuerto
 	
-	var hp = 100
-	const property fuerza = 20 // ataque fisico
-	const property vigor = 30 // defensa fisica
-	const property intelecto = 25 // ataque magico
-	const property mente = 20 // defensa magica
-	
+	var image = imagenInicial
+
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
-			return "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png"
+			return imagenMuerto
 		else return image  
 	}
 
 	method image(ruta) {
 		image = ruta
 	}
-	
-	method estaMuerto(){
-		return hp <= 0
-	}
-	
+
 	method animarAtaque() {
-		self.image("Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png")
-		game.schedule(1000, { => self.image("Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png") })
+		self.image(imagenAtaque)
+		game.schedule(1000, { => self.image(imagenInicial) })
+	}
+
+	method estaMuerto() {
+		return hp <= 0
 	}
 
 	method hp() = hp
@@ -45,4 +80,5 @@ object personaje {
 			}
 		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + hp.toString())
 	}
+
 }

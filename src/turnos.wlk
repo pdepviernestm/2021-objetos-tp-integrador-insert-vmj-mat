@@ -6,20 +6,30 @@ import ataques.*
 
 object turno {
 	
-	var property accionElegida
+	var property accionLadron = null
+	var property accionClerigo = null
 	var property accionEnemigo = ataqueFisico
 	
+	var property personajeActual = ladron
+
 	method actualizar() {								// cuando se actualiza el turno, el oponente ataca
 		menu.removerMenu()
-        game.schedule(1000, { => accionElegida.realizar(personaje, enemigo) })
-        game.schedule(3000, { => accionEnemigo.realizar(enemigo, personaje) })
-        game.schedule(4000, { => menu.activarMenu() })
+		accionEnemigo = enemigo.elegirAtaque()
+        game.schedule(1000, { => accionLadron.realizar(ladron, enemigo) })
+        game.schedule(3000, { => accionEnemigo.realizar(enemigo, ladron) })
+		game.schedule(5000, { => accionClerigo.realizar(clerigo, enemigo) })
+        game.schedule(6000, { => menu.activarMenu() })
 	}
 	
 	method comenzarTurno() {
-		if(!personaje.estaMuerto()) {
-            if(game.hasVisual(ataque)) menu.menuActivo().seleccionarOpcion(game.uniqueCollider(puntero))
-            self.actualizar()  
-	    }
-    }
+		if(!personajeActual.estaMuerto()) {
+            if (game.hasVisual(ataque)) menu.menuActivo().seleccionarOpcion(game.uniqueCollider(puntero), personajeActual)
+			if (personajeActual == clerigo) {
+				personajeActual = ladron
+				self.actualizar()
+			}
+			else personajeActual = clerigo
+	    } 
+    } 
+	
 }
