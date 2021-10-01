@@ -1,0 +1,65 @@
+
+import ataques.*
+import enemigo.*
+import wollok.game.*
+import menu.*
+import personaje.*
+import turnos.*
+
+
+test "la posicion del personaje es 5, 5" {
+	const personaje = new Personaje(position = game.at(5, 5))
+	assert.equals(game.at(5, 5), personaje.position())
+}
+
+test "la posicion del enemigo es 2, 5" {
+	assert.equals(game.at(2, 5), enemigo.position())
+}
+
+
+test "un personaje esta muerto si sus puntos son = 0"{
+	
+	const personaje = new Personaje(hp = 0)
+	assert.that(personaje.estaMuerto())
+	
+}
+test "el enemigo está muerto si sus puntos son = 0"{
+	enemigo.hp() == 0
+	assert.that(enemigo.estaMuerto())
+}
+	
+
+
+test "puntos del personaje si recibe un ataque fisico del enemigo "{
+	const personaje = new Personaje(vigor = 30, hp = 100)
+	enemigo.fuerza() == 50
+	const ataqueFisico = new Ataque(atributo = "fisico")
+	ataqueFisico.realizar(enemigo, personaje) 
+	assert.equals(80, personaje.hp())
+	}
+
+test "puntos del personaje si recibe un hechizo fulgor del enemigo "{
+	const personaje = new Personaje(mente = 30, hp = 100)
+	enemigo.intelecto() == 20
+	const hechizoFulgor = new Ataque(atributo = "magico")
+	hechizoFulgor.realizar(enemigo, personaje)
+	assert.equals(70, personaje.hp())
+	
+	}
+
+	
+
+test " si  la carga es menor a 3, el enemigo elige un ataque fisico"{
+	enemigo.carga() < 3
+	assert.equals(ataqueFisico, enemigo.elegirAtaque())
+	
+}
+
+test " si  la carga NO es menor a 3, el enemigo elige un Hechizo fulgor"{
+	enemigo.carga() >= 3
+	assert.equals(hechizoFulgor, enemigo.elegirAtaque())
+	
+	
+}
+
+	

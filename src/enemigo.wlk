@@ -4,7 +4,10 @@ import personaje.*
 import turnos.*
 import ataques.*
 
+
 object enemigo {
+
+	
 	const property image = "enemigos/Cactrot.gif"
 	var property position = game.at(2, 5)
 
@@ -20,6 +23,9 @@ object enemigo {
 		game.schedule(1000, { => self.position(game.at(2,5))})
 	}
 	
+	method estaMuerto() {
+		return hp <= 0
+	}
 	method hp() = hp
 	
 	method reducirHP(danio) {
