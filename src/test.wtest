@@ -8,8 +8,7 @@ import turnos.*
 
 
 test "la posicion del personaje es 5, 5" {
-	const personaje = new Personaje(position = game.at(5, 5))
-	assert.equals(game.at(5, 5), personaje.position())
+	assert.equals(game.at(5, 5), ladron.position())
 }
 
 test "la posicion del enemigo es 2, 5" {
@@ -24,7 +23,7 @@ test "un personaje esta muerto si sus puntos son = 0"{
 	
 }
 test "el enemigo está muerto si sus puntos son = 0"{
-	enemigo.hp() == 0
+	enemigo.hp(0) // para test
 	assert.that(enemigo.estaMuerto())
 }
 	
@@ -32,17 +31,15 @@ test "el enemigo está muerto si sus puntos son = 0"{
 
 test "puntos del personaje si recibe un ataque fisico del enemigo "{
 	const personaje = new Personaje(vigor = 30, hp = 100)
-	enemigo.fuerza() == 50
-	const ataqueFisico = new Ataque(atributo = "fisico")
-	ataqueFisico.realizar(enemigo, personaje) 
+	const personaje2 = new Personaje( fuerza = 50)
+	ataqueFisico.realizar(personaje2, personaje) 
 	assert.equals(80, personaje.hp())
 	}
 
 test "puntos del personaje si recibe un hechizo fulgor del enemigo "{
 	const personaje = new Personaje(mente = 30, hp = 100)
-	enemigo.intelecto() == 20
-	const hechizoFulgor = new Ataque(atributo = "magico")
-	hechizoFulgor.realizar(enemigo, personaje)
+	const personaje2 = new Personaje(intelecto = 20)
+	hechizoFulgor.realizar(personaje2, personaje)
 	assert.equals(70, personaje.hp())
 	
 	}
@@ -50,13 +47,13 @@ test "puntos del personaje si recibe un hechizo fulgor del enemigo "{
 	
 
 test " si  la carga es menor a 3, el enemigo elige un ataque fisico"{
-	enemigo.carga() < 3
+	enemigo.carga(2) 
 	assert.equals(ataqueFisico, enemigo.elegirAtaque())
 	
 }
 
 test " si  la carga NO es menor a 3, el enemigo elige un Hechizo fulgor"{
-	enemigo.carga() >= 3
+	enemigo.carga(3) 
 	assert.equals(hechizoFulgor, enemigo.elegirAtaque())
 	
 	

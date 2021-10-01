@@ -27,6 +27,9 @@ object enemigo {
 		return hp <= 0
 	}
 	method hp() = hp
+	method hp(nuevosHP){ //  PARA TEST
+		hp = nuevosHP
+	}
 	
 	method reducirHP(danio) {
 		hp -= danio.max(0)
