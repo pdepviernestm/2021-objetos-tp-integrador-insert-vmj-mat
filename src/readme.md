@@ -55,11 +55,7 @@ Antimagia
 Bio
 
 
-
 **Objetivos para 01/10**
-
-
-
 ✅ Primer objetivo: tener una pelea entre 2 personajes en el que se pueda elegir que ataque usar. El oponente podría hacer siempre lo mismo (lo más simple posible).
 
 ✅ Segundo objetivo: el oponente puede tener varios ataques y puede elegir entre ellos.
@@ -73,3 +69,19 @@ Por ahora, podemos limitar a una cantidad hardcodeada de ataques/opciones en el 
 
 Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como testeamos eso.
 
+**Objetivos para 28/10**
+✅ Primer objetivo: sePuedeDesplazarHacia no hagan IF BOOLEANO RETURN BOOLEANO
+
+Segundo objetivo: ^ separar el efecto de la consulta
+
+Tercer objetivo: Sacar lo hardcodeado del menu (que hay 2 ataques) y que eso dependa de una lista de ataques.
+
+✅ Cuarto objetivo: Tipos de ataques polimorficos (fisico/magico que no sean strings)
+
+Quinto objetivo: Habilidades para curar.
+
+Sexto objetivo: Peleas de al menos 2v2.
+
+Septimo objetivo: Pantalla de inicio + Poder hacer secuencias de peleas.
+
+Octavo objetivo: Que se puedan ver en pantalla algunas cosas de los personajes (como la vida)

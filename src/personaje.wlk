@@ -8,6 +8,10 @@ const ladron = new Personaje (
 	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
 	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
 	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	
+	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 	position = game.at(5, 5),
 	objetivo = enemigo,
 
@@ -22,6 +26,11 @@ const clerigo = new Personaje (
 	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
 	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
 	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	
+	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+	
 	// cambiar imágenes
 	position = game.at(5, 3),
 	objetivo = enemigo,
@@ -47,7 +56,11 @@ class Personaje {
 	const property imagenInicial
 	const property imagenAtaque
 	const property imagenMuerto
-	
+
+	const property imagenVida1
+	const property imagenVida2
+	const property imagenVida3
+
 	var image = imagenInicial
 
 	method image() {					// para que se quede muerto

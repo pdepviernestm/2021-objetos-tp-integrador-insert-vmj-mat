@@ -1,12 +1,12 @@
 import personaje.*
 import enemigo.*
-
+import atributos.*
 class Ataque{
 	var property atributo
 
 	method realizar(atacante, atacado) {
 		var potencia
-		if (atributo == "fisico") {
+		if (atributo == fisico) {
 			potencia = atacante.fuerza() - atacado.vigor()
 		}
 		else {
@@ -18,8 +18,9 @@ class Ataque{
 	}
 }
 
-const ataqueFisico = new Ataque(atributo = "fisico")
-const hechizoFulgor = new Ataque(atributo = "magico")
+const ataqueFisico = new Ataque(atributo = fisico)
+const hechizoFulgor = new Ataque(atributo = magico)
+
 
 /*
 object cura {

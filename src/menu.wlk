@@ -75,11 +75,7 @@ object puntero {
 	}
 	
 	method sePuedeDesplazarHacia(direccion){
-		if (menuActual.elementosHacia(direccion) > 0){
-			menuActual.actualizarEn(direccion)
-			return true	
-		}
-		else return false
+		return (menuActual.elementosHacia(direccion) > 0)
 	}
     
 }
@@ -140,4 +136,5 @@ object fulgor {
         else if (quienAtaca == clerigo) turno.accionClerigo(hechizoFulgor)
 	}
 }
+
 
