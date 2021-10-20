@@ -4,7 +4,7 @@ import batalla.*
 import elementos.*
 
 object pantallaInicio {
-    const opciones = [opcionBatallaFacil]
+    const property opciones = [opcionBatallaFacil, opcionBatallaDificil]
 
     method iniciar() {
         opciones.forEach{ opcion => game.addVisual(opcion) }
@@ -22,7 +22,7 @@ class Opcion {
     }
 
     method text() = nombre
-    method textColor() = "ffffff"
+    method textColor() = "000000"
 }
 
 const opcionBatallaFacil = new Opcion(

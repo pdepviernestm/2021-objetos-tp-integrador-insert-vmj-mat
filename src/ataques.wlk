@@ -35,22 +35,14 @@ object cura {
 }
 */
 
-
-
-
-//Con este archivo, podemos modelar muchos ataques y además reutilizarlos.
-//Por ejemplo, ambos usan "ataqueFisico" porque es el ataque básico.
-
  class Habilidad {
 	const property tipoHabilidad
 	const property position 
 	const property text
-	method  textColor() = "ffffff" 
+	method textColor() = "ffffff" 
 	
-	method pulsar(origen,destino){
-		
-		turno1.rutina().add(tipoHabilidad)
-	
+	method pulsar() {
+		turno1.agregarAccion(tipoHabilidad)
 	}
 }
 
@@ -58,7 +50,7 @@ object cura {
 
 object fisico{
 	
-	method realizar(atacante,victima){
+	method realizar(atacante, victima){
 		var potencia = atacante.fuerza() - victima.vigor()
 		victima.reducirHP(potencia)
 		atacante.animarHabilidad()
@@ -79,7 +71,7 @@ class Magia{
 		atacante.animarHabilidad()
 	}
 }
-class Elemento{
+class Elemento {
 	const property image
 	var property position = game.at(0,0)
 	

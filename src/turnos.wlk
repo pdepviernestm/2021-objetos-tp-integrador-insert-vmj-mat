@@ -6,15 +6,30 @@ import ataques.*
 import batalla.*
 import elementos.*
 
-object turno1{
+object turno1 {
 	var property rutina = []
 	var origen
 	var destino
+	var property batalla
+	var property heroeActivo
+	var property heroes
 	
 	method ejecutar(){
-		rutina.forEach({accion => accion.realizar(origen,destino)})
+		menuBase.removerMenu()
+		rutina.forEach({accion => accion.realizar(origen, destino)})
 	}
 	
+	method agregarAccion(accion) {
+		rutina.add(accion)
+		if (heroeActivo == heroes.last()) self.ejecutar()
+		else {
+			const cantHeroes = heroes.length()
+			const indiceActual = (0 .. cantHeroes - 1).forEach{ x => 
+				if(heroes.get(x) == heroeActivo) return x
+			}
+			heroeActivo = batalla.heroes().get(indiceActual + 1)
+		}
+	}
 }
 
 

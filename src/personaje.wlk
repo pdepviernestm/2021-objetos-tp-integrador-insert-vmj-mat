@@ -116,10 +116,8 @@ const ladron = new Personaje (
 	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
 	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-	position = game.at(5, 5),
+	position = game.at(5, 8),
 	objetivo = enemigo1,
-	
-	//icono = new Icono(position = game.at(16,4),image = "images/WhiteMage2F2.gif"),
 
 	hp = 100,
 	vida = new Hp(hpInicial = 100,position= game.at(14,2)),
@@ -141,7 +139,7 @@ const clerigo = new Personaje (
 	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 	
 	// cambiar imágenes
-	position = game.at(5, 3),
+	position = game.at(5, 6),
 	objetivo = enemigo1,
 
 	
