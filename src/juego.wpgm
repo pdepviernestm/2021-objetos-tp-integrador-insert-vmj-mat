@@ -1,26 +1,30 @@
 import wollok.game.*
-import enemigo.*
+// import enemigo.*
 import menu.*
-import personaje.*
-import turnos.*
+// import personaje.*
+// import turnos.*
+import pantallaInicio.*
 
 program juego {
 	
 	game.cellSize(32)
 	game.height(10)
 	game.width(20)
-	game.boardGround(background.image())
+	// game.boardGround(background.image())
 	
-	game.addVisual(ladron)
-	game.addVisual(clerigo)
-	game.addVisual(enemigo)
-	menu.menuActivo().display()			//agregue un display para que muestre el menu del principio
-	game.addVisual(puntero)
+	// game.addVisual(ladron)
+	// game.addVisual(clerigo)
+	// game.addVisual(enemigo)
+	// menu.menuActivo().display()			//agregue un display para que muestre el menu del principio
+	// game.addVisual(puntero)
 	
-	keyboard.x().onPressDo{ turno.comenzarTurno() }
-	keyboard.down().onPressDo{ puntero.moverCursor(abajo) }
-	keyboard.up().onPressDo{ puntero.moverCursor(arriba) }
+	pantallaInicio.iniciar()
+	
+	// keyboard.x().onPressDo{ turno.comenzarTurno() }
+	keyboard.down().onPressDo{ punteroInicio.moverseHacia(abajo) }
+	keyboard.up().onPressDo{ punteroInicio.moverseHacia(arriba) }
+	keyboard.y().onPressDo{ punteroInicio.seleccionar() }
 	
 	game.start()
-	
+
 }

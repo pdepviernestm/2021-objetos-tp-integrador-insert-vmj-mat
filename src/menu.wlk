@@ -3,6 +3,47 @@ import enemigo.*
 import personaje.*
 import turnos.*
 import ataques.*
+import batalla.*
+
+class Menu {
+	const property position
+	const property image
+	var items // = [puntero,curacion,ataqueFisico,ataqueMagico]
+	
+	method activarMenu(){
+		self.display()
+	}
+
+	method display(){
+		game.addVisual(self)
+		items.forEach({item=>game.addVisual(item)})
+	}
+	
+	method removerMenu() {
+        game.removeVisual(puntero)
+        items.forEach({item=>game.removeVisual(item)})
+    }
+
+	method seleccionarOpcion(opcion, actor){
+		opcion.accion(actor)
+	}
+}
+
+class Estadisticas inherits Menu{
+	var personajes // = [clerigo,otroClerigo,otroOClerigo]
+	
+	override method display(){
+		game.addVisual(self)
+		personajes.forEach({p=>self.addChar(p)})
+	}
+	method addChar(p){
+		game.addVisual(p.vida())
+		game.addVisual(p.icono())
+	}
+}
+
+
+
 
 object menu {
 	var property menuActivo = menuPrincipal
@@ -56,11 +97,10 @@ object menuItems{
 	
 }
 
-object puntero {
-
-	const posicionInicial = game.at(1,3)
-	var position = posicionInicial
-	const menuActual = menu.menuActivo()
+class Puntero {
+	const posicionInicial
+	var property position = posicionInicial
+	const menuActual = menuBase
 	method position() = position
 	method image() = "background/cursor3.png"
 	
@@ -68,51 +108,33 @@ object puntero {
 		position = posicionInicial
 	}
 	
-	method moverCursor(posicion){
-		if (self.sePuedeDesplazarHacia(posicion))
-			position = posicion.mover(position)
-		else position 
+	method moverseHacia(donde){
+		if (donde.hayElementos(position.y())){
+			position = donde.mover(position)
+		}
 	}
-	
-	method sePuedeDesplazarHacia(direccion){
-		return (menuActual.elementosHacia(direccion) > 0)
-	}
-    
-}
-
-// el puntero, que basicamente esta hardcodeado para que se mueva dependiendo de la cantidad de opciones q tiene arriba o abajo
-
-
-object arriba {
-	var lugares = 0
-	const property opuesto = abajo
-	
-	method lugares() = lugares
-	method mover(posicionActual){
-		return posicionActual.up(1)
-	}
-	method restarLugares(){
-		lugares -= 1
-	}
-	method sumarLugares(){
-		lugares += 1
+	method seleccionar(){
+		game.uniqueCollider(self).realizar()
 	}
 }
 
-object abajo {
-	var lugares = 2
-	const property opuesto = arriba
+const puntero = new Puntero(posicionInicial = game.at(2, 3))
+
+object arriba{
 	
-	method lugares() = lugares
-	method mover(posicionActual){
-		return posicionActual.down(1)
+	method hayElementos(posicion) = game.getObjectsIn(game.at(2,(posicion+1))) == []
+	method mover(posicion){
+		return posicion.up(1)
 	}
-	method restarLugares(){
-		lugares -= 1
+	
+}
+object abajo{
+	
+	method hayElementos(posicion) = game.getObjectsIn(game.at(2,(posicion-1))) == []
+	method mover(posicion){
+		return posicion.down(1)
 	}
-	method sumarLugares(){
-		lugares += 1
-	}
+
 }
 
 object background {

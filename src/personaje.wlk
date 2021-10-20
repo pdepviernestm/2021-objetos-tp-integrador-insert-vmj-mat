@@ -4,48 +4,11 @@ import menu.*
 import turnos.*
 import ataques.*
 
-const ladron = new Personaje (
-	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
-	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
-	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
-	
-	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-	position = game.at(5, 5),
-	objetivo = enemigo,
-
-	hp = 100,
-	fuerza = 20,
-	vigor = 30,
-	intelecto = 25, 
-	mente = 30
-)
-
-const clerigo = new Personaje (
-	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
-	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
-	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
-	
-	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-	
-	// cambiar imágenes
-	position = game.at(5, 3),
-	objetivo = enemigo,
-
-	hp = 120,
-	fuerza = 20,
-	vigor = 30,
-	intelecto = 25,
-	mente = 30
-	// cambiar estadísticas
-)
-
 class Personaje {
 	const property position
 	var property objetivo
+	//var property vida
+	//var property icono
 
 	var hp
 	const property fuerza 		// ataque fisico
@@ -62,6 +25,10 @@ class Personaje {
 	const property imagenVida3
 
 	var image = imagenInicial
+
+	var imageVida = imagenVida1
+	var imageVida2 = imagenVida2
+	var imageVida3 = imagenVida3
 
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
@@ -88,10 +55,107 @@ class Personaje {
 		hp -= danio.max(0)
 		if (self.estaMuerto()) {
 			game.removeVisual(self)
-			game.say(enemigo, "Game over...")
+			game.say(enemigo1, "Game over...")
 			game.schedule(500, { => game.stop() })
 			}
-		if (game.hasVisual(self)) game.say(self, "Mi vida ahora es " + hp.toString())
+		if (game.hasVisual(self)) {
+			game.say(self, "Mi vida ahora es " + hp.toString())}
 	}
 
 }
+
+const ladron = new Personaje (
+	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
+	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
+	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	
+	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+	position = game.at(5, 5),
+	objetivo = enemigo1,
+	//vida = new Hp(hpInicial = 100,position= game.at(14,4)),
+	//icono = new Icono(position = game.at(16,4),image = "images/WhiteMage2F2.gif"),
+
+	hp = 100,
+	fuerza = 20,
+	vigor = 30,
+	intelecto = 25, 
+	mente = 30
+)
+
+const clerigo = new Personaje (
+	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
+	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
+	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	
+	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+	
+	// cambiar imágenes
+	position = game.at(5, 3),
+	objetivo = enemigo1,
+
+	//vida = new Hp(hpInicial = 100,position= game.at(14,4)),
+	//icono = new Icono(position = game.at(16,4),image = "images/WhiteMage2F2.gif"),
+	
+	hp = 120,
+	fuerza = 20,
+	vigor = 30,
+	intelecto = 25,
+	mente = 30
+	// cambiar estadísticas
+)
+const poseidon = new Personaje(
+	//CAMBIAR IMAGENES 
+	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png", 
+	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
+	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	
+	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+	position = game.at(6, 6),
+	objetivo = enemigo1, // CAMBIAR A ENEMIGO INTERMEDIO
+
+	//vida = new Hp(hpInicial = 100,position= game.at(14,3)),
+	//icono = new Icono(position = game.at(16,3),image = "images/WhiteMage2F2.gif"),
+
+	hp = 150,
+	fuerza = 40,
+	vigor = 20,
+	intelecto = 60,
+	mente = 10
+)
+
+const hercules = new Personaje(
+	//CAMBIAR IMAGENES 
+	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png", 
+	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
+	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+	
+	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+	position = game.at(7, 7),
+	objetivo = enemigo1, // CAMBIAR A ENEMIGO INTERMEDIO
+
+	//vida = new Hp(hpInicial = 100,position= game.at(14,2)),
+	//icono = new Icono(position = game.at(16,2),image = "images/WhiteMage2F2.gif"),
+
+	hp = 120,
+	fuerza = 90,
+	vigor = 50,
+	intelecto = 40,
+	mente = 70
+)
+
+
+
+
+/*class Personaje {
+	var property vida //= new Hp(hpInicial = 100)
+	var property icono //= new Icono(position = game.at(16,4),image = "images/WhiteMage2F.gif")
+	
+}*/

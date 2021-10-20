@@ -72,7 +72,7 @@ Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como 
 **Objetivos para 28/10**
 ✅ Primer objetivo: sePuedeDesplazarHacia no hagan IF BOOLEANO RETURN BOOLEANO
 
-Segundo objetivo: ^ separar el efecto de la consulta
+✅Segundo objetivo: ^ separar el efecto de la consulta
 
 Tercer objetivo: Sacar lo hardcodeado del menu (que hay 2 ataques) y que eso dependa de una lista de ataques.
 
@@ -84,4 +84,4 @@ Sexto objetivo: Peleas de al menos 2v2.
 
 Septimo objetivo: Pantalla de inicio + Poder hacer secuencias de peleas.
 
-Octavo objetivo: Que se puedan ver en pantalla algunas cosas de los personajes (como la vida)
+✅Octavo objetivo: Que se puedan ver en pantalla algunas cosas de los personajes (como la vida)
