@@ -4,11 +4,12 @@ import menu.*
 // import personaje.*
 // import turnos.*
 import pantallaInicio.*
+import elementos.*
 
 program juego {
 	
 	game.cellSize(32)
-	game.height(10)
+	game.height(15)
 	game.width(20)
 	// game.boardGround(background.image())
 	
@@ -21,9 +22,9 @@ program juego {
 	pantallaInicio.iniciar()
 	
 	// keyboard.x().onPressDo{ turno.comenzarTurno() }
-	keyboard.down().onPressDo{ punteroInicio.moverseHacia(abajo) }
-	keyboard.up().onPressDo{ punteroInicio.moverseHacia(arriba) }
-	keyboard.y().onPressDo{ punteroInicio.seleccionar() }
+	keyboard.down().onPressDo{ modo.puntero().moverseHacia(abajo) }
+	keyboard.up().onPressDo{ modo.puntero().moverseHacia(arriba) }
+	keyboard.y().onPressDo{ modo.puntero().seleccionar() }
 	
 	game.start()
 

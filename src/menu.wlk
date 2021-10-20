@@ -4,22 +4,21 @@ import personaje.*
 import turnos.*
 import ataques.*
 import batalla.*
+import elementos.*
 
 class Menu {
 	const property position
 	const property image
-	var items // = [puntero,curacion,ataqueFisico,ataqueMagico]
-	
-	method activarMenu(){
-		self.display()
-	}
+	var items 
 
-	method display(){
+	method display(puntero){
 		game.addVisual(self)
 		items.forEach({item=>game.addVisual(item)})
+		game.addVisual(puntero)
 	}
 	
-	method removerMenu() {
+	method removerMenu(puntero) {
+        //game.removeVisual(self)
         game.removeVisual(puntero)
         items.forEach({item=>game.removeVisual(item)})
     }
@@ -30,16 +29,21 @@ class Menu {
 }
 
 class Estadisticas inherits Menu{
-	var personajes // = [clerigo,otroClerigo,otroOClerigo]
 	
-	override method display(){
+	
+	method display(){
 		game.addVisual(self)
-		personajes.forEach({p=>self.addChar(p)})
+		items.forEach({p=>self.addChar(p)})
 	}
 	method addChar(p){
 		game.addVisual(p.vida())
 		game.addVisual(p.icono())
 	}
+	method removerStats() {
+        //game.removeVisual(self)
+        items.forEach({item=>game.removeVisual(item)})
+    }
+	
 }
 
 
@@ -50,11 +54,11 @@ object menu {
 
     method activarMenu() {
         menuActivo.display()
-        game.addVisual(puntero)
+        game.addVisual(punteroBase)
     }
     
     method removerMenu() {
-        game.removeVisual(puntero)
+        game.removeVisual(punteroBase)
         menuActivo.notDisplay()
         menuActivo = menuPrincipal
     }
@@ -100,7 +104,6 @@ object menuItems{
 class Puntero {
 	const posicionInicial
 	var property position = posicionInicial
-	const menuActual = menuBase
 	method position() = position
 	method image() = "background/cursor3.png"
 	
@@ -109,30 +112,30 @@ class Puntero {
 	}
 	
 	method moverseHacia(donde){
-		if (donde.hayElementos(position.y())){
+		if (donde.hayElementos(position.x(),position.y())){
 			position = donde.mover(position)
 		}
 	}
 	method seleccionar(){
-		game.uniqueCollider(self).realizar()
+		game.uniqueCollider(self).pulsar()
 	}
 }
 
-const puntero = new Puntero(posicionInicial = game.at(2, 3))
+//const puntero = new Puntero(posicionInicial = game.at(3, 3))
 
 object arriba{
 	
-	method hayElementos(posicion) = game.getObjectsIn(game.at(2,(posicion+1))) == []
-	method mover(posicion){
-		return posicion.up(1)
+	method hayElementos(x,y) = game.getObjectsIn(game.at(x,(y+1))) != []
+	method mover(y){
+		return y.up(1)
 	}
 	
 }
 object abajo{
 	
-	method hayElementos(posicion) = game.getObjectsIn(game.at(2,(posicion-1))) == []
-	method mover(posicion){
-		return posicion.down(1)
+	method hayElementos(x,y) = game.getObjectsIn(game.at(x,(y-1))) != []
+	method mover(y){
+		return y.down(1)
 	}
 
 }
@@ -154,8 +157,8 @@ object fulgor {
 	const property image = "background/ataque2.png"
 	const property position = game.at(1, 2)
 	method accion(quienAtaca) {
-		if (quienAtaca == ladron) turno.accionLadron(hechizoFulgor)
-        else if (quienAtaca == clerigo) turno.accionClerigo(hechizoFulgor)
+		if (quienAtaca == ladron) turno.accionLadron(ataqueMagico)
+        else if (quienAtaca == clerigo) turno.accionClerigo(ataqueMagico)
 	}
 }
 

@@ -4,6 +4,20 @@ import menu.*
 import personaje.*
 import ataques.*
 import batalla.*
+import elementos.*
+
+object turno1{
+	var property rutina = []
+	var origen
+	var destino
+	
+	method ejecutar(){
+		rutina.forEach({accion => accion.realizar(origen,destino)})
+	}
+	
+}
+
+
 
 object turno {
 	
@@ -24,7 +38,7 @@ object turno {
 	
 	method comenzarTurno() {
 		if(!personajeActual.estaMuerto()) {
-            if (game.hasVisual(ataque)) menuBase.seleccionarOpcion(game.uniqueCollider(puntero), personajeActual)
+            if (game.hasVisual(ataque)) menuBase.seleccionarOpcion(game.uniqueCollider(punteroBase), personajeActual)
 			if (personajeActual == clerigo) {
 				personajeActual = ladron
 				self.actualizar()

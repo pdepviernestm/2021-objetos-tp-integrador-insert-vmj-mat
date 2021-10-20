@@ -1,6 +1,7 @@
 import wollok.game.*
 import menu.*
 import batalla.*
+import elementos.*
 
 object pantallaInicio {
     const opciones = [opcionBatallaFacil]
@@ -16,7 +17,7 @@ class Opcion {
     const nombre
     const property position
 
-    method realizar() {
+    method pulsar() {
         destino.iniciar()
     }
 
@@ -36,4 +37,3 @@ const opcionBatallaDificil = new Opcion(
     position = game.at(5, 6)
 )
 
-const punteroInicio = new Puntero(posicionInicial = game.at(5, 5))

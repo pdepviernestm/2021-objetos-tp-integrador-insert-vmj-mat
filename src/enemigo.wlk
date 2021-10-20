@@ -38,7 +38,7 @@ class Enemigo {
 			carga++
 		}
 		else {
-			ataqueElegido = hechizoFulgor
+			ataqueElegido = ataqueMagico
 			carga = 0
 		}
 		return ataqueElegido
