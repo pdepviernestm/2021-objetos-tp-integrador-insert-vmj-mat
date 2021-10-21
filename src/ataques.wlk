@@ -36,13 +36,14 @@ object cura {
 */
 
  class Habilidad {
+ 	const property rol
 	const property tipoHabilidad
 	const property position 
 	const property text
 	method textColor() = "ffffff" 
 	
 	method pulsar() {
-		turno1.agregarAccion(tipoHabilidad)
+		turno1.agregarAccion(self)
 	}
 }
 
@@ -97,6 +98,9 @@ object cura{
 	}
 }
 
-const curacion = new Habilidad (tipoHabilidad = cura, position = game.at(3, 3),text = "Curacion")
-const ataqueFisico = new Habilidad (tipoHabilidad = fisico, position = game.at(3, 2),text = "Ataque Fisico")
-const ataqueMagico = new Habilidad (tipoHabilidad = new Magia(elemento = piro),position = game.at(3, 1),text = "Ataque Magico")
+object ataque{}
+object defensa{}
+
+const curacion = new Habilidad (rol = defensa, tipoHabilidad = cura, position = game.at(3, 3),text = "Curacion")
+const ataqueFisico = new Habilidad (rol = ataque,tipoHabilidad = fisico, position = game.at(3, 2),text = "Ataque Fisico")
+const ataqueMagico = new Habilidad (rol = ataque,tipoHabilidad = new Magia(elemento = piro),position = game.at(3, 1),text = "Ataque Magico")

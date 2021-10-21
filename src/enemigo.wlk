@@ -9,7 +9,7 @@ class Enemigo {
 	const property imagenVida1
 	const property imagenVida2
 	const property imagenVida3
-	
+	var property nombre
 	var property position
 	var hp
 	var property carga
@@ -57,7 +57,8 @@ const enemigo1 = new Enemigo(
 	 fuerza = 50, // ataque fisico
 	 vigor = 15, // defensa fisica
 	 intelecto = 20, // ataque magico
-	 mente = 15 // defensa magica
+	 mente = 15, // defensa magica
+	 nombre = new Nombre(text ="enemigo1",position = game.at(2,1))
 )
 
 const enemigo2 = new Enemigo(
@@ -72,7 +73,9 @@ const enemigo2 = new Enemigo(
 	 fuerza = 70, // ataque fisico
 	 vigor = 30, // defensa fisica
 	 intelecto = 30, // ataque magico
-	 mente = 10 // defensa magica
+	 mente = 10, // defensa magica
+	 nombre = new Nombre(text ="enemigo1",position = game.at(2,2))
+
 )
 
 const enemigo3 = new Enemigo (
@@ -88,7 +91,8 @@ const enemigo3 = new Enemigo (
 	 fuerza = 50, // ataque fisico
 	 vigor = 70, // defensa fisica
 	 intelecto = 30, // ataque magico
-	 mente = 40 // defensa magica
+	 mente = 40, // defensa magica
+	 nombre = new Nombre(text ="enemigo1",position = game.at(2,3))
 )
 
 const enemigo4 = new Enemigo(
@@ -104,5 +108,6 @@ const enemigo4 = new Enemigo(
 	 fuerza = 40, // ataque fisico
 	 vigor = 80, // defensa fisica
 	 intelecto = 60, // ataque magico
-	 mente = 35 // defensa magica
+	 mente = 35, // defensa magica
+	 nombre = new Nombre(text ="enemigo1",position = game.at(2,4))
 )

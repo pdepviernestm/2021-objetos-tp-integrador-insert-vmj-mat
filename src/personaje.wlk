@@ -27,11 +27,19 @@ class Hp{
 	method ganarHP(n){
 		hpActual += n
 	}
-	
-	
-	
 }
 
+class Nombre{
+	const  position
+	const  text
+	method position() = position
+	method text() = text
+	method textColor() = "ffffff"
+	
+	method pulsar(){
+		turno1.objetivoTurno(self)
+	}
+}
 
 class Personaje {
 	const property position
@@ -39,7 +47,8 @@ class Personaje {
 	var property vida = new Hp(hpInicial = 0,position = game.at(0,0))
 	var property icono
 	var property hp
-
+	var property nombre
+	
 	//var property status 
 	//var hp
 	
@@ -103,10 +112,12 @@ class Personaje {
 		else{}
 	}
 
+	
 }
 
 
 const ladron = new Personaje (
+	nombre = new Nombre(text ="ladron",position = game.at(4,2)),
 	icono = new Icono(position = game.at(16,2),image = "menu/WhiteMage2F2.gif"),
 	//hp = new Hp(hpInicial = 100,position= game.at(14,2)),
 	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
@@ -128,6 +139,7 @@ const ladron = new Personaje (
 )
 
 const clerigo = new Personaje (
+	nombre = new Nombre(text ="clerigo",position = game.at(4,1)),	
 	icono = new Icono(position = game.at(16,4),image = "menu/WhiteMage2F2.gif"),
 	//hp = new Hp(hpInicial = 120,position= game.at(14,2)),
 	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
@@ -155,6 +167,7 @@ const clerigo = new Personaje (
 )
 const poseidon = new Personaje(
 	//CAMBIAR IMAGENES 
+	nombre = new Nombre(text ="poseidon",position = game.at(4,3)),		
 	icono = new Icono(position = game.at(13,2),image = "menu/WhiteMage2F2.gif"),
 	//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
 	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png", 
@@ -180,6 +193,7 @@ const poseidon = new Personaje(
 
 const hercules = new Personaje(
 	//CAMBIAR IMAGENES 
+	nombre = new Nombre(text ="hercules",position = game.at(4,4)),
 	icono= new Icono(position = game.at(13,4),image = "menu/WhiteMage2F2.gif"),
 	//hp= new Hp(hpInicial = 120,position= game.at(14,2)),
 	

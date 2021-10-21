@@ -15,6 +15,7 @@ class Menu {
 		game.addVisual(self)
 		items.forEach({item=>game.addVisual(item)})
 		game.addVisual(puntero)
+		modo.puntero(puntero)
 	}
 	
 	method removerMenu(puntero) {
@@ -46,60 +47,19 @@ class Estadisticas inherits Menu{
 	
 }
 
-
-
-
-object menu {
-	var property menuActivo = menuPrincipal
-
-    method activarMenu() {
-        menuActivo.display()
-        game.addVisual(punteroBase)
-    }
-    
-    method removerMenu() {
-        game.removeVisual(punteroBase)
-        menuActivo.notDisplay()
-        menuActivo = menuPrincipal
-    }
-    
-}
-
-object menuPrincipal{
-	
-	method display(){
-		game.addVisual(ataque)
-		game.addVisual(fulgor)
-        //...
-	}
-
-    method notDisplay() {
-        game.removeVisual(ataque)
-        game.removeVisual(fulgor)
-        //...
-    }
-	
-	method elementosHacia(direccion){
-		return direccion.lugares()
-	}
-
-	method actualizarEn(direccion){
-		direccion.restarLugares()
-		direccion.opuesto().sumarLugares()
-	}
-        
-	method seleccionarOpcion(opcion, quienAtaca){
-		opcion.accion(quienAtaca)
+class Objetivos inherits Estadisticas{
+	 override method display(puntero){
+	 	game.addVisual(self)
+		items.forEach({item=>game.addVisual(item.nombre())})
+		game.addVisual(puntero)
+		modo.puntero(puntero)
+	 }
+	 override method addChar(p){
+		game.addVisual(p.nombre())
+		
 	}
 }
 
-object menuAtaques{
-	
-}
-
-object menuItems{
-	
-}
 
 class Puntero {
 	const posicionInicial
@@ -140,26 +100,29 @@ object abajo{
 
 }
 
+object izquierda{
+	
+	method hayElementos(x,y) = game.getObjectsIn(game.at(x-2,y)) != []
+	method mover(x){
+		return x.left(2)
+	}
+	
+}
+object derecha{
+	
+	method hayElementos(x,y) = game.getObjectsIn(game.at(x+2,y)) != []
+	method mover(x){
+		return x.right(2)
+	}
+
+}
+
 object background {
 	method image() = "background/fondo.jpeg"
 }
 
-object ataque {
-	const property image = "background/ataque2.png"
-	const property position = game.at(1, 3)
-	method accion(quienAtaca){
-		if (quienAtaca == ladron) turno.accionLadron(ataqueFisico)
-        else if (quienAtaca == clerigo) turno.accionClerigo(ataqueFisico)
-	}
-}
 
-object fulgor {
-	const property image = "background/ataque2.png"
-	const property position = game.at(1, 2)
-	method accion(quienAtaca) {
-		if (quienAtaca == ladron) turno.accionLadron(ataqueMagico)
-        else if (quienAtaca == clerigo) turno.accionClerigo(ataqueMagico)
-	}
-}
+	
 
+const menuBase = new Menu (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [curacion, ataqueFisico, ataqueMagico])
 

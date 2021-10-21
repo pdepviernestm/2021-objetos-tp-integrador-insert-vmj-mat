@@ -7,7 +7,8 @@ import ataques.*
 import elementos.*
 import turnos.*
 
-const menuBase = new Menu (position = game.at(2,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.png", items = [curacion, ataqueFisico, ataqueMagico])
+//const menuBase = new Menu (position = game.at(2,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.png", items = [curacion, ataqueFisico, ataqueMagico])
+
 //const estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [ladron,clerigo])
 
 class Batalla {
@@ -15,6 +16,7 @@ class Batalla {
     const enemigos = []
     const estadisticas
     const fondo = "background/fondo1.jpeg"
+    const property menuObjetivo
     
     method iniciar() {
     	game.removeVisual(punteroInicio)
@@ -38,12 +40,16 @@ const batallaFacil = new Batalla(
     heroes = [ladron, clerigo],
     enemigos = [enemigo2, enemigo1], // cambiar
     fondo = "background/fondo1.jpeg",
-    estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [ladron,clerigo])
+    estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [ladron,clerigo]),
+    menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [ladron, clerigo] + [enemigo2, enemigo1])
+    
     )
 
 const batallaDificil = new Batalla (
     heroes = [poseidon, hercules],
     enemigos = [enemigo3, enemigo4], // cambiar
     fondo = "background/fondo1.jpeg", // cambiar
-    estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [poseidon, hercules])
+    estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [poseidon, hercules]),
+	menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [poseidon, hercules] + [enemigo3, enemigo4])
+	
 )

@@ -12,6 +12,7 @@ object turno1 {
 	var property heroeActivo
 	var property heroes = []
 	var property enemigos = []
+	var property objetivoTurno
 	
 	method ejecutar(){
 		menuBase.removerMenu(punteroBase)
@@ -29,8 +30,25 @@ object turno1 {
 		game.schedule(1000 + 2000 * cantAcciones, { => menuBase.display(punteroBase) })
 	}
 	
+	method agregarObjetivoPara(accion){
+		if (accion.rol() != objetivoTurno.rol() ){
+			self.agregarAccion(accion)
+		}
+		else{
+			batalla.menuObjetivo().removerMenu(punteroObjetivo)
+			menuBase.display(punteroBase)
+		}
+		
+	}
+	
+	
 	method agregarAccion(accion) {
-		const movimiento = new Movimiento(habilidad = accion, origen = heroeActivo, destino = enemigos.head())
+		if(game.hasVisual(menuBase)){
+			menuBase.removerMenu(punteroBase)
+			batalla.menuObjetivo().display(punteroObjetivo)
+		}
+		
+		const movimiento = new Movimiento(habilidad = accion.tipoHabilidad(), origen = heroeActivo, destino = objetivoTurno)
 		// hay que dejar que el héroe elija el enemigo
 		
 		rutina.add(movimiento)
@@ -61,32 +79,3 @@ class Movimiento {
 	}
 }
 
-object turno {
-	
-	var property accionLadron = null
-	var property accionClerigo = null
-	var property accionEnemigo = ataqueFisico
-	
-	var property personajeActual = ladron
-
-	method actualizar() {								// cuando se actualiza el turno, el oponente ataca
-		menu.removerMenu()
-		accionEnemigo = enemigo1.elegirAtaque()
-        game.schedule(1000, { => accionLadron.realizar(ladron, enemigo1) })
-        game.schedule(3000, { => accionEnemigo.realizar(enemigo1, ladron) })
-		game.schedule(5000, { => accionClerigo.realizar(clerigo, enemigo1) })
-        game.schedule(6000, { => menuBase.activarMenu() })
-	}
-	
-	method comenzarTurno() {
-		if(!personajeActual.estaMuerto()) {
-            if (game.hasVisual(ataque)) menuBase.seleccionarOpcion(game.uniqueCollider(punteroBase), personajeActual)
-			if (personajeActual == clerigo) {
-				personajeActual = ladron
-				self.actualizar()
-			}
-			else personajeActual = clerigo
-	    } 
-    } 
-	
-}
