@@ -22,6 +22,7 @@ class Batalla {
     	game.boardGround(fondo)
     	
     	turno1.batalla(self)
+    	turno1.enemigos(enemigos)
     	turno1.heroes(heroes)
     	turno1.heroeActivo(heroes.head())
     	
