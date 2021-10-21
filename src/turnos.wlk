@@ -15,8 +15,8 @@ object turno1 {
 	
 	method ejecutar(){
 		menuBase.removerMenu(punteroBase)
-		enemigos.forEach({ enemigo => self.agregarAccion(enemigo.elegirAccion()) })
-		// la línea de acá arriba dependería de cómo modelamos la IA del enemigo
+		
+		enemigos.forEach({ enemigo => self.agregarAccion(enemigo.elegirAtaque()) })
 		
 		const cantAcciones = rutina.size()
 		(0 .. cantAcciones - 1).forEach{ x => 
