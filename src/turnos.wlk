@@ -31,6 +31,8 @@ object turno1 {
 	
 	method agregarAccion(accion) {
 		const movimiento = new Movimiento(habilidad = accion, origen = heroeActivo, destino = enemigos.head())
+		// hay que dejar que el héroe elija el enemigo
+		
 		rutina.add(movimiento)
 		if (heroeActivo == heroes.last()) self.ejecutar()
 		else {
@@ -55,7 +57,7 @@ class Movimiento {
 	var destino
 	
 	method realizar() {
-		// esto es según cómo se modele cada ataque
+		habilidad.realizar(origen, destino)
 	}
 }
 
