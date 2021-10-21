@@ -12,7 +12,7 @@ class Icono{
 }
 
 class Hp{
-	
+	var property rol = ataque
 	const hpInicial 
 	var hpActual = hpInicial
 	const property position 

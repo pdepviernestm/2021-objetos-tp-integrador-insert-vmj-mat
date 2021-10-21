@@ -5,6 +5,7 @@ import turnos.*
 import ataques.*
 
 class Enemigo {
+	var property rol = defensa
 	const property imagenInicial
 	const property imagenVida1
 	const property imagenVida2
@@ -19,7 +20,9 @@ class Enemigo {
 	const property mente  		// defensa magica
 
 	method image() = imagenInicial
-
+	
+	 
+	
 	method animarAtaque() {
 		position = game.at(position.x()+1, position.y())
 		game.schedule(1000, { => position = game.at(position.x()-1, position.y()) })
