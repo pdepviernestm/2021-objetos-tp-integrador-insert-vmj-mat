@@ -11,22 +11,15 @@ program juego {
 	game.cellSize(32)
 	game.height(15)
 	game.width(20)
-	// game.boardGround(background.image())
-	
-	// game.addVisual(ladron)
-	// game.addVisual(clerigo)
-	// game.addVisual(enemigo)
-	// menu.menuActivo().display()			//agregue un display para que muestre el menu del principio
-	// game.addVisual(puntero)
 	
 	pantallaInicio.iniciar()
 	
-	// keyboard.x().onPressDo{ turno.comenzarTurno() }
 	keyboard.down().onPressDo{ modo.puntero().moverseHacia(abajo) }
 	keyboard.up().onPressDo{ modo.puntero().moverseHacia(arriba) }
-	keyboard.y().onPressDo{ modo.puntero().seleccionar() }
-	keyboard.left().onPressDo{modo.puntero().moverseHacia(izquierda) }
-	keyboard.right().onPressDo{modo.puntero().moverseHacia(derecha) }
+	keyboard.x().onPressDo{ modo.puntero().seleccionar() }
+	keyboard.left().onPressDo{ modo.puntero().moverseHacia(izquierda) }
+	keyboard.right().onPressDo{ modo.puntero().moverseHacia(derecha) }
+	
 	game.start()
 
 }

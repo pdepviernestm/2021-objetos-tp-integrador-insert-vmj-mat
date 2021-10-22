@@ -19,7 +19,6 @@ class Menu {
 	}
 	
 	method removerMenu(puntero) {
-        //game.removeVisual(self)
         game.removeVisual(puntero)
         items.forEach({item=>game.removeVisual(item)})
     }
@@ -29,16 +28,15 @@ class Menu {
 	}
 }
 
-class Estadisticas inherits Menu{
-	
+class Estadisticas inherits Menu {
 	
 	method display(){
 		game.addVisual(self)
 		items.forEach({p=>self.addChar(p)})
 	}
 	method addChar(p){
-		game.addVisual(p.vida())
-		game.addVisual(p.icono())
+		game.addVisual(p.atributos().vida())
+		game.addVisual(p.atributos().icono())
 	}
 	method removerStats() {
         //game.removeVisual(self)
@@ -48,16 +46,16 @@ class Estadisticas inherits Menu{
 }
 
 class Objetivos inherits Estadisticas{
-	 override method display(puntero){
-	 	game.addVisual(self)
-		items.forEach({item=>game.addVisual(item.nombre())})
+	override method display(puntero){
+		game.addVisual(self)
+		items.forEach{ item => game.addVisual(item) }
 		game.addVisual(puntero)
 		modo.puntero(puntero)
-	 }
-	 override method addChar(p){
-		game.addVisual(p.nombre())
-		
 	}
+	override method addChar(p){
+		game.addVisual(p)
+	}
+	
 }
 
 
@@ -80,8 +78,6 @@ class Puntero {
 		game.uniqueCollider(self).pulsar()
 	}
 }
-
-//const puntero = new Puntero(posicionInicial = game.at(3, 3))
 
 object arriba{
 	
@@ -121,8 +117,9 @@ object background {
 	method image() = "background/fondo.jpeg"
 }
 
-
-	
-
-const menuBase = new Menu (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [curacion, ataqueFisico, ataqueMagico])
+const menuBase = new Menu(
+	position = game.at(1,1), 
+	image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", 
+	items = [curacion, ataqueFisico, ataqueMagico]
+)
 

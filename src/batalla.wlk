@@ -28,8 +28,8 @@ class Batalla {
     	turno1.heroes(heroes)
     	turno1.heroeActivo(heroes.head())
     	
-        heroes.forEach{ heroe => game.addVisual(heroe) }
-        enemigos.forEach{ enemigo => game.addVisual(enemigo) }
+        heroes.forEach{ heroe => game.addVisual(heroe.atributos()) }
+        enemigos.forEach{ enemigo => game.addVisual(enemigo.atributos()) }
         menuBase.display(punteroBase)
         modo.puntero(punteroBase)
         estadisticas.display()
