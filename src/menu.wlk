@@ -116,9 +116,6 @@ object derecha{
 
 }
 
-object background {
-	method image() = "background/fondo.jpeg"
-}
 
 const menuBase = new Menu(
 	position = game.at(1,1), 

@@ -101,7 +101,7 @@ const tomberi = new Personaje (
 		hp = 200,
 		carga = 0,
 		fuerza = 50, // ataque fisico
-		vigor = 70, // defensa fisica
+		vigor = 40, // defensa fisica
 		intelecto = 30, // ataque magico
 		mente = 40 // defensa magica
 	), 
@@ -120,7 +120,7 @@ const duende = new Personaje (
 		hp = 170,
 		carga = 0,
 		fuerza = 40, // ataque fisico
-		vigor = 80, // defensa fisica
+		vigor = 50, // defensa fisica
 		intelecto = 60, // ataque magico
 		mente = 35 // defensa magica
 	),

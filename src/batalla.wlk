@@ -7,9 +7,6 @@ import ataques.*
 import elementos.*
 import turnos.*
 
-//const menuBase = new Menu (position = game.at(2,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.png", items = [curacion, ataqueFisico, ataqueMagico])
-
-//const estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [ladron,clerigo])
 
 class Batalla {
     const property heroes = []
@@ -34,7 +31,7 @@ class Batalla {
 
 const batallaFacil = new Batalla(
     heroes = [ladron, clerigo],
-    enemigos = [flan, cactrot], // cambiar
+    enemigos = [flan, cactrot], 
     fondo = "background/fondo1.jpeg",
     estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [ladron, clerigo]),
     menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [ladron, clerigo] + [flan, cactrot])
@@ -42,8 +39,8 @@ const batallaFacil = new Batalla(
 
 const batallaDificil = new Batalla (
     heroes = [poseidon, hercules],
-    enemigos = [tomberi, duende], // cambiar
-    fondo = "background/fondo1.jpeg", // cambiar
+    enemigos = [tomberi, duende], 
+    fondo = "background/fondo1.jpeg", 
     estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [poseidon, hercules]),
 	menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [poseidon, hercules] + [tomberi, duende])
 )
