@@ -9,6 +9,7 @@ object pantallaInicio {
     method iniciar() {
         opciones.forEach{ opcion => game.addVisual(opcion) }
         game.addVisual(punteroInicio)
+        modo.puntero(punteroInicio)
     }
 }
 
@@ -18,6 +19,8 @@ class Opcion {
     const property position
 
     method pulsar() {
+        game.removeVisual(punteroInicio)
+    	pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
         destino.iniciar()
     }
 
@@ -32,8 +35,7 @@ const opcionBatallaFacil = new Opcion(
 )
 
 const opcionBatallaDificil = new Opcion(
-    destino = batallaFacil,
+    destino = batallaDificil,
     nombre = "Batalla difícil",
     position = game.at(5, 6)
 )
-

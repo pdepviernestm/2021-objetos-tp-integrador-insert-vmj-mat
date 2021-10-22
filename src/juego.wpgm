@@ -13,13 +13,13 @@ program juego {
 	game.width(20)
 	
 	pantallaInicio.iniciar()
-	
+	game.boardGround("background/fondo1.jpeg")
 	keyboard.down().onPressDo{ modo.puntero().moverseHacia(abajo) }
 	keyboard.up().onPressDo{ modo.puntero().moverseHacia(arriba) }
 	keyboard.x().onPressDo{ modo.puntero().seleccionar() }
 	keyboard.left().onPressDo{ modo.puntero().moverseHacia(izquierda) }
 	keyboard.right().onPressDo{ modo.puntero().moverseHacia(derecha) }
-	
+
 	game.start()
 
 }

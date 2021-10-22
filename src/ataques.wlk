@@ -1,39 +1,7 @@
 import personaje.*
 import enemigo.*
-import atributos.*
 import wollok.game.*
 import turnos.*
-/*
-class Ataque {
-	var property atributo
-
-	method realizar(atacante, atacado) {
-		var potencia
-
-		if (atributo == fisico) {
-			potencia = atacante.fuerza() - atacado.vigor()
-		}
-		else {
-			potencia = atacante.intelecto() * 3 - atacado.mente()
-		}
-
-		atacante.animarAtaque()
-		atacado.reducirHP(potencia)
-	}
-}
-
-const ataqueFisico = new Ataque(atributo = fisico)
-const hechizoFulgor = new Ataque(atributo = magico)
-*/
-
-/*
-object cura {
-	method realizar(curador,curado){
-		const potencia = curador.mente() * 0.3 // + curado.hp()
-		curado.aumentarHp(potencia)
-	}
-}
-*/
 
 class Habilidad {
 	const property tipoHabilidad
@@ -42,32 +10,28 @@ class Habilidad {
 	method textColor() = "ffffff" 
 	
 	method pulsar() {
-		turno1.proximaAccion(self.tipoHabilidad())
+		turno.proximaAccion(self.tipoHabilidad())
 	}
 }
 
 
 
-object fisico{	
+object fisico {	
 	method realizar(atacante, victima){
-		var potencia = atacante.fuerza() - victima.vigor()
-		victima.reducirHP(potencia)
-		atacante.animarHabilidad()
+		var potencia = (atacante.atributos().fuerza() - victima.atributos().vigor()).max(0)
+		victima.atributos().reducirHP(potencia)
+		//atacante.animarHabilidad()
 	}
 }
 
-/*class Magia{
-	
-}*/
-
-class Magia{
+class Magia {
 	const elemento
 	
 	method realizar(atacante,victima){
-		var potencia = atacante.intelecto() * 3 - victima.mente()
-		victima.reducirHP(potencia)
-		elemento.animar(atacante.position(),victima.position())
-		atacante.animarHabilidad()
+		var potencia = (atacante.atributos().intelecto() * 3 - victima.atributos().mente()).max(0)
+		victima.atributos().reducirHP(potencia)
+		//elemento.animar(atacante.position(),victima.position())
+		//atacante.animarHabilidad()
 	}
 }
 class Elemento {
@@ -90,12 +54,12 @@ const salud = new Elemento(image = "/ataques/curaThrow.gif")
 
 object cura{
 	method realizar(curador, curado){
-		var potencia = curador.mente() * 0.3
-		salud.animar(curador, curado)
-		curado.aumentarHP(potencia)
+		var potencia = curador.atributos().mente() * 0.3
+		//salud.animar(curador, curado)
+		curado.atributos().aumentarHP(potencia)
 	}
 }
 
-const curacion = new Habilidad (tipoHabilidad = cura, position = game.at(3, 3),text = "Curacion")
-const ataqueFisico = new Habilidad (tipoHabilidad = fisico, position = game.at(3, 2),text = "Ataque Fisico")
-const ataqueMagico = new Habilidad (tipoHabilidad = new Magia(elemento = piro), position = game.at(3, 1),text = "Ataque Magico")
+const curacion = new Habilidad(tipoHabilidad = cura, position = game.at(3, 3), text = "Curacion")
+const ataqueFisico = new Habilidad(tipoHabilidad = fisico, position = game.at(3, 2), text = "Ataque Fisico")
+const ataqueMagico = new Habilidad(tipoHabilidad = new Magia(elemento = piro), position = game.at(3, 1), text = "Ataque Magico")

@@ -9,7 +9,7 @@ import elementos.*
 class Menu {
 	const property position
 	const property image
-	var items 
+	var property items 
 
 	method display(puntero){
 		game.addVisual(self)
@@ -40,10 +40,12 @@ class Estadisticas inherits Menu {
 		game.addVisual(p.atributos().icono())
 	}
 	method removerStats() {
-        items.forEach({item=>game.removeVisual(item)})
-		//game.removeVisual(self)
+        items.forEach{ item => 
+		game.removeVisual(item.atributos().vida())
+		game.removeVisual(item.atributos().icono())
+		}
+		game.removeVisual(self)
     }
-	
 }
 
 class Objetivos inherits Estadisticas{
@@ -99,7 +101,7 @@ object abajo{
 
 object izquierda{
 	
-	method hayElementos(x,y) = game.getObjectsIn(game.at(x-2,y)) != []
+	method hayElementos(x,y) =true//= game.getObjectsIn(game.at(x-2,y)) != []
 	method mover(x){
 		return x.left(2)
 	}
@@ -107,7 +109,7 @@ object izquierda{
 }
 object derecha{
 	
-	method hayElementos(x,y) = game.getObjectsIn(game.at(x+2,y)) != []
+	method hayElementos(x,y) = true//= game.getObjectsIn(game.at(x+2,y)) != []
 	method mover(x){
 		return x.right(2)
 	}
@@ -123,4 +125,3 @@ const menuBase = new Menu(
 	image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", 
 	items = [curacion, ataqueFisico, ataqueMagico]
 )
-

@@ -14,19 +14,15 @@ import turnos.*
 class Batalla {
     const property heroes = []
     const enemigos = []
-    const estadisticas
-    const fondo = "background/fondo1.jpeg"
+    const property estadisticas
+    const property fondo = "background/fondo1.jpeg"
     const property menuObjetivo
     
     method iniciar() {
-    	game.removeVisual(punteroInicio)
-    	pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
-    	game.boardGround(fondo)
-    	
-    	turno1.batalla(self)
-    	turno1.enemigos(enemigos)
-    	turno1.heroes(heroes)
-    	turno1.heroeActivo(heroes.head())
+    	turno.batalla(self)
+    	turno.enemigos(enemigos)
+    	turno.heroes(heroes)
+    	turno.heroeActivo(heroes.head())
     	
         heroes.forEach{ heroe => game.addVisual(heroe.atributos()) }
         enemigos.forEach{ enemigo => game.addVisual(enemigo.atributos()) }
@@ -38,16 +34,16 @@ class Batalla {
 
 const batallaFacil = new Batalla(
     heroes = [ladron, clerigo],
-    enemigos = [enemigo2, enemigo1], // cambiar
+    enemigos = [flan, cactrot], // cambiar
     fondo = "background/fondo1.jpeg",
     estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [ladron, clerigo]),
-    menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [ladron, clerigo] + [enemigo2, enemigo1])
+    menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [ladron, clerigo] + [flan, cactrot])
     )
 
 const batallaDificil = new Batalla (
     heroes = [poseidon, hercules],
-    enemigos = [enemigo3, enemigo4], // cambiar
+    enemigos = [tomberi, duende], // cambiar
     fondo = "background/fondo1.jpeg", // cambiar
     estadisticas = new Estadisticas (position = game.at(10,1),image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", items = [poseidon, hercules]),
-	menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [poseidon, hercules] + [enemigo3, enemigo4])
+	menuObjetivo = new Objetivos (position = game.at(1,1), image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", items = [poseidon, hercules] + [tomberi, duende])
 )

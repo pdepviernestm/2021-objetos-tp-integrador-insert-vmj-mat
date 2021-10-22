@@ -5,27 +5,22 @@ import turnos.*
 import ataques.*
 
 class Icono{
-	const  position
-	const  image
+	const position
+	const image
 	method position() = position
 	method image() = image
 }
 
 class Hp{
 	const hpInicial 
-	var hpActual = hpInicial
+	var property hpActual = hpInicial
 	const property position 
 	
 	method hpActual() = hpActual
 	method hpInicial() = hpInicial
-	method text() = hpInicial.toString() + "/" + hpActual.toString()
+	method text() = hpActual.toString() + "/" + hpInicial.toString()
 	method textColor() = "ffffff"
-	method perderHP(n){
-		hpActual -= n
-	}
-	method ganarHP(n){
-		hpActual += n
-	}
+	
 }
 
 class Personaje {
@@ -37,10 +32,8 @@ class Personaje {
 	method textColor() = "ffffff"
 	
 	method pulsar(){
-		turno1.agregarAccion(self)
+		turno.agregarAccion(self)
 	}
-
-	
 }
 
 class Atributos {
@@ -48,7 +41,8 @@ class Atributos {
 	var property objetivo
 	var property vida = new Hp(hpInicial = 0,position = game.at(0,0))
 	var property icono
-	var property hp
+	const property maxHP
+	var property hp = maxHP
 	
 	const property fuerza 		// ataque fisico
 	const property vigor  		// defensa fisica
@@ -84,55 +78,43 @@ class Atributos {
 		game.schedule(1000, { => self.image(imagenInicial) })
 	}
 
-	method estaMuerto() {
-		return hp == 0
-	}
+	method estaMuerto() = hp == 0
 
-	
 	method reducirHP(danio) {
-		hp -= danio
-		vida.perderHP(danio)
+		hp = (hp - danio).max(0)
+		vida.hpActual(hp)
 		
 		if (self.estaMuerto()) {
 			game.removeVisual(self)
-			game.say(enemigo1, "Game over...")
-			game.schedule(500, { => game.stop() })
-			}
-		if (game.hasVisual(self)) {
-			game.say(self, "Mi vida ahora es " + hp.toString())}
+		}
 	}
 	
-	method aumentarHP(cura){
-		if (!self.estaMuerto()){
-		hp += cura	
-		vida.ganarHp(cura)
-		}
-		else{}
+	method aumentarHP(cura) {
+		hp = (hp + cura).min(maxHP)
+		vida.hpActual(hp)
 	}
 
-	
 }
 
 const ladron = new Personaje (
 	atributos = new Atributos(
-	icono = new Icono(position = game.at(16,2),image = "menu/WhiteMage2F2.gif"),
-	//hp = new Hp(hpInicial = 100,position= game.at(14,2)),
-	imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
-	imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
-	imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
-	
-	imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-	imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-	imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-	position = game.at(5, 8),
-	objetivo = enemigo1,
+		icono = new Icono(position = game.at(16,2),image = "personajes/Thief2M.gif"),
+		imagenInicial = "personajes/Thief2M-SW.gif",
+		imagenAtaque = "personajes/Thief2M-SW.gif",
+		imagenMuerto = "personajes/Thief2M-SW.gif",
+		
+		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
+		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
+		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+		position = game.at(5, 8),
+		objetivo = cactrot,
 
-	hp = 100,
-	vida = new Hp(hpInicial = 100,position= game.at(14,2)),
-	fuerza = 20,
-	vigor = 30,
-	intelecto = 25, 
-	mente = 30
+		maxHP = 100,
+		vida = new Hp(hpInicial = 100,position= game.at(14,2)),
+		fuerza = 20,
+		vigor = 30,
+		intelecto = 25, 
+		mente = 30
 	),
 	text = "ladron",
 	position = game.at(4, 2)
@@ -141,11 +123,10 @@ const ladron = new Personaje (
 
 const clerigo = new Personaje (
 	atributos = new Atributos(	
-		icono = new Icono(position = game.at(16,4),image = "menu/WhiteMage2F2.gif"),
-		//hp = new Hp(hpInicial = 120,position= game.at(14,2)),
-		imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png",
-		imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
-		imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+		icono = new Icono(position = game.at(16,4),image = "personajes/WhiteMage2F.gif"),
+		imagenInicial = "personajes/WhiteMage2F-SW.gif",
+		imagenAtaque =  "personajes/WhiteMage2F-SW.gif",
+		imagenMuerto =  "personajes/WhiteMage2F-SW.gif",
 		
 		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
@@ -153,9 +134,9 @@ const clerigo = new Personaje (
 		
 		// cambiar imágenes
 		position = game.at(5, 6),
-		objetivo = enemigo1,
+		objetivo = flan,
 		
-		hp = 120,
+		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(14,4)),
 		fuerza = 20,
 		vigor = 30,
@@ -169,22 +150,22 @@ const clerigo = new Personaje (
 const poseidon = new Personaje(
 	//CAMBIAR IMAGENES 
 	atributos = new Atributos(
-		icono = new Icono(position = game.at(13,2),image = "menu/WhiteMage2F2.gif"),
+		icono = new Icono(position = game.at(13,2),image = "personajes/Summoner2M.gif"),
 		//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
-		imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png", 
-		imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
-		imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+		imagenInicial = "personajes/Summoner2M-SW.gif", 
+		imagenAtaque = "personajes/Summoner2M-SW.gif",
+		imagenMuerto = "personajes/Summoner2M-SW.gif",
 		
 		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-		position = game.at(6, 6),
-		objetivo = enemigo1, // CAMBIAR A ENEMIGO INTERMEDIO
+		position = game.at(6, 10),
+		objetivo = tomberi, // CAMBIAR A ENEMIGO INTERMEDIO
 	
 		
 		//icono = new Icono(position = game.at(16,3),image = "images/WhiteMage2F2.gif"),
 	
-		hp = 150,
+		maxHP = 150,
 		vida = new Hp(hpInicial = 150,position= game.at(11,2)),
 		fuerza = 40,
 		vigor = 20,
@@ -198,20 +179,20 @@ const poseidon = new Personaje(
 const hercules = new Personaje(
 	//CAMBIAR IMAGENES 
 	atributos = new Atributos(
-		icono= new Icono(position = game.at(13,4),image = "menu/WhiteMage2F2.gif"),
+		icono= new Icono(position = game.at(13,4),image ="personajes/Knight3M.gif" ),
 		//hp= new Hp(hpInicial = 120,position= game.at(14,2)),
 		
-		imagenInicial = "Bandits/Sprites/Heavy_Bandit/Idle/HeavyBandit_Idle_0.png", 
-		imagenAtaque = "Bandits/Sprites/Heavy_Bandit/Attack/HeavyBandit_Attack_0.png",
-		imagenMuerto = "Bandits/Sprites/Heavy_Bandit/Death/HeavyBandit_Death_0.png",
+		imagenInicial = "personajes/Knight3M-SW.gif", 
+		imagenAtaque = "personajes/Knight3M-SW.gif",
+		imagenMuerto = "personajes/Knight3M-SW.gif",
 		
 		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-		position = game.at(7, 7),
-		objetivo = enemigo1, // CAMBIAR A ENEMIGO INTERMEDIO
+		position = game.at(9, 9),
+		objetivo = duende, // CAMBIAR A ENEMIGO INTERMEDIO
 		
-		hp = 120,
+		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(11,4)),
 		fuerza = 90,
 		vigor = 50,
@@ -222,11 +203,3 @@ const hercules = new Personaje(
 	position = game.at(4, 4)
 )
 
-
-
-
-/*class Personaje {
-	var property vida //= new Hp(hpInicial = 100)
-	var property icono //= new Icono(position = game.at(16,4),image = "images/WhiteMage2F.gif")
-	
-}*/

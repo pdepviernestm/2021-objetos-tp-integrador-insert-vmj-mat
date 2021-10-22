@@ -5,58 +5,87 @@ import wollok.game.*
 import menu.*
 import personaje.*
 import turnos.*
+import batalla.*
 
-
-test "la posicion del personaje es 5, 5" {
-	assert.equals(game.at(5, 5), ladron.position())
-}
-
-test "la posicion del enemigo es 2, 5" {
-	assert.equals(game.at(2, 5), enemigo.position())
-}
-
-
-test "un personaje esta muerto si sus puntos son = 0"{
-	
-	const personaje = new Personaje(hp = 0)
-	assert.that(personaje.estaMuerto())
+test "un personaje esta muerto si sus puntos son = 0" {
+	const personaje = new Personaje(atributos = new Atributos(maxHP = 0))
+	assert.that(personaje.atributos().estaMuerto())
 	
 }
-test "el enemigo está muerto si sus puntos son = 0"{
-	enemigo.hp(0) // para test
-	assert.that(enemigo.estaMuerto())
+test "el enemigo está muerto si sus puntos son = 0" {
+	cactrot.atributos().hp(0)
+	assert.that(cactrot.atributos().estaMuerto())
 }
-	
 
-
-test "puntos del personaje si recibe un ataque fisico del enemigo "{
-	const personaje = new Personaje(vigor = 30, hp = 100)
-	const personaje2 = new Personaje( fuerza = 50)
-	ataqueFisico.realizar(personaje2, personaje) 
-	assert.equals(80, personaje.hp())
+test "puntos del personaje si recibe un ataque fisico del enemigo" {
+	const personaje = new Personaje(atributos = new Atributos(vigor = 30, maxHP = 100))
+	const personaje2 = new Personaje(atributos = new Atributos(fuerza = 50))
+	ataqueFisico.tipoHabilidad().realizar(personaje2, personaje) 
+	assert.equals(80, personaje.atributos().hp())
 	}
 
-test "puntos del personaje si recibe un hechizo fulgor del enemigo "{
-	const personaje = new Personaje(mente = 30, hp = 100)
-	const personaje2 = new Personaje(intelecto = 20)
-	hechizoFulgor.realizar(personaje2, personaje)
-	assert.equals(70, personaje.hp())
-	
+test "puntos del personaje si recibe un ataque mágico del enemigo" {
+	const personaje = new Personaje(atributos = new Atributos(mente = 30, maxHP = 100))
+	const personaje2 = new Personaje(atributos = new Atributos(intelecto = 20))
+	ataqueMagico.tipoHabilidad().realizar(personaje2, personaje)
+	assert.equals(70, personaje.atributos().hp())
 	}
 
-	
-
-test " si  la carga es menor a 3, el enemigo elige un ataque fisico"{
-	enemigo.carga(2) 
-	assert.equals(ataqueFisico, enemigo.elegirAtaque())
-	
+test "si la carga es menor a 3, el enemigo elige un ataque físico" {
+	cactrot.atributos().carga(2) 
+	assert.equals(ataqueFisico.tipoHabilidad(), cactrot.atributos().elegirAtaque())
 }
 
-test " si  la carga NO es menor a 3, el enemigo elige un Hechizo fulgor"{
-	enemigo.carga(3) 
-	assert.equals(hechizoFulgor, enemigo.elegirAtaque())
-	
-	
+test "si la carga no es menor a 3, el enemigo elige un ataque mágico" {
+	cactrot.atributos().carga(3) 
+	assert.equals(ataqueMagico.tipoHabilidad(), cactrot.atributos().elegirAtaque())	
 }
 
-	
+test "si un personaje cura a otro, los HP del curado no superan los HP máximos" {
+	const personaje = new Personaje(atributos = new Atributos(mente = 60))
+	const personaje2 = new Personaje(atributos = new Atributos(maxHP = 40))
+	personaje2.atributos().hp(30)
+	curacion.tipoHabilidad().realizar(personaje, personaje2)
+	assert.equals(40, personaje2.atributos().hp())
+}
+
+test "al iniciar una batalla, al objeto turno se le transfieren las propiedades de ésta" {
+	const batallaDeEjemplo = new Batalla(enemigos = [cactrot], heroes = [clerigo, ladron],
+	estadisticas = new Estadisticas (position = game.at(10,1),
+	image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", 
+	items = [ladron, clerigo]),
+	menuObjetivo = new Objetivos (position = game.at(1,1), 
+		image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", 
+		items = [ladron, clerigo] + [flan, cactrot]
+	)
+    
+	)
+	batallaDeEjemplo.iniciar()
+	assert.equals(batallaDeEjemplo, turno.batalla())
+	assert.equals([cactrot], turno.enemigos())
+	assert.equals([clerigo, ladron], turno.heroes())
+}
+
+test "el método heroesVivos retorna los héroes que están vivos en cierto momento" {
+	turno.heroes([ladron, clerigo])
+	ladron.atributos().hp(0)
+	assert.equals([clerigo], turno.heroesVivos())
+}
+
+test "el método enemigosVivos retorna los enemigos que están vivos en cierto momento" {
+	turno.enemigos([cactrot, duende, tomberi])
+	duende.atributos().hp(0)
+	assert.equals([cactrot, tomberi], turno.enemigosVivos())
+}
+
+test "el método encontrarActual retorna el índice en la lista de héroes en que se encuentra el activo" {
+	turno.heroes([ladron, clerigo])
+	turno.heroeActivo(clerigo)
+	assert.equals(1, turno.encontrarActual())
+}
+
+test "el método siguienteVivo retorna el próximo héroe con vida, comenzando desde cierto punto" {
+	turno.heroes([ladron, clerigo, hercules, poseidon])
+	clerigo.atributos().hp(0)
+	assert.equals(hercules, turno.siguienteVivo(0))
+}
