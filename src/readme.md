@@ -1,25 +1,3 @@
-Ataque fisico personaje = daño fisico + daño arma
-Ataque magico = daño magico + daño arma 
-
-Personaje.ataqueMagico(elemento) -> enemigo.recibirAtaqueMagico(elemento,N)
-Personaje.ataqueFisico() -> enemigo.recibirAtaqueFisico(N)
-Personaje.tirarEncantamiento() -> enemigo.recibirEncantamiento(encantamiento)
-
-Personaje.recibirAtaqueFisico(N) = hp personaje  - (N - DefFisica) * random (0.85-1)
-Personaje.recibirAtaqueMagico(N) = hp personaje  - (N - DefMagica) * random (0.85-1)
-Personaje.recibirEncantamiento(encantamiento) = encantamiento.efecto(personaje)
-
-Enemigo.recibirAtaqueFisico(N) = hp enemigo -  (N - DefFisica)
-Enemigo.recibirAtaqueMagico(elemento,N) = hp enemigo - vulnerabilidadElemental(elemento) * N
-Enemigo.recibirEncantamiento(encantamiento) = encantamiento.efecto(enemigo)
-
-
-Se elige un rol antes de la batalla se comienza con:
-
-Fulminador 
-Castigador
-
-
 **Pociones**
 
 Panacea
@@ -69,7 +47,7 @@ Por ahora, podemos limitar a una cantidad hardcodeada de ataques/opciones en el 
 
 Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como testeamos eso.
 
-**Objetivos para 28/10**
+**Objetivos para 22/10**
 ✅ Primer objetivo: sePuedeDesplazarHacia no hagan IF BOOLEANO RETURN BOOLEANO
 
 ✅ Segundo objetivo: ^ separar el efecto de la consulta
