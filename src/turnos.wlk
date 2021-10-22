@@ -80,7 +80,7 @@ object turno {
 		else {
 			const indiceActual = self.encontrarActual()
 			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
-			if (heroeActivo == null) {
+			if (heroeActivo == null) { // corregir
 				self.ejecutar()
 			}
 			else {
@@ -100,7 +100,7 @@ object turno {
 		return indiceActual
 	}
 
-	method siguienteVivo(x) = heroes.drop(x + 1).filter{ heroe => !heroe.atributos().estaMuerto() }.head()
+	method siguienteVivo(x) = heroes.drop(x + 1).filter{ heroe => !heroe.atributos().estaMuerto() }.head() //chequear el ultimo vivo
 }
 	
 

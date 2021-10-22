@@ -24,9 +24,9 @@ class Menu {
 		game.removeVisual(self)
     }
 
-	method seleccionarOpcion(opcion, actor){
-		opcion.accion(actor)
-	}
+	//method seleccionarOpcion(opcion, actor){
+	//	opcion.accion(actor)
+	//
 }
 
 class Estadisticas inherits Menu {
@@ -84,7 +84,7 @@ class Puntero {
 
 object arriba{
 	
-	method hayElementos(x,y) = game.getObjectsIn(game.at(x,(y+1))) != []
+	method hayElementos(x,y) = true//game.getObjectsIn(game.at(x,(y+1))) != []
 	method mover(y){
 		return y.up(1)
 	}
@@ -92,7 +92,7 @@ object arriba{
 }
 object abajo{
 	
-	method hayElementos(x,y) = game.getObjectsIn(game.at(x,(y-1))) != []
+	method hayElementos(x,y) = true //game.getObjectsIn(game.at(x,(y-1))) != []
 	method mover(y){
 		return y.down(1)
 	}
