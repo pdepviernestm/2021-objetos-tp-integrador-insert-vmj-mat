@@ -12,7 +12,6 @@ class Icono{
 }
 
 class Hp{
-	var property rol = ataque
 	const hpInicial 
 	var hpActual = hpInicial
 	const property position 
@@ -38,8 +37,10 @@ class Personaje {
 	method textColor() = "ffffff"
 	
 	method pulsar(){
-		turno1.objetivoTurno(self)
+		turno1.agregarAccion(self)
 	}
+
+	
 }
 
 class Atributos {

@@ -12,12 +12,13 @@ object turno1 {
 	var property heroeActivo
 	var property heroes = []
 	var property enemigos = []
-	var property objetivoTurno
+	var proximaAccion
 	
 	method ejecutar(){
 		menuBase.removerMenu(punteroBase)
 		
-		enemigos.forEach({ enemigo => self.agregarAccion(enemigo.elegirAtaque()) })
+		enemigos.forEach({ enemigo => self.agregarAccion(enemigo.atributosEnemigo().elegirAtaque(), enemigo, enemigo.atributosEnemigo().elegirObjetivo()) })
+		//definir elegirObjetivo
 		
 		const cantAcciones = rutina.size()
 		(0 .. cantAcciones - 1).forEach{ x => 
@@ -28,37 +29,37 @@ object turno1 {
 		// y se envía un mensaje a ella para que se realice (fue instanciada al agregarla)
 		
 		game.schedule(1000 + 2000 * cantAcciones, { => menuBase.display(punteroBase) })
+		rutina = []
 	}
 	
-	method agregarObjetivoPara(accion){
-		if (accion.rol() != objetivoTurno.rol() ){
-			self.agregarAccion(accion)
-		}
-		else{
-			batalla.menuObjetivo().removerMenu(punteroObjetivo)
-			menuBase.display(punteroBase)
-		}
-		
+	method agregarAccion(accion, enemigoAtacante, heroeAtacado) {
+		const movimiento = new Movimiento(habilidad = accion, origen = enemigoAtacante, destino = heroeAtacado)
+		rutina.add(movimiento)
 	}
-	
-	
-	method agregarAccion(accion) {
-		if(game.hasVisual(menuBase)){
-			menuBase.removerMenu(punteroBase)
-			batalla.menuObjetivo().display(punteroObjetivo)
-		}
-		
-		const movimiento = new Movimiento(habilidad = accion.tipoHabilidad(), origen = heroeActivo, destino = objetivoTurno)
-		// hay que dejar que el héroe elija el enemigo
+
+	method proximaAccion(accion) {
+		proximaAccion = accion
+		menuBase.removerMenu(punteroBase)
+		batalla.menuObjetivo().display(punteroObjetivo)
+	}
+
+	method agregarAccion(objetivo) {
+		batalla.menuObjetivo().removerMenu(punteroObjetivo)
+		menuBase.display(punteroBase)
+		const movimiento = new Movimiento(habilidad = proximaAccion, origen = heroeActivo, destino = objetivo)
 		
 		rutina.add(movimiento)
 		if (heroeActivo == heroes.last()) self.ejecutar()
 		else {
 			const indiceActual = self.encontrarActual()
 			heroeActivo = heroes.get(indiceActual + 1)
-		}
+			//batalla.menuObjetivo().removerMenu(punteroObjetivo)
+			//menuBase.display(punteroBase)
+		}		
 	}
+
 	
+
 	method encontrarActual() {
 		const cantHeroes = heroes.size()
 		var indiceActual

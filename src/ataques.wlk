@@ -35,22 +35,20 @@ object cura {
 }
 */
 
- class Habilidad {
- 	const property rol
+class Habilidad {
 	const property tipoHabilidad
 	const property position 
 	const property text
 	method textColor() = "ffffff" 
 	
 	method pulsar() {
-		turno1.agregarAccion(self)
+		turno1.proximaAccion(self.tipoHabilidad())
 	}
 }
 
 
 
-object fisico{
-	
+object fisico{	
 	method realizar(atacante, victima){
 		var potencia = atacante.fuerza() - victima.vigor()
 		victima.reducirHP(potencia)
@@ -91,16 +89,13 @@ const electro = new Elemento(image = "/ataques/ElectroExplode.gif")
 const salud = new Elemento(image = "/ataques/curaThrow.gif")
 
 object cura{
-	method realizar(curador,curado){
+	method realizar(curador, curado){
 		var potencia = curador.mente() * 0.3
-		salud.animar(curador,curado)
+		salud.animar(curador, curado)
 		curado.aumentarHP(potencia)
 	}
 }
 
-object ataque{}
-object defensa{}
-
-const curacion = new Habilidad (rol = defensa, tipoHabilidad = cura, position = game.at(3, 3),text = "Curacion")
-const ataqueFisico = new Habilidad (rol = ataque,tipoHabilidad = fisico, position = game.at(3, 2),text = "Ataque Fisico")
-const ataqueMagico = new Habilidad (rol = ataque,tipoHabilidad = new Magia(elemento = piro),position = game.at(3, 1),text = "Ataque Magico")
+const curacion = new Habilidad (tipoHabilidad = cura, position = game.at(3, 3),text = "Curacion")
+const ataqueFisico = new Habilidad (tipoHabilidad = fisico, position = game.at(3, 2),text = "Ataque Fisico")
+const ataqueMagico = new Habilidad (tipoHabilidad = new Magia(elemento = piro), position = game.at(3, 1),text = "Ataque Magico")

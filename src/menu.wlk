@@ -13,14 +13,15 @@ class Menu {
 
 	method display(puntero){
 		game.addVisual(self)
-		items.forEach({item=>game.addVisual(item)})
+		items.forEach({ item => game.addVisual(item) })
 		game.addVisual(puntero)
 		modo.puntero(puntero)
 	}
 	
 	method removerMenu(puntero) {
         game.removeVisual(puntero)
-        items.forEach({item=>game.removeVisual(item)})
+        items.forEach({ item => game.removeVisual(item) })
+		game.removeVisual(self)
     }
 
 	method seleccionarOpcion(opcion, actor){
@@ -39,8 +40,8 @@ class Estadisticas inherits Menu {
 		game.addVisual(p.atributos().icono())
 	}
 	method removerStats() {
-        //game.removeVisual(self)
         items.forEach({item=>game.removeVisual(item)})
+		//game.removeVisual(self)
     }
 	
 }

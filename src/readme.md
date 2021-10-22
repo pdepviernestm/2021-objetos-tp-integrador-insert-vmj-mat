@@ -74,7 +74,7 @@ Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como 
 
 ✅Segundo objetivo: ^ separar el efecto de la consulta
 
-Tercer objetivo: Sacar lo hardcodeado del menu (que hay 2 ataques) y que eso dependa de una lista de ataques.
+✅Tercer objetivo: Sacar lo hardcodeado del menu (que hay 2 ataques) y que eso dependa de una lista de ataques.
 
 ✅ Cuarto objetivo: Tipos de ataques polimorficos (fisico/magico que no sean strings)
 

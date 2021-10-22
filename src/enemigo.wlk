@@ -5,7 +5,6 @@ import turnos.*
 import ataques.*
 
 class AtributosEnemigo {
-	var property rol = defensa
 	const property imagenInicial
 	const property imagenVida1
 	const property imagenVida2
@@ -40,6 +39,12 @@ class AtributosEnemigo {
 			carga = 0
 		}
 		return ataqueElegido
+	}
+
+		
+	method elegirObjetivo(objetivos){
+		var objetivo = objetivos.min({ objetivo => objetivo.hp() })
+		return objetivo
 	}
 }
 
