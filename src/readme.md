@@ -63,3 +63,15 @@ Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como 
 ✅ Septimo objetivo: Pantalla de inicio + Poder hacer secuencias de peleas.
 
 ✅ Octavo objetivo: Que se puedan ver en pantalla algunas cosas de los personajes (como la vida)
+
+**Objetivos para 12/11**
+- 1) Saber que personaje estoy usando
+- 2) Que los personajes no puedan atacar cuando ya murieron
+✅ 3) Que al morir personajes no se limite el movimiento del cursor
+✅ 4) Revisar jerarquia de herencia de los menues
+- 5) Sacar repeticion de logica entre direcciones
+- 6) Que las acciones del menu dependan del personaje que va a realizar la accion
+- 7) Animaciones para los ataques
+✅ 8) Que cada batalla decida que hacer al finalizarla
+- 9) Que se pueda modificar la posicion del menu sin tener que cambiar a mano todos los numeros de punteros e items
+✅ 10) Cuidado con el encapsulamiento del personaje (!) 

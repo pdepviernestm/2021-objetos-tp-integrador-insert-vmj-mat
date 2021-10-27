@@ -1,8 +1,5 @@
 import wollok.game.*
-// import enemigo.*
 import menu.*
-// import personaje.*
-// import turnos.*
 import pantallaInicio.*
 import elementos.*
 

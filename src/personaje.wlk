@@ -27,25 +27,62 @@ class Personaje {
 	const position
 	const text
 	const property atributos
+	var property textColor = "ffffff"
+
 	method position() = position
 	method text() = text
-	method textColor() = "ffffff"
-	
-	method pulsar(){
-		turno.agregarAccion(self)
+
+	method fuerza() = atributos.fuerza()
+	method vigor() = atributos.vigor()
+	method intelecto() = atributos.intelecto()
+	method mente() = atributos.mente()
+
+	method estaMuerto() = atributos.estaMuerto()
+	method reducirHP(danio) { atributos.reducirHP(danio) }
+	method aumentarHP(restauracion) { atributos.aumentarHP(restauracion) }
+
+	method animarAtaque() { atributos.animarAtaque() }
+
+	method pulsar() {
+		if(self.habilitado()) turno.agregarAccion(self)
 	}
+
+	method habilitado() = textColor == "ffffff"
+	
+	method inhabilitar() {
+		textColor = "9b9b9b"
+	}
+
+	method agregarPersonaje() {
+		game.addVisual(self.atributos())
+	}
+	
+	method eliminarPersonaje() {
+		game.removeVisual(self.atributos())
+	}
+
+	method estaElPersonaje() = game.hasVisual(atributos)
+
+	// exclusivos para héroes
+	method vida() = atributos.vida()
+	method icono() = atributos.icono()
+
+	// exclusivos para enemigos
+	method elegirAtaque() = atributos.elegirAtaque()
+	method elegirObjetivo(objetivos) = atributos.elegirObjetivo(objetivos)
 }
 
 class Atributos {
 	const property position
 	var property objetivo
-	var property vida = new Hp(hpInicial = 0,position = game.at(0,0))
+	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
+	var property habilidades = []
 	const property maxHP
 	var property hp = maxHP
 	
 	const property fuerza 		// ataque fisico
-	const property vigor  		// defensa fisica
+	const property vigor		// defensa fisica
 	const property intelecto   	// ataque magico
 	const property mente  		// defensa magica
 
@@ -58,11 +95,7 @@ class Atributos {
 	const property imagenVida3
 
 	var image = imagenInicial
-
-	var imageVida = imagenVida1
-	var imageVida2 = imagenVida2
-	var imageVida3 = imagenVida3
-
+	
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
 			return imagenMuerto
@@ -77,7 +110,7 @@ class Atributos {
 		self.image(imagenAtaque)
 		game.schedule(1000, { => self.image(imagenInicial) })
 	}
-
+	
 	method estaMuerto() = hp == 0
 
 	method reducirHP(danio) {
@@ -89,8 +122,8 @@ class Atributos {
 		}
 	}
 	
-	method aumentarHP(cura) {
-		hp = (hp + cura).min(maxHP)
+	method aumentarHP(restauracion) {
+		hp = (hp + restauracion).min(maxHP)
 		vida.hpActual(hp)
 	}
 

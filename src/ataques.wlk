@@ -18,8 +18,8 @@ class Habilidad {
 
 object fisico {	
 	method realizar(atacante, victima){
-		var potencia = (atacante.atributos().fuerza() - victima.atributos().vigor()).max(0)
-		victima.atributos().reducirHP(potencia)
+		const potencia = (atacante.fuerza() - victima.vigor()).max(0)
+		victima.reducirHP(potencia)
 		//atacante.animarHabilidad()
 	}
 }
@@ -28,8 +28,8 @@ class Magia {
 	const elemento
 	
 	method realizar(atacante,victima){
-		var potencia = (atacante.atributos().intelecto() * 3 - victima.atributos().mente()).max(0)
-		victima.atributos().reducirHP(potencia)
+		const potencia = (atacante.intelecto() * 3 - victima.mente()).max(0)
+		victima.reducirHP(potencia)
 		//elemento.animar(atacante.position(),victima.position())
 		//atacante.animarHabilidad()
 	}
@@ -54,9 +54,9 @@ const salud = new Elemento(image = "/ataques/curaThrow.gif")
 
 object cura{
 	method realizar(curador, curado){
-		var potencia = curador.atributos().mente() * 0.3
+		const potencia = curador.mente() * 0.3
 		//salud.animar(curador, curado)
-		curado.atributos().aumentarHP(potencia)
+		curado.aumentarHP(potencia)
 	}
 }
 

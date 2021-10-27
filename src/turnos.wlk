@@ -19,8 +19,8 @@ object turno {
 		batalla.menuObjetivo().removerMenu(punteroObjetivo)
 		
 		self.enemigosVivos().forEach({ enemigo => 
-			self.agregarAccion(enemigo.atributos().elegirAtaque(), enemigo, enemigo.atributos().elegirObjetivo(self.heroesVivos())) 
-			})
+			self.agregarAccion(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos())) 
+		})
 		
 		const cantAcciones = rutina.size()
 		(0 .. cantAcciones - 1).forEach{ x => 
@@ -32,34 +32,40 @@ object turno {
 		
 		game.schedule(1000 + 2000 * cantAcciones, { => 
 			if(self.heroesVivos().isEmpty()) {
-				self.terminarBatalla()
-				pantallaInicio.iniciar()
+				self.perder()
 			}
-
 			else if(self.enemigosVivos().isEmpty()) {
-				self.terminarBatalla()
-				batallaDificil.iniciar()
+				self.ganar()
 			}
 			
 			else {
 				menuBase.display(punteroBase) 
 				rutina = []
 				heroeActivo = self.heroesVivos().head() // se obtiene el primer héroe vivo
-				batalla.menuObjetivo().items().removeAllSuchThat({p=>p.atributos().estaMuerto()})
+				batalla.menuObjetivo().inhabilitarOpciones()
 			}
-			
-			})
+		})
+	}
+
+	method ganar() {
+		self.terminarBatalla()
+		batalla.proximaAccion().apply()
+	}
+
+	method perder() {
+		self.terminarBatalla()
+		pantallaInicio.iniciar()
 	}
 
 	method terminarBatalla() {
 		batalla.estadisticas().removerStats()
-		self.enemigosVivos().map({ enemigo => enemigo.atributos() }).forEach({ x => game.removeVisual(x) })
-		self.heroesVivos().map({ heroe => heroe.atributos() }).forEach({ x => game.removeVisual(x) }) 
+		self.enemigosVivos().forEach({ x => x.eliminarPersonaje() })
+		self.heroesVivos().forEach({ x => x.eliminarPersonaje() }) 
 	} // quizá podríamos usar game.clear()
 
-	method heroesVivos() = heroes.filter({ heroe => !heroe.atributos().estaMuerto() })
+	method heroesVivos() = heroes.filter({ heroe => !heroe.estaMuerto() })
 
-	method enemigosVivos() = enemigos.filter({ enemigo => !enemigo.atributos().estaMuerto() })
+	method enemigosVivos() = enemigos.filter({ enemigo => !enemigo.estaMuerto() })
 
 	method agregarAccion(accion, enemigoAtacante, heroeAtacado) {
 		const movimiento = new Movimiento(habilidad = accion, origen = enemigoAtacante, destino = heroeAtacado)
@@ -100,7 +106,7 @@ object turno {
 		return indiceActual
 	}
 
-	method siguienteVivo(x) = heroes.drop(x + 1).filter{ heroe => !heroe.atributos().estaMuerto() }.head() //chequear el ultimo vivo
+	method siguienteVivo(x) = heroes.drop(x + 1).filter{ heroe => !heroe.estaMuerto() }.head() // chequear el ultimo vivo
 }
 	
 
@@ -110,6 +116,6 @@ class Movimiento {
 	var destino
 	
 	method realizar() {
-		if(game.hasVisual(destino.atributos())) habilidad.realizar(origen, destino)
+		if(destino.estaElPersonaje()) habilidad.realizar(origen, destino)
 	}
 }

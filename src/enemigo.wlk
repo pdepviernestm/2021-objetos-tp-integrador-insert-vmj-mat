@@ -28,7 +28,7 @@ class AtributosEnemigo {
 		return hp <= 0
 	}
 	
-	method reducirHP(n){
+	method reducirHP(n) {
 		hp = (hp - n).max(0)
 		if (self.estaMuerto()) game.removeVisual(self)
 	} 
@@ -45,11 +45,9 @@ class AtributosEnemigo {
 		}
 		return ataqueElegido
 	}
-
 		
 	method elegirObjetivo(objetivos){
-		var objetivo = objetivos.min({ objetivo => objetivo.atributos().hp() })
-		return objetivo
+		return objetivos.min({ objetivo => objetivo.atributos().hp() })
 	}
 }
 
