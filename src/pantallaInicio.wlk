@@ -28,7 +28,7 @@ object pantallaInicio {
     
     
 }
-
+// const opener =game.sound("assets/music/mixkit-ominous-drums-227.wav")
 object comenzar{
 	//method text() = "comenzar"
    // method textColor() = "ffffff"
@@ -36,6 +36,7 @@ object comenzar{
     method position() = game.at(8,5)
     
     method pulsar() {
+        // opener.play()
         game.removeVisual(punteroInicio)
     	pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
         menuMapa.display()

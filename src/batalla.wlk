@@ -25,7 +25,7 @@ class Batalla {
     const property estadisticas
     const property image //= "background/fondo1.jpeg"
     const property position = game.origin()
-   const property menuAliados
+    const property menuAliados
     const property menuEnemigos
     var property menuActivo = menuEnemigos
     

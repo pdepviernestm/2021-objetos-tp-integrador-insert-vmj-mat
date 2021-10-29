@@ -10,7 +10,8 @@ class AtributosEnemigo {
 	const property imagenVida2
 	const property imagenVida3
 	var property position
-	var property hp
+	var property hp = maxHP
+	const property maxHP
 	var property carga = 0
 	const property fuerza 		// ataque fisico
 	const property vigor  		// defensa fisica
@@ -32,6 +33,10 @@ class AtributosEnemigo {
 		hp = (hp - n).max(0)
 		if (self.estaMuerto()) game.removeVisual(self)
 	} 
+	
+	method aumentarHP(restauracion) {
+		hp = (hp + restauracion).min(maxHP)
+	}
 
 	method elegirAtaque() {
 		var ataqueElegido
@@ -49,6 +54,31 @@ class AtributosEnemigo {
 	method elegirObjetivo(objetivos){
 		return objetivos.min({ objetivo => objetivo.atributos().hp() })
 	}
+
+	method recibirHabilidad(ataque, potencia){
+		if (ataque.naturaleza() == fisico){
+			defensa = vigor
+			self.reducirHP(potencia - defensa)
+		} 
+		else if (ataque.naturaleza() == magico) {
+			defensa = mente
+			self.reducirHP(potencia - defensa)
+		}
+		else if (ataque.naturaleza() == regenerativo) {
+			self.aumentarHP(potencia)
+		}
+		// else if (ataque.naturaleza() == lazaro) ...
+	}
+	
+	method hacerHabilidad(ataque, enemigo) {
+		var potencia
+		if (ataque.naturaleza() == fisico) potencia = fuerza
+		else if (ataque.naturaleza() == magico) potencia = intelecto
+		else if (ataque.naturaleza() == regenerativo) potencia = mente
+		// else if (ataque.naturaleza() == lazaro) ...
+		console.println(enemigo.toString())
+		enemigo.recibirHabilidad(ataque, potencia)
+	}
 }
 
 const cactrot = new Personaje(
@@ -59,14 +89,14 @@ const cactrot = new Personaje(
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(2, 8),
 	
-		hp = 100,
+		maxHP = 100,
 		carga = 0,
 		fuerza = 50, // ataque fisico
 		vigor = 15, // defensa fisica
 		intelecto = 20, // ataque magico
 		mente = 15 // defensa magica
 		),
-	text = "cactrot",
+	text = "Cactrot",
 	position = game.at(2, 1)
 )
 
@@ -77,14 +107,14 @@ const flan = new Personaje(
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(3, 7),
-		hp = 150,
+		maxHP = 150,
 		carga = 0,
 	 	fuerza = 70, // ataque fisico
 		vigor = 30, // defensa fisica
 		intelecto = 30, // ataque magico
 		mente = 10 // defensa magica
 		),
-	text = "flan",
+	text = "Flan",
 	position = game.at(2, 2)
 )
 
@@ -96,14 +126,14 @@ const tomberi = new Personaje (
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(5, 8),
 	
-		hp = 200,
+		maxHP = 200,
 		carga = 0,
 		fuerza = 50, // ataque fisico
 		vigor = 40, // defensa fisica
 		intelecto = 30, // ataque magico
 		mente = 40 // defensa magica
 	), 
-	text = "tomberi",
+	text = "Tomberi",
 	position = game.at(2, 3)
 )
 
@@ -115,13 +145,13 @@ const duende = new Personaje (
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(7, 9),
 	
-		hp = 170,
+		maxHP = 170,
 		carga = 0,
 		fuerza = 40, // ataque fisico
 		vigor = 50, // defensa fisica
 		intelecto = 60, // ataque magico
 		mente = 35 // defensa magica
 	),
-	text = "duende",
+	text = "Duende",
 	position = game.at(2, 4)
 )

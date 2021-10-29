@@ -70,18 +70,16 @@ class Interfaz{
 	
 	method posicionarItems(){
 		area.posicionarItems(items)
-}
+	}
 	method display(){
 		items = self.itemsActuales()
 		game.addVisual(self)
-		self.posicionarItems()
+		self.posicionarItems() 
 	}
 	
 	method itemsActuales()
 	
-	
-	
-	}
+}
 		
 		
 		
@@ -98,7 +96,7 @@ class Estadisticas inherits Interfaz{
 
 	override method itemsActuales() = items.map{i => i.icono()}
 
-	 override method display(){
+	override method display(){
 		super()
 		items = personajes
 		items.forEach({ p => self.agregarStats(p) })
@@ -127,20 +125,16 @@ class Estadisticas inherits Interfaz{
     }
 }
 
-
-
-
 class Menu inherits Interfaz{
 	const property position
 	const property image
 	var puntero = new Puntero (posicionInicial = game.at(0,0))
 	
-	
 	method puntero() = puntero
 
 	override method itemsActuales() = items
 	 
-	 override method display(){
+	override method display(){
 		super()	
 		items.forEach({ item => game.addVisual(item) })
 		self.agregarPuntero()

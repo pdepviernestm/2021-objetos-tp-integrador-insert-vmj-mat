@@ -2,7 +2,7 @@ import wollok.game.*
 import enemigo.*
 import menu.*
 //import aaaa.*
-import turnos.*
+import turnos.*	
 import ataques.*
 
 class Icono{
@@ -73,6 +73,9 @@ class Personaje {
 	
 	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
+	
+	method hacerHabilidad(ataque, enemigo) { atributos.hacerHabilidad(ataque, enemigo) }
+	method recibirHabilidad(ataque, potencia) { atributos.hacerHabilidad(ataque, potencia) }
 
 	// exclusivos para héroes
 	method vida() = atributos.vida()
@@ -85,10 +88,10 @@ class Personaje {
 
 class Atributos {
 	const property position
-	var property objetivo
+	//var property objetivo
 	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
-	var property habilidades 
+	var property habilidades
 	const property maxHP
 	var property hp = maxHP
 	
@@ -106,7 +109,6 @@ class Atributos {
 	const property imagenVida3
 
 	var image = imagenInicial
-	
 	
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
@@ -138,7 +140,31 @@ class Atributos {
 		hp = (hp + restauracion).min(maxHP)
 		vida.hpActual(hp)
 	}
-
+	
+	method recibirHabilidad(ataque, potencia){
+		if (ataque.naturaleza() == fisico){
+			defensa = vigor
+			self.reducirHP(potencia - defensa)
+		} 
+		else if (ataque.naturaleza() == magico) {
+			defensa = mente
+			self.reducirHP(potencia - defensa)
+		}
+		else if (ataque.naturaleza() == regenerativo) {
+			self.aumentarHP(potencia)
+		}
+		// else if (ataque.naturaleza() == lazaro) ...
+	}
+	
+	method hacerHabilidad(ataque, enemigo) {
+		var potencia
+		if (ataque.naturaleza() == fisico) potencia = fuerza
+		else if (ataque.naturaleza() == magico) potencia = intelecto
+		else if (ataque.naturaleza() == regenerativo) potencia = mente
+		// else if (ataque.naturaleza() == lazaro) ...
+		console.println(enemigo.toString())
+		enemigo.recibirHabilidad(ataque, potencia)
+	}
 }
 
 const ladron = new Personaje (
@@ -152,7 +178,7 @@ const ladron = new Personaje (
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(5, 8),
-		objetivo = cactrot,
+		//objetivo = cactrot,
 
 		maxHP = 100,
 		vida = new Hp(hpInicial = 100,position= game.at(14,2)),
@@ -179,10 +205,8 @@ const clerigo = new Personaje (
 		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-		
-		// cambiar imágenes
 		position = game.at(5, 6),
-		objetivo = flan,
+		//objetivo = flan,
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(14,4)),
@@ -191,7 +215,7 @@ const clerigo = new Personaje (
 		intelecto = 25,
 		mente = 30,
 		
-		habilidades = [lazaro,curacion,ataqueMagico]
+		habilidades = [curacion,ataqueMagico]
 		// cambiar estadísticas
 		),
 	text = "clerigo",
@@ -210,7 +234,7 @@ const poseidon = new Personaje(
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(6, 10),
-		objetivo = tomberi, // CAMBIAR A ENEMIGO INTERMEDIO
+		//objetivo = tomberi,
 	
 		
 		//icono = new Icono(position = game.at(16,3),image = "images/WhiteMage2F2.gif"),
@@ -242,7 +266,7 @@ const hercules = new Personaje(
 		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
 		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(9, 9),
-		objetivo = duende, // CAMBIAR A ENEMIGO INTERMEDIO
+		//objetivo = duende,
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(11,4)),

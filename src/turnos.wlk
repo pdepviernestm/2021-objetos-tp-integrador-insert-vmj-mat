@@ -31,6 +31,8 @@ object turno {
 		// con 2 seg de diferencia entre cada una; rutina.get(x) es la acción en el índice "x", 
 		// y se envía un mensaje a ella para que se realice (fue instanciada al agregarla)
 		
+		//game.schedule(1000, {=> rutina.get(0).realizar()})
+
 		game.schedule(1000 + 2000 * cantAcciones, { => 
 			if(self.heroesVivos().isEmpty()) {
 				self.perder()
@@ -62,6 +64,7 @@ object turno {
 
 	method terminarBatalla() {
 		batalla.estadisticas().removerStats()
+		game.removeVisual(batalla)
 		self.enemigosVivos().forEach({ x => x.eliminarPersonaje() })
 		self.heroesVivos().forEach({ x => x.eliminarPersonaje() }) 
 	} // quizá podríamos usar game.clear()
