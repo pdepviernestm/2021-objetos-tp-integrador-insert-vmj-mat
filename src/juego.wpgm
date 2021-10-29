@@ -1,6 +1,7 @@
 import wollok.game.*
 import menu.*
 import pantallaInicio.*
+import mapa.*
 import elementos.*
 
 program juego {
@@ -9,8 +10,10 @@ program juego {
 	game.height(15)
 	game.width(20)
 	
+	
+	
 	pantallaInicio.iniciar()
-	game.boardGround("background/fondo1.jpeg")
+	game.boardGround("background/inicio.jpeg")
 	keyboard.down().onPressDo{ modo.puntero().moverseHacia(abajo) }
 	keyboard.up().onPressDo{ modo.puntero().moverseHacia(arriba) }
 	keyboard.x().onPressDo{ modo.puntero().seleccionar() }

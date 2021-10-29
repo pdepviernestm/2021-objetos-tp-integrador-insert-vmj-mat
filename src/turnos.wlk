@@ -1,6 +1,7 @@
 import wollok.game.*
 import enemigo.*
 import menu.*
+import mapa.*
 import personaje.*
 import ataques.*
 import batalla.*

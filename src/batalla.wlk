@@ -6,6 +6,7 @@ import pantallaInicio.*
 import ataques.*
 import elementos.*
 import turnos.*
+import mapa.*
 
 class NombreBatalla {
 	const property text 
@@ -22,7 +23,8 @@ class Batalla {
     const property heroes = []
     const enemigos = []
     const property estadisticas
-    const property fondo = "background/fondo1.jpeg"
+    const property image //= "background/fondo1.jpeg"
+    const property position = game.origin()
    const property menuAliados
     const property menuEnemigos
     var property menuActivo = menuEnemigos
@@ -30,6 +32,7 @@ class Batalla {
     const property proximaAccion
 
     method iniciar() {
+    	game.addVisual(self)
     	turno.batalla(self)
     	turno.enemigos(enemigos)
     	turno.heroes(heroes)
@@ -46,7 +49,7 @@ class Batalla {
 const batallaFacil = new Batalla(
     heroes = [ladron, clerigo],
     enemigos = [flan, cactrot], 
-    fondo = "background/fondo1.jpeg",
+    image = "background/fondo2.jpeg",
     estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1),  items = [ladron, clerigo]),
     menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [ladron, clerigo] ),
    menuEnemigos= new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [flan, cactrot]),
@@ -56,7 +59,7 @@ const batallaFacil = new Batalla(
 const batallaDificil = new Batalla (
     heroes = [poseidon, hercules],
     enemigos = [tomberi, duende], 
-    fondo = "background/fondo1.jpeg", 
+    image = "background/bosque.png", 
     estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1), items = [poseidon, hercules]),
 	menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [poseidon, hercules]),
     proximaAccion = { => pantallaInicio.iniciar() },
@@ -69,7 +72,7 @@ const llanura = new Batalla(
 	// nombre = new NombreBatalla(text = "Llanura inmutable", position = game.at(0,0)),
     heroes = [ladron, clerigo],
     enemigos = [flan, cactrot], 
-    fondo = "background/fondo1.jpeg",
+    image = "background/fondo1.jpeg",
     estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1),  items = [ladron, clerigo]),
     menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [ladron, clerigo]),
     proximaAccion = { => batallaDificil.iniciar() },
@@ -81,7 +84,7 @@ const Bosque = new Batalla (
 	// nombre = new NombreBatalla(text = "Bosque del Paradigma Misterioso", position = game.at(0,0)),	
     heroes = [poseidon, hercules],
     enemigos = [tomberi, duende], 
-    fondo = "background/fondo1.jpeg", 
+    image = "background/fondo1.jpeg", 
     estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1),/*image = "menu/FondoStats.png", */ items = [poseidon, hercules]),
 	menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [poseidon, hercules]),
     menuEnemigos = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [tomberi, duende]),

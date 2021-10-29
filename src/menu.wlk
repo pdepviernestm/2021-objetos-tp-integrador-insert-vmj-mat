@@ -138,7 +138,7 @@ class Menu inherits Interfaz{
 	
 	method puntero() = puntero
 
-	
+	override method itemsActuales() = items
 	 
 	 override method display(){
 		super()	
@@ -163,7 +163,7 @@ class Menu inherits Interfaz{
 	
 	class Objetivos inherits Menu {
 	
-	override method itemsActuales() = items
+	//override method itemsActuales() = items
 	method inhabilitarOpciones() {
 		items.filter{ p => p.estaMuerto() }.forEach{ p => p.inhabilitar() }
 	}
@@ -174,6 +174,9 @@ const menuBase = new MenuHabilidades(
 	area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3)
 	
 )
+
+
+//const menuInicio = new Menu()
 
 
 // 
