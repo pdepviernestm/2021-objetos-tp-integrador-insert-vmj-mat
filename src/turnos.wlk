@@ -16,7 +16,7 @@ object turno {
 	var proximaAccion
 	
 	method ejecutar(){
-		batalla.menuObjetivo().removerMenu(punteroObjetivo)
+		batalla.menuActivo().removerMenu()
 		
 		self.enemigosVivos().forEach({ enemigo => 
 			self.agregarAccion(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos())) 
@@ -39,10 +39,12 @@ object turno {
 			}
 			
 			else {
-				menuBase.display(punteroBase) 
+				heroeActivo = self.heroesVivos().head()
+				menuBase.display() 
 				rutina = []
-				heroeActivo = self.heroesVivos().head() // se obtiene el primer héroe vivo
-				batalla.menuObjetivo().inhabilitarOpciones()
+				 // se obtiene el primer héroe vivo
+				batalla.menuAliados().inhabilitarOpciones()
+				batalla.menuEnemigos().inhabilitarOpciones()
 			}
 		})
 	}
@@ -74,8 +76,18 @@ object turno {
 
 	method proximaAccion(accion) {
 		proximaAccion = accion
-		menuBase.removerMenu(punteroBase)
-		batalla.menuObjetivo().display(punteroObjetivo)
+		menuBase.removerMenu()
+		//batalla.menuObjetivo().display()
+		self.objetivosPosibles(accion)
+		batalla.menuActivo().display()
+	}
+	method objetivosPosibles(accion){
+		if (accion.esDefensiva()){
+			batalla.menuActivo(batalla.menuAliados())
+		}
+		else {
+			batalla.menuActivo(batalla.menuEnemigos())
+		}
 	}
 
 	method agregarAccion(objetivo) {
@@ -90,8 +102,9 @@ object turno {
 				self.ejecutar()
 			}
 			else {
-				batalla.menuObjetivo().removerMenu(punteroObjetivo)
-				menuBase.display(punteroBase)
+				batalla.menuActivo().removerMenu()
+				menuBase.display()
+				// menuHabilidades.display(heroeActivo)
 			}
 		}		
 	}

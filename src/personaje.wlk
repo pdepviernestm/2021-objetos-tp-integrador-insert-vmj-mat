@@ -1,21 +1,28 @@
 import wollok.game.*
 import enemigo.*
 import menu.*
+//import aaaa.*
 import turnos.*
 import ataques.*
 
 class Icono{
-	const position
+	var property position
 	const image
-	method position() = position
 	method image() = image
+	
+	method posX() = self.position().x()
+	method posY() = self.position().y()
 }
 
 class Hp{
 	const hpInicial 
 	var property hpActual = hpInicial
-	const property position 
+	var property position 
 	
+	
+	method posicionar(x,y){
+		self.position(game.at(x,y))
+	}
 	method hpActual() = hpActual
 	method hpInicial() = hpInicial
 	method text() = hpActual.toString() + "/" + hpInicial.toString()
@@ -24,12 +31,11 @@ class Hp{
 }
 
 class Personaje {
-	const position
+	var property position
 	const text
 	const property atributos
 	var property textColor = "ffffff"
 
-	method position() = position
 	method text() = text
 
 	method fuerza() = atributos.fuerza()
@@ -52,7 +58,11 @@ class Personaje {
 	method inhabilitar() {
 		textColor = "9b9b9b"
 	}
-
+	
+	method reset(){
+		self.aumentarHP(self.atributos().maxHP())
+	}
+	
 	method agregarPersonaje() {
 		game.addVisual(self.atributos())
 	}
@@ -60,7 +70,8 @@ class Personaje {
 	method eliminarPersonaje() {
 		game.removeVisual(self.atributos())
 	}
-
+	
+	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
 
 	// exclusivos para héroes
@@ -77,7 +88,7 @@ class Atributos {
 	var property objetivo
 	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
-	var property habilidades = []
+	var property habilidades 
 	const property maxHP
 	var property hp = maxHP
 	
@@ -95,6 +106,7 @@ class Atributos {
 	const property imagenVida3
 
 	var image = imagenInicial
+	
 	
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
@@ -147,7 +159,10 @@ const ladron = new Personaje (
 		fuerza = 20,
 		vigor = 30,
 		intelecto = 25, 
-		mente = 30
+		mente = 30,
+		
+		habilidades = [ataqueFisico]
+		
 	),
 	text = "ladron",
 	position = game.at(4, 2)
@@ -174,7 +189,9 @@ const clerigo = new Personaje (
 		fuerza = 20,
 		vigor = 30,
 		intelecto = 25,
-		mente = 30
+		mente = 30,
+		
+		habilidades = [lazaro,curacion,ataqueMagico]
 		// cambiar estadísticas
 		),
 	text = "clerigo",
@@ -203,7 +220,9 @@ const poseidon = new Personaje(
 		fuerza = 40,
 		vigor = 20,
 		intelecto = 60,
-		mente = 10
+		mente = 10,
+		
+		habilidades = [ataquePiro, ataqueHielo,ataqueElectro,ataqueAero]
 	),
 	text = "poseidon",
 	position = game.at(4, 3)
@@ -230,7 +249,9 @@ const hercules = new Personaje(
 		fuerza = 90,
 		vigor = 50,
 		intelecto = 40,
-		mente = 70
+		mente = 70,
+		
+		habilidades = [ataqueFisico,ataqueEspada]
 	),
 	text = "hercules",
 	position = game.at(4, 4)

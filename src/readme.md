@@ -73,5 +73,5 @@ Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como 
 - 6) Que las acciones del menu dependan del personaje que va a realizar la accion
 - 7) Animaciones para los ataques
 ✅ 8) Que cada batalla decida que hacer al finalizarla
-- 9) Que se pueda modificar la posicion del menu sin tener que cambiar a mano todos los numeros de punteros e items
+✅ 9) Que se pueda modificar la posicion del menu sin tener que cambiar a mano todos los numeros de punteros e items
 ✅ 10) Cuidado con el encapsulamiento del personaje (!) 
