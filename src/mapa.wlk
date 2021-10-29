@@ -4,26 +4,6 @@ import menu.*
 import batalla.*
 import pantallaInicio.*
 import elementos.*
-/* 
-class menuMapa inherits Menu{
-	
-	method indice(){
-		
-	}
-	
-}
-
-class Indice(){
-	const property position
-	const nombre
-	
-	method text() = nombre
-	method textColor() = "ffffff" 
-	
-	method indice(){
-		
-	}
-}*/
 
 const menuMapa = new Menu (
 	position = game.origin(),
@@ -33,10 +13,11 @@ const menuMapa = new Menu (
 	)
 class Opcion {
     const destino
-    //const ubicacionMapa 
     const nombre
+    const property indice 
     var property position
 
+	
     method pulsar() {
     	menuMapa.removerMenu()
         //game.removeVisual(punteroInicio)
@@ -51,12 +32,28 @@ class Opcion {
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
     nombre = "Batalla fácil",
-    position = game.at(5, 5)
+    position = game.at(5, 5),
+    indice = new Indice(position = game.at(4,5),nombre = "Batalla Facil")
 )
 
 const opcionBatallaDificil = new Opcion(
     destino = batallaDificil,
     nombre = "Batalla difícil",
-    position = game.at(5, 6)
+    position = game.at(5, 6),
+    indice = new Indice(position = game.at(7,2),nombre = "Batalla dificil")
 )
+ 
+
+
+class Indice {
+	const property position
+	const nombre
+	var color = "ffffff" 
+	
+	method text() = nombre
+	method textColor() = color 
+	
+	
+	
+}
 

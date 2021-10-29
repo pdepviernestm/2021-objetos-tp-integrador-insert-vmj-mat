@@ -20,6 +20,7 @@ class NombreHabilidad {
 class Habilidad {
 	const property rol
 	const property naturaleza
+	const property potenciaInicial
 	method esDefensiva() = rol == defensa
 	method esOfensiva() = rol == ofensa
 	method realizar(atacante, atacado) {
@@ -27,13 +28,20 @@ class Habilidad {
 			atacante.hacerHabilidad(self, atacado)
 		}
 	}
+	
+	
+	method esFisico() = naturaleza == fisico
+	method esMagico() = naturaleza == magico
+	method esCurativo() = naturaleza == regenerativo
+	
 }
 
-const cura = new Habilidad(naturaleza = regenerativo, rol = defensa)
-const basico = new Habilidad(naturaleza = fisico, rol = ofensa)
-class Magia inherits Habilidad(naturaleza = magico, rol = ofensa) {
+const cura = new Habilidad(naturaleza = regenerativo, rol = defensa,potenciaInicial = 20)
+const basico = new Habilidad(naturaleza = fisico, rol = ofensa,potenciaInicial = 20)
+class Magia inherits Habilidad(naturaleza = magico, rol = ofensa,potenciaInicial = 20) {
 	const elemento
 }
+
 
 object defensa{}
 object ofensa{}

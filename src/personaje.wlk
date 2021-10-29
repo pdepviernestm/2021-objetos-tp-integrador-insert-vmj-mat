@@ -74,9 +74,24 @@ class Personaje {
 	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
 	
-	method hacerHabilidad(ataque, enemigo) { atributos.hacerHabilidad(ataque, enemigo) }
-	method recibirHabilidad(ataque, potencia) { atributos.hacerHabilidad(ataque, potencia) }
-
+	//method hacerHabilidad(ataque, enemigo) { atributos.hacerHabilidad(ataque, enemigo) }
+	method recibirHabilidad(ataque, potencia) { atributos.recibirHabilidad(ataque, potencia) }
+	
+	
+	
+	method hacerHabilidad(ataque, enemigo) {
+		var potencia = 0
+		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + atributos.fuerza()
+		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + atributos.intelecto()
+		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + atributos.mente()
+		// else if (ataque.naturaleza() == lazaro) ...
+		console.println(enemigo.toString())
+		console.println(ataque.toString())
+		console.println(potencia.toString())
+		enemigo.recibirHabilidad(ataque, potencia)
+		}
+	
+	
 	// exclusivos para héroes
 	method vida() = atributos.vida()
 	method icono() = atributos.icono()
@@ -142,28 +157,20 @@ class Atributos {
 	}
 	
 	method recibirHabilidad(ataque, potencia){
-		if (ataque.naturaleza() == fisico){
-			defensa = vigor
-			self.reducirHP(potencia - defensa)
+		
+		var def = 0
+		if (ataque.esFisico()){
+			def = vigor
+			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
 		} 
-		else if (ataque.naturaleza() == magico) {
-			defensa = mente
-			self.reducirHP(potencia - defensa)
+		else if (ataque.esMagico()) {
+			def = mente
+			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
 		}
-		else if (ataque.naturaleza() == regenerativo) {
+		else if (ataque.esCurativo()) {
 			self.aumentarHP(potencia)
 		}
 		// else if (ataque.naturaleza() == lazaro) ...
-	}
-	
-	method hacerHabilidad(ataque, enemigo) {
-		var potencia
-		if (ataque.naturaleza() == fisico) potencia = fuerza
-		else if (ataque.naturaleza() == magico) potencia = intelecto
-		else if (ataque.naturaleza() == regenerativo) potencia = mente
-		// else if (ataque.naturaleza() == lazaro) ...
-		console.println(enemigo.toString())
-		enemigo.recibirHabilidad(ataque, potencia)
 	}
 }
 
@@ -182,8 +189,8 @@ const ladron = new Personaje (
 
 		maxHP = 100,
 		vida = new Hp(hpInicial = 100,position= game.at(14,2)),
-		fuerza = 20,
-		vigor = 30,
+		fuerza = 70,
+		vigor = 70,
 		intelecto = 25, 
 		mente = 30,
 		
@@ -212,8 +219,8 @@ const clerigo = new Personaje (
 		vida = new Hp(hpInicial = 120,position= game.at(14,4)),
 		fuerza = 20,
 		vigor = 30,
-		intelecto = 25,
-		mente = 30,
+		intelecto = 70,
+		mente = 70,
 		
 		habilidades = [curacion,ataqueMagico]
 		// cambiar estadísticas

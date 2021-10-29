@@ -56,28 +56,20 @@ class AtributosEnemigo {
 	}
 
 	method recibirHabilidad(ataque, potencia){
-		if (ataque.naturaleza() == fisico){
-			defensa = vigor
-			self.reducirHP(potencia - defensa)
+		
+		var def = 0
+		if (ataque.esFisico()){
+			def = vigor
+			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
 		} 
-		else if (ataque.naturaleza() == magico) {
-			defensa = mente
-			self.reducirHP(potencia - defensa)
+		else if (ataque.esMagico()) {
+			def = mente
+			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
 		}
-		else if (ataque.naturaleza() == regenerativo) {
+		else if (ataque.esCurativo()) {
 			self.aumentarHP(potencia)
 		}
 		// else if (ataque.naturaleza() == lazaro) ...
-	}
-	
-	method hacerHabilidad(ataque, enemigo) {
-		var potencia
-		if (ataque.naturaleza() == fisico) potencia = fuerza
-		else if (ataque.naturaleza() == magico) potencia = intelecto
-		else if (ataque.naturaleza() == regenerativo) potencia = mente
-		// else if (ataque.naturaleza() == lazaro) ...
-		console.println(enemigo.toString())
-		enemigo.recibirHabilidad(ataque, potencia)
 	}
 }
 
