@@ -1,7 +1,6 @@
 import wollok.game.*
 import enemigo.*
 import menu.*
-//import aaaa.*
 import turnos.*	
 import ataques.*
 
@@ -17,16 +16,20 @@ class Icono{
 class Hp{
 	const hpInicial 
 	var property hpActual = hpInicial
-	var property position 
+	var property position
+	var property textColor = "ffffff"
 	
 	
 	method posicionar(x,y){
 		self.position(game.at(x,y))
 	}
+		method cambiarColor(color){
+		textColor = color
+	}
 	method hpActual() = hpActual
 	method hpInicial() = hpInicial
 	method text() = hpActual.toString() + "/" + hpInicial.toString()
-	method textColor() = "ffffff"
+	//method textColor() = "ffffff"
 	
 }
 
@@ -59,6 +62,10 @@ class Personaje {
 		textColor = "9b9b9b"
 	}
 	
+	method cambiarColor(color) {
+		atributos.vida().cambiarColor(color)
+	}
+	
 	method reset(){
 		self.aumentarHP(self.atributos().maxHP())
 	}
@@ -74,10 +81,7 @@ class Personaje {
 	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
 	
-	//method hacerHabilidad(ataque, enemigo) { atributos.hacerHabilidad(ataque, enemigo) }
 	method recibirHabilidad(ataque, potencia) { atributos.recibirHabilidad(ataque, potencia) }
-	
-	
 	
 	method hacerHabilidad(ataque, enemigo) {
 		var potencia = 0
@@ -85,9 +89,6 @@ class Personaje {
 		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + atributos.intelecto()
 		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + atributos.mente()
 		// else if (ataque.naturaleza() == lazaro) ...
-		console.println(enemigo.toString())
-		console.println(ataque.toString())
-		console.println(potencia.toString())
 		enemigo.recibirHabilidad(ataque, potencia)
 		}
 	

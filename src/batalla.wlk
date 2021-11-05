@@ -37,6 +37,7 @@ class Batalla {
     	turno.enemigos(enemigos)
     	turno.heroes(heroes)
     	turno.heroeActivo(heroes.head())
+        turno.heroeActivo().cambiarColor("00FF00FF")
         heroes.forEach{ heroe => heroe.agregarPersonaje() }
         enemigos.forEach{ enemigo => enemigo.agregarPersonaje() }
         //menuEnemigos.items(enemigos)

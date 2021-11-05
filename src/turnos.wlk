@@ -42,7 +42,9 @@ object turno {
 			}
 			
 			else {
+				heroeActivo.cambiarColor("FFFFFFFF") 
 				heroeActivo = self.heroesVivos().head()
+				heroeActivo.cambiarColor("00FF00FF") 
 				menuBase.display() 
 				rutina = []
 				 // se obtiene el primer héroe vivo
@@ -102,11 +104,13 @@ object turno {
 		if (heroeActivo == heroes.last()) self.ejecutar()
 		else {
 			const indiceActual = self.encontrarActual()
+			heroeActivo.cambiarColor("FFFFFFFF") 
 			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
 			if (heroeActivo == null) { // corregir
 				self.ejecutar()
 			}
 			else {
+				heroeActivo.cambiarColor("00FF00FF") 
 				batalla.menuActivo().removerMenu()
 				menuBase.display()
 				// menuHabilidades.display(heroeActivo)

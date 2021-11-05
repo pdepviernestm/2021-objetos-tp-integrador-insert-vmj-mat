@@ -22,12 +22,12 @@ class Habilidad {
 	const property naturaleza
 	const property potenciaInicial
 
-    const property animacion = { => }
+    const property animacion = { personaje => }
 
 	method esDefensiva() = rol == defensa
 	method esOfensiva() = rol == ofensa
 
-	method animar() = animacion.apply()
+	method animar(personaje) = animacion.apply(personaje)
 
 	method realizar(atacante, atacado) {
 		atacante.hacerHabilidad(self, atacado)
@@ -74,13 +74,14 @@ const curacion = new NombreHabilidad(tipoHabilidad = cura, position = game.at(3,
 const ataqueFisico = new NombreHabilidad(tipoHabilidad = basico, position = game.at(3, 2), text = "Golpe Fisico")
 const ataqueEspada = new NombreHabilidad(tipoHabilidad = basico, position = game.at(3, 2), text = "Corte Sangriento")
 const ataqueMagico = new NombreHabilidad(tipoHabilidad = new Magia(elemento = fuego), position = game.at(3, 1), text = "Ataque Magico")
-const ataquePiro= new NombreHabilidad(tipoHabilidad = new Magia(elemento = fuego), position = game.at(3, 1), text = "Piro")
-const ataqueHielo= new NombreHabilidad(tipoHabilidad = new Magia(elemento = hielo), position = game.at(3, 1), text = "Golpe Helado")
+const ataquePiro = new NombreHabilidad(tipoHabilidad = new Magia(elemento = fuego), position = game.at(3, 1), text = "Piro")
+const ataqueHielo = new NombreHabilidad(tipoHabilidad = new Magia(elemento = hielo), position = game.at(3, 1), text = "Golpe Helado")
 const ataqueElectro = new NombreHabilidad(tipoHabilidad = new Magia(elemento = electro), position = game.at(3, 1), text = "Rayo Electrico")
 const ataqueAero = new NombreHabilidad(tipoHabilidad = new Magia(elemento = aire), position = game.at(3, 1), text = "Rafaga Aerea")
 //const lazaro = new NombreHabilidad(tipoHabilidad = reanimacion, position = game.at(3, 1), text = "Lazaro")
 
-const animacionFisico = { => 
+const animacionFisico = { personaje => 
+	personaje.animarAtaque()
 	const punch = game.sound("assets/music/mixkit-hard-and-quick-punch-2143.wav")
 	punch.play()
 }
