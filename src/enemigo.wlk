@@ -6,9 +6,7 @@ import ataques.*
 
 class AtributosEnemigo {
 	const property imagenInicial
-	const property imagenVida1
-	const property imagenVida2
-	const property imagenVida3
+
 	var property position
 	var property hp = maxHP
 	const property maxHP
@@ -76,9 +74,6 @@ class AtributosEnemigo {
 const cactrot = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Cactrot.gif",
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(2, 8),
 	
 		maxHP = 100,
@@ -95,9 +90,6 @@ const cactrot = new Personaje(
 const flan = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Flan.gif",
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(3, 7),
 		maxHP = 150,
 		carga = 0,
@@ -113,9 +105,6 @@ const flan = new Personaje(
 const tomberi = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Tonberry.gif",
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(5, 8),
 	
 		maxHP = 200,
@@ -132,9 +121,6 @@ const tomberi = new Personaje (
 const duende = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Goblin2.gif",
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
 		position = game.at(7, 9),
 	
 		maxHP = 170,

@@ -43,7 +43,8 @@ class AreaMenu {
 	method puedePosicionarse(posicion){
 		return self.dentroDeArea(posicion) and self.estaLibre(posicion)
 	}
-	  method proximaPosicionLibre(){
+
+	method proximaPosicionLibre(){
 	  	if (self.puedePosicionarse(proxima.up(distanciaY)))
 	  	return proxima.up(distanciaY)
 	  	else if (self.puedePosicionarse(proxima.right(distanciaX)))
@@ -138,14 +139,13 @@ class Menu inherits Interfaz{
 		super()	
 		items.forEach({ item => game.addVisual(item) })
 		self.agregarPuntero()
-		}
-		
-	
+	}
 		
 	method removerMenu() {
         game.removeVisual(puntero)
         items.forEach({ item => game.removeVisual(item) })
-		game.removeVisual(self)}
+		game.removeVisual(self)
+	}
 	
 	method agregarPuntero(){
 		puntero.position(items.head().position())

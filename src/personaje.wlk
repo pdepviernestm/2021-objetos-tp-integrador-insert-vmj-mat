@@ -119,10 +119,6 @@ class Atributos {
 	const property imagenAtaque
 	const property imagenMuerto
 
-	const property imagenVida1
-	const property imagenVida2
-	const property imagenVida3
-
 	var image = imagenInicial
 	
 	method image() {					// para que se quede muerto
@@ -157,7 +153,6 @@ class Atributos {
 	}
 	
 	method recibirHabilidad(ataque, potencia){
-		
 		var def = 0
 		if (ataque.esFisico()){
 			def = vigor
@@ -180,12 +175,8 @@ const ladron = new Personaje (
 		imagenInicial = "personajes/Thief2M-SW.gif",
 		imagenAtaque = "personajes/Thief2M-SW.gif",
 		imagenMuerto = "personajes/Thief2M-SW.gif",
-		
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+
 		position = game.at(5, 8),
-		//objetivo = cactrot,
 
 		maxHP = 100,
 		vida = new Hp(hpInicial = 100,position= game.at(14,2)),
@@ -208,12 +199,8 @@ const clerigo = new Personaje (
 		imagenInicial = "personajes/WhiteMage2F-SW.gif",
 		imagenAtaque =  "personajes/WhiteMage2F-SW.gif",
 		imagenMuerto =  "personajes/WhiteMage2F-SW.gif",
-		
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+
 		position = game.at(5, 6),
-		//objetivo = flan,
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(14,4)),
@@ -222,27 +209,21 @@ const clerigo = new Personaje (
 		intelecto = 70,
 		mente = 70,
 		
-		habilidades = [curacion,ataqueMagico]
+		habilidades = [curacion, ataqueMagico]
 		// cambiar estadísticas
 		),
 	text = "clerigo",
 	position = game.at(4, 1)
 )
 const poseidon = new Personaje(
-	//CAMBIAR IMAGENES 
 	atributos = new Atributos(
 		icono = new Icono(position = game.at(13,2),image = "personajes/Summoner2M.gif"),
 		//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
 		imagenInicial = "personajes/Summoner2M-SW.gif", 
 		imagenAtaque = "personajes/Summoner2M-SW.gif",
 		imagenMuerto = "personajes/Summoner2M-SW.gif",
-		
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
-		position = game.at(6, 10),
-		//objetivo = tomberi,
-	
+
+		position = game.at(6, 10),	
 		
 		//icono = new Icono(position = game.at(16,3),image = "images/WhiteMage2F2.gif"),
 	
@@ -268,12 +249,8 @@ const hercules = new Personaje(
 		imagenInicial = "personajes/Knight3M-SW.gif", 
 		imagenAtaque = "personajes/Knight3M-SW.gif",
 		imagenMuerto = "personajes/Knight3M-SW.gif",
-		
-		imagenVida1 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida2 = "Bandits/Sprites/Vida/Corazon.png",
-		imagenVida3 = "Bandits/Sprites/Vida/Corazon.png",
+
 		position = game.at(9, 9),
-		//objetivo = duende,
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(11,4)),
@@ -287,4 +264,3 @@ const hercules = new Personaje(
 	text = "hercules",
 	position = game.at(4, 4)
 )
-

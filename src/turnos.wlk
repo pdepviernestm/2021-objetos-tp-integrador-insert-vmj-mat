@@ -85,6 +85,7 @@ object turno {
 		self.objetivosPosibles(accion)
 		batalla.menuActivo().display()
 	}
+	
 	method objetivosPosibles(accion){
 		if (accion.esDefensiva()){
 			batalla.menuActivo(batalla.menuAliados())

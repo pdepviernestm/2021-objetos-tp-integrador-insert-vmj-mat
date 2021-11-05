@@ -66,7 +66,7 @@ Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como 
 
 **Objetivos para 12/11**
 - 1) Saber que personaje estoy usando
-- 2) Que los personajes no puedan atacar cuando ya murieron
+✅ 2) Que los personajes no puedan atacar cuando ya murieron
 ✅ 3) Que al morir personajes no se limite el movimiento del cursor
 ✅ 4) Revisar jerarquia de herencia de los menues
 ✅ 5) Sacar repeticion de logica entre direcciones
