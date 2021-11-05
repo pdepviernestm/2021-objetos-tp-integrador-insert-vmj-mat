@@ -30,10 +30,8 @@ class Habilidad {
 	method animar() = animacion.apply()
 
 	method realizar(atacante, atacado) {
-		if (!atacante.estaMuerto()) {
-			atacante.hacerHabilidad(self, atacado)
-			self.animar()
-		}
+		atacante.hacerHabilidad(self, atacado)
+		self.animar()
 	}
 	
 	method esFisico() = naturaleza == fisico
