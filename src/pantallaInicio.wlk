@@ -15,12 +15,12 @@ object pantallaInicio {
     
 }
 
-const opener = game.sound("assets/music/mixkit-ominous-drums-227.wav")
 object comenzar {
     method image() = "menu/comenzar.png"
     method position() = game.at(8,5)
     
     method pulsar() {
+        const opener = game.sound("assets/music/mixkit-ominous-drums-227.wav")
         opener.play()
         game.removeVisual(punteroInicio)
     	pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
