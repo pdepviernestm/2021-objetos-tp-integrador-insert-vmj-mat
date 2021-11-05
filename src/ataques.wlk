@@ -30,8 +30,11 @@ class Habilidad {
 	method animar(personaje) = animacion.apply(personaje)
 
 	method realizar(atacante, atacado) {
-		atacante.hacerHabilidad(self, atacado)
-		self.animar()
+		if(!atacante.estaMuerto()){
+			atacante.hacerHabilidad(self, atacado)
+			self.animar(atacante)
+		}
+		
 	}
 	
 	method esFisico() = naturaleza == fisico
@@ -80,8 +83,12 @@ const ataqueElectro = new NombreHabilidad(tipoHabilidad = new Magia(elemento = e
 const ataqueAero = new NombreHabilidad(tipoHabilidad = new Magia(elemento = aire), position = game.at(3, 1), text = "Rafaga Aerea")
 //const lazaro = new NombreHabilidad(tipoHabilidad = reanimacion, position = game.at(3, 1), text = "Lazaro")
 
-const animacionFisico = { personaje => 
-	personaje.animarAtaque()
-	const punch = game.sound("assets/music/mixkit-hard-and-quick-punch-2143.wav")
-	punch.play()
-}
+object animacionFisico{
+	method apply (personaje){
+		personaje.animarAtaque()
+		//meter aca el sonido que se pueda escuchar mas de una vez
+		//const punch = game.sound("assets/music/mixkit-hard-and-quick-punch-2143.wav")
+		//punch.play()
+	}
+	
+}	

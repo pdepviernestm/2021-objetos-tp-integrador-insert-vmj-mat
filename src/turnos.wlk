@@ -101,20 +101,18 @@ object turno {
 		const movimiento = new Movimiento(habilidad = proximaAccion, origen = heroeActivo, destino = objetivo)
 		
 		rutina.add(movimiento)
-		if (heroeActivo == heroes.last()) self.ejecutar()
+		if (heroeActivo == self.heroesVivos().last()) self.ejecutar()
 		else {
 			const indiceActual = self.encontrarActual()
 			heroeActivo.cambiarColor("FFFFFFFF") 
 			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
-			if (heroeActivo == null) { // corregir
-				self.ejecutar()
-			}
-			else {
-				heroeActivo.cambiarColor("00FF00FF") 
-				batalla.menuActivo().removerMenu()
-				menuBase.display()
-				// menuHabilidades.display(heroeActivo)
-			}
+			//if (heroeActivo == null) { // corregir
+				//self.ejecutar()
+			//}
+			heroeActivo.cambiarColor("00FF00FF") //meter un object de colores 
+			batalla.menuActivo().removerMenu()
+			menuBase.display()
+			// menuHabilidades.display(heroeActivo)
 		}		
 	}
 
