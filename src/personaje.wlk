@@ -81,16 +81,36 @@ class Personaje {
 	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
 	
-	method recibirHabilidad(ataque, potencia) { atributos.recibirHabilidad(ataque, potencia) }
+	//method recibirHabilidad(ataque, potencia) { atributos.recibirHabilidad(ataque, potencia) }
 	
-	method hacerHabilidad(ataque, enemigo) {
+	method recibirHabilidad(ataque,potencia){
+		atributos.recibirHabilidad(ataque,(potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))
+	}
+	
+	
+	method atributoPorNaturaleza(nat){
+		if (nat == fisico) return atributos.vigor()
+		else if (nat == magico) return atributos.intelecto()
+		else /*if (nat == regenerativo)*/ return atributos.mente()
+	}
+	
+	//method defensaTotal(ataque) = ataque.atributoPorNaturaleza(atributos)
+	method defensaTotal(ataque) = self.atributoPorNaturaleza(ataque.naturaleza())
+	method potenciaTotal(ataque) = self.atributoPorNaturaleza(ataque.naturaleza()) + ataque.potenciaInicial()
+	//method potenciaTotal(ataque) = ataque.potenciaInicial() + ataque.atributoPorNaturaleza(atributos)  
+	
+	/*method hacerHabilidad(ataque, enemigo) {
 		var potencia = 0
 		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + atributos.fuerza()
 		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + atributos.intelecto()
 		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + atributos.mente()
 		// else if (ataque.naturaleza() == lazaro) ...
 		enemigo.recibirHabilidad(ataque, potencia)
-		}
+		}*/
+	method hacerHabilidad(ataque,enemigo){
+	enemigo.recibirHabilidad(ataque,self.potenciaTotal(ataque))	
+	}
+	
 	
 	
 	// exclusivos para héroes
@@ -153,7 +173,7 @@ class Atributos {
 		vida.hpActual(hp)
 	}
 	
-	method recibirHabilidad(ataque, potencia){
+	/*method recibirHabilidad(ataque, potencia){
 		var def = 0
 		if (ataque.esFisico()){
 			def = vigor
@@ -167,7 +187,28 @@ class Atributos {
 			self.aumentarHP(potencia)
 		}
 		// else if (ataque.naturaleza() == lazaro) ...
+	}*/
+	
+	method recibirHabilidad(ataque,potencia){
+		if (ataque.esOfensiva()){
+			self.reducirHP(potencia )
+		}
+		else 
+			self.aumentarHP(potencia)
 	}
+	
+	
+	/*method hacerHabilidad(ataque, enemigo) {
+		var potencia = 0
+		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + fuerza
+		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + intelecto
+		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + mente
+		// else if (ataque.naturaleza() == lazaro) ...
+		enemigo.recibirHabilidad(ataque, potencia)
+		}*/
+		
+	//method potenciaTotal(ataque) = return ataque.potenciaInicial() + ataque.atributoPorNaturaleza(self)
+	
 }
 
 const ladron = new Personaje (

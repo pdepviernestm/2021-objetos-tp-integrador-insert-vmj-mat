@@ -28,7 +28,8 @@ class Habilidad {
 	method esOfensiva() = rol == ofensa
 
 	method animar(personaje) = animacion.apply(personaje)
-
+	
+	
 	method realizar(atacante, atacado) {
 		if(!atacante.estaMuerto()){
 			atacante.hacerHabilidad(self, atacado)
@@ -36,6 +37,10 @@ class Habilidad {
 		}
 		
 	}
+	
+	//method atributoPorNaturaleza(personaje) = naturaleza.atributoPorNaturaleza(personaje)
+	
+	
 	
 	method esFisico() = naturaleza == fisico
 	method esMagico() = naturaleza == magico
@@ -49,11 +54,22 @@ class Magia inherits Habilidad(naturaleza = magico, rol = ofensa,potenciaInicial
 	const elemento
 }
 
+
+
 object defensa{}
 object ofensa{}
-object fisico{}
-object magico{}
-object regenerativo{}
+object fisico {}
+/* 	method atributoPorNaturaleza(personaje) = personaje.vigor()
+}
+
+*/object magico {}
+//	method atributoPorNaturaleza(personaje) = personaje.intelecto()
+//}
+
+object regenerativo {}
+//	method atributoPorNaturaleza(personaje) = personaje.mente()
+//}
+//*/
 
 class Elemento {
 	const property image

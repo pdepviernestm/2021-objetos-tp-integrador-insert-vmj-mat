@@ -53,7 +53,7 @@ class AtributosEnemigo {
 		return objetivos.min({ objetivo => objetivo.atributos().hp() })
 	}
 
-	method recibirHabilidad(ataque, potencia){
+	/*method recibirHabilidad(ataque, potencia){
 		
 		var def = 0
 		if (ataque.esFisico()){
@@ -68,7 +68,20 @@ class AtributosEnemigo {
 			self.aumentarHP(potencia)
 		}
 		// else if (ataque.naturaleza() == lazaro) ...
+	}*/
+	
+	method recibirHabilidad(ataque,potenciaTotal){
+		self.reducirHP(potenciaTotal)
 	}
+	
+	method hacerHabilidad(ataque, enemigo) {
+		var potencia = 0
+		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + fuerza
+		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + intelecto
+		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + mente
+		// else if (ataque.naturaleza() == lazaro) ...
+		enemigo.recibirHabilidad(ataque, potencia)
+		}
 }
 
 const cactrot = new Personaje(
