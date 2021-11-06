@@ -50,11 +50,13 @@ class AreaMenu {
 	method proximaPosicionLibre(){
 	  	if (self.puedePosicionarse(proxima.up(distanciaY)))
 	  	return proxima.up(distanciaY)
-		if (self.puedePosicionarse(proxima.down(distanciaY)))
-	  	return proxima.down(distanciaY)
 	  	else if (self.puedePosicionarse(proxima.right(distanciaX)))
 	  	return proxima.right(distanciaX)
-	  	else return proxima
+	  	else {proxima.right(distanciaX)
+	  		if (self.puedePosicionarse(proxima.down(distanciaY)))
+	  		return proxima.down(distanciaY)
+	  		else return proxima
+	  		}
 	}
 	
 	method posicionarItems(items){
