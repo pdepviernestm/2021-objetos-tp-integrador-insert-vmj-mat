@@ -7,6 +7,7 @@ import ataques.*
 import batalla.*
 import elementos.*
 import pantallaInicio.*
+import paleta.*
 
 object turno {
 	var property rutina = []
@@ -42,9 +43,9 @@ object turno {
 			}
 
 			else {
-				heroeActivo.cambiarColor("FFFFFFFF")
+				heroeActivo.cambiarColor(paleta.blanco())
 				heroeActivo = self.heroesVivos().head()
-				heroeActivo.cambiarColor("00FF00FF")
+				heroeActivo.cambiarColor(paleta.verde())
 				menuBase.display()
 				rutina = []
 				// se obtiene el primer héroe vivo

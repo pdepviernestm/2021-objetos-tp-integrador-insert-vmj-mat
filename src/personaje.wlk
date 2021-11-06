@@ -4,6 +4,7 @@ import menu.*
 import turnos.*	
 import ataques.*
 import tocadiscos.*
+import paleta.*
 
 class Icono{
 	var property position
@@ -18,7 +19,7 @@ class Hp{
 	const hpInicial 
 	var property hpActual = hpInicial
 	var property position
-	var property textColor = "ffffff"
+	var property textColor = paleta.blanco()
 	
 	
 	method posicionar(x,y){
@@ -36,7 +37,7 @@ class Personaje {
 	var property position
 	const text
 	const property atributos
-	var property textColor = "ffffff"
+	var property textColor = paleta.blanco()
 
 	method text() = text
 	
@@ -65,14 +66,14 @@ class Personaje {
 	//traer la habilidad seleccionada. Si es lázaro, siempre devolver true. Si no, ver el color.
 	//además, cambiar el color si es lázaro.
 
-	method habilitado() = textColor == "ffffff"
+	method habilitado() = textColor == paleta.blanco()
 	
 	method inhabilitar() {
-		textColor = "9b9b9b"
+		textColor = paleta.gris()
 	}
 
 	method habilitar() {
-		textColor = "ffffff"
+		textColor = paleta.blanco()
 	}
 	
 	method cambiarColor(color) {

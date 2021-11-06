@@ -4,12 +4,13 @@ import wollok.game.*
 import turnos.*
 import batalla.*
 import tocadiscos.*
+import paleta.*
 
 class NombreHabilidad {
 	const property tipoHabilidad
 	var property position = game.at(0, 0)
 	const property text
-	method textColor() = "ffffff" 
+	method textColor() = paleta.blanco()
 	
 	method pulsar() {
 		turno.proximaAccion(self.tipoHabilidad())
@@ -59,13 +60,8 @@ class Magia inherits Habilidad(naturaleza = magico, rol = ofensa, potenciaInicia
 }
 }
 
-
-
-object cura inherits Magia (elemento = salud,naturaleza = regenerativo, rol = defensa, potenciaInicial = 20)
-{}
-object lazaro inherits Magia (elemento = fenix ,naturaleza = regenerativo, rol = defensa, potenciaInicial = 0)
-{}
-	
+const cura = new Magia(elemento = salud, naturaleza = regenerativo, rol = defensa, potenciaInicial = 20)
+const lazaro = new Magia(elemento = fenix, naturaleza = regenerativo, rol = defensa, potenciaInicial = 0)
 
 
 class Elemento {
@@ -143,7 +139,6 @@ const magiaBlanca = new Elemento(image = "ataques/cositoVerde.gif")
 const fenix = new Elemento(image = "ataques/CuraThrow.gif" )
 
 const curacion = new NombreHabilidad(tipoHabilidad = cura  , text = "Curacion")
-//const curacion = new NombreHabilidad(tipoHabilidad = cura, text = "Curacion")
 const ataqueFisico = new NombreHabilidad(tipoHabilidad = basico, text = "Golpe Fisico")
 const ataqueEspada = new NombreHabilidad(tipoHabilidad = basico, text = "Corte Sangriento")
 const ataqueMagico = new NombreHabilidad(tipoHabilidad = new Magia(elemento = magiaBlanca), text = "Ataque Magico")

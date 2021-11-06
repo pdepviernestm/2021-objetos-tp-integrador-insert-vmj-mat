@@ -3,6 +3,7 @@ import menu.*
 import batalla.*
 import pantallaInicio.*
 import elementos.*
+import paleta.*
 
 const menuMapa = new Menu (
 	position = game.origin(),
@@ -32,21 +33,21 @@ class Opcion {
 		game.addVisual(destino.nombre())
 	}*/
     method text() = nombre
-    method textColor() = "ffffff"
+    method textColor() = paleta.blanco()
 }
 
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
     nombre = "Batalla fácil",
     position = game.at(5, 5),
-    indice = new Indice(position = game.at(4,5),nombre = "Batalla Facil")
+    indice = new Indice(position = game.at(4,5), nombre = "Batalla Facil")
 )
 
 const opcionBatallaDificil = new Opcion(
     destino = batallaDificil,
     nombre = "Batalla difícil",
     position = game.at(5, 6),
-    indice = new Indice(position = game.at(7,2),nombre = "Batalla dificil")
+    indice = new Indice(position = game.at(7,2), nombre = "Batalla dificil")
 )
  
 
@@ -54,12 +55,8 @@ const opcionBatallaDificil = new Opcion(
 class Indice {
 	const property position
 	const nombre
-	var color = "ffffff" 
+	const color = paleta.blanco()
 	
 	method text() = nombre
 	method textColor() = color 
-	
-	
-	
 }
-
