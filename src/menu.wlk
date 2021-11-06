@@ -165,7 +165,7 @@ class Menu inherits Interfaz{
 const menuBase = new MenuHabilidades(
 	position = game.at(1,1),
 	image = "menu/MenuBase.png",
-	area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3)
+	area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3)
 	
 )
 

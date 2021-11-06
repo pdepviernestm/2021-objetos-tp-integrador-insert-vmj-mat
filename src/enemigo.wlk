@@ -3,11 +3,12 @@ import menu.*
 import personaje.*
 import turnos.*
 import ataques.*
+import tocadiscos.*
 
 class AtributosEnemigo {
 	const property imagenInicial
-
-	var property position
+	const property posicionOriginal
+	var property position = posicionOriginal
 	var property hp = maxHP
 	const property maxHP
 	var property carga = 0
@@ -18,10 +19,12 @@ class AtributosEnemigo {
 
 	method image() = imagenInicial
 	
-	method animarAtaque() {
+	/*method animarAtaque() {
 		position = game.at(position.x()+1, position.y())
 		game.schedule(1000, { => position = game.at(position.x()-1, position.y()) })
-	}
+	}*/
+
+	method posicionAtaque() = game.at(position.x()+1, position.y())
 	
 	method estaMuerto() {
 		return hp <= 0
@@ -52,42 +55,26 @@ class AtributosEnemigo {
 	method elegirObjetivo(objetivos){
 		return objetivos.min({ objetivo => objetivo.atributos().hp() })
 	}
-
-	/*method recibirHabilidad(ataque, potencia){
-		
-		var def = 0
-		if (ataque.esFisico()){
-			def = vigor
-			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
-		} 
-		else if (ataque.esMagico()) {
-			def = mente
-			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
-		}
-		else if (ataque.esCurativo()) {
-			self.aumentarHP(potencia)
-		}
-		// else if (ataque.naturaleza() == lazaro) ...
-	}*/
 	
-	method recibirHabilidad(ataque,potenciaTotal){
+	method recibirHabilidad(ataque, potenciaTotal){
 		self.reducirHP(potenciaTotal)
 	}
 	
-	method hacerHabilidad(ataque, enemigo) {
-		var potencia = 0
-		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + fuerza
-		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + intelecto
-		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + mente
-		// else if (ataque.naturaleza() == lazaro) ...
-		enemigo.recibirHabilidad(ataque, potencia)
-		}
+	method animarAtaqueFisico() {
+		tocadiscos.tocar(sonidoPunio)
+		position = self.posicionAtaque()
+		game.schedule(1000, { => position = self.posicionOriginal() })
+	}
+
+	method animarAtaqueMagico() {
+		tocadiscos.tocar(sonidoMagia)
+	}
 }
 
 const cactrot = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Cactrot.gif",
-		position = game.at(2, 8),
+		posicionOriginal = game.at(2, 8),
 	
 		maxHP = 100,
 		carga = 0,
@@ -103,7 +90,7 @@ const cactrot = new Personaje(
 const flan = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Flan.gif",
-		position = game.at(3, 7),
+		posicionOriginal = game.at(3, 7),
 		maxHP = 150,
 		carga = 0,
 	 	fuerza = 70, // ataque fisico
@@ -118,7 +105,7 @@ const flan = new Personaje(
 const tomberi = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Tonberry.gif",
-		position = game.at(5, 8),
+		posicionOriginal = game.at(5, 8),
 	
 		maxHP = 200,
 		carga = 0,
@@ -134,7 +121,7 @@ const tomberi = new Personaje (
 const duende = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Goblin2.gif",
-		position = game.at(7, 9),
+		posicionOriginal = game.at(7, 9),
 	
 		maxHP = 170,
 		carga = 0,
@@ -145,4 +132,20 @@ const duende = new Personaje (
 	),
 	text = "Duende",
 	position = game.at(2, 4)
+)
+
+const duendeInmortal = new Personaje (
+	atributos = new AtributosEnemigo (
+		imagenInicial = "enemigos/Goblin2.gif",
+		posicionOriginal = game.at(9, 7),
+	
+		maxHP = 170,
+		carga = 0,
+		fuerza = 40, // ataque fisico
+		vigor = 200, // defensa fisica
+		intelecto = 60, // ataque magico
+		mente = 200 // defensa magica
+	),
+	text = "Duende inmortal",
+	position = game.at(2, 5)
 )

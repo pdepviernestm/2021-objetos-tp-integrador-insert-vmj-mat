@@ -3,6 +3,7 @@ import enemigo.*
 import menu.*
 import turnos.*	
 import ataques.*
+import tocadiscos.*
 
 class Icono{
 	var property position
@@ -28,9 +29,7 @@ class Hp{
 	}
 	method hpActual() = hpActual
 	method hpInicial() = hpInicial
-	method text() = hpActual.toString() + "/" + hpInicial.toString()
-	//method textColor() = "ffffff"
-	
+	method text() = hpActual.toString() + "/" + hpInicial.toString()	
 }
 
 class Personaje {
@@ -50,16 +49,26 @@ class Personaje {
 	method reducirHP(danio) { atributos.reducirHP(danio) }
 	method aumentarHP(restauracion) { atributos.aumentarHP(restauracion) }
 
-	method animarAtaque() { atributos.animarAtaque() }
-
 	method pulsar() {
-		if(self.habilitado()) turno.agregarAccion(self)
+		if(self.habilitado()) {
+			turno.agregarAccion(self)
+			if(turno.proximaAccion() == lazaro) {
+				turno.heroesMuertos().forEach{ personaje => personaje.inhabilitar() }
+			}
+		}
 	}
+
+	//traer la habilidad seleccionada. Si es lázaro, siempre devolver true. Si no, ver el color.
+	//además, cambiar el color si es lázaro.
 
 	method habilitado() = textColor == "ffffff"
 	
 	method inhabilitar() {
 		textColor = "9b9b9b"
+	}
+
+	method habilitar() {
+		textColor = "ffffff"
 	}
 	
 	method cambiarColor(color) {
@@ -67,7 +76,11 @@ class Personaje {
 	}
 	
 	method reset(){
-		self.aumentarHP(self.atributos().maxHP())
+		if(self.estaMuerto()) {
+			self.aumentarHP(self.atributos().maxHP())
+			atributos.image()
+			self.habilitar()
+		}
 	}
 	
 	method agregarPersonaje() {
@@ -81,37 +94,17 @@ class Personaje {
 	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
 	
-	//method recibirHabilidad(ataque, potencia) { atributos.recibirHabilidad(ataque, potencia) }
-	
-	method recibirHabilidad(ataque,potencia){
-		atributos.recibirHabilidad(ataque,(potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))
+	method recibirHabilidad(ataque, potencia){
+		if (ataque == lazaro) self.reset()
+		else atributos.recibirHabilidad(ataque, (potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))
 	}
 	
+	method defensaTotal(ataque) = ataque.naturaleza().estadisticaDeDefensa(self)
+	method potenciaTotal(ataque) = ataque.naturaleza().estadisticaDePotencia(self) + ataque.potenciaInicial()
 	
-	method atributoPorNaturaleza(nat){
-		if (nat == fisico) return atributos.vigor()
-		else if (nat == magico) return atributos.intelecto()
-		else /*if (nat == regenerativo)*/ return atributos.mente()
-	}
-	
-	//method defensaTotal(ataque) = ataque.atributoPorNaturaleza(atributos)
-	method defensaTotal(ataque) = self.atributoPorNaturaleza(ataque.naturaleza())
-	method potenciaTotal(ataque) = self.atributoPorNaturaleza(ataque.naturaleza()) + ataque.potenciaInicial()
-	//method potenciaTotal(ataque) = ataque.potenciaInicial() + ataque.atributoPorNaturaleza(atributos)  
-	
-	/*method hacerHabilidad(ataque, enemigo) {
-		var potencia = 0
-		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + atributos.fuerza()
-		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + atributos.intelecto()
-		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + atributos.mente()
-		// else if (ataque.naturaleza() == lazaro) ...
-		enemigo.recibirHabilidad(ataque, potencia)
-		}*/
-	method hacerHabilidad(ataque,enemigo){
-	enemigo.recibirHabilidad(ataque,self.potenciaTotal(ataque))	
-	}
-	
-	
+	method hacerHabilidad(ataque, enemigo) {
+		enemigo.recibirHabilidad(ataque, self.potenciaTotal(ataque))	
+	}	
 	
 	// exclusivos para héroes
 	method vida() = atributos.vida()
@@ -120,11 +113,15 @@ class Personaje {
 	// exclusivos para enemigos
 	method elegirAtaque() = atributos.elegirAtaque()
 	method elegirObjetivo(objetivos) = atributos.elegirObjetivo(objetivos)
+
+	method animarAtaqueFisico() { atributos.animarAtaqueFisico() }
+	method animarAtaqueMagico() { atributos.animarAtaqueMagico() }
+
 }
 
 class Atributos {
-	const property position
-	//var property objetivo
+	const property posicionOriginal
+	var property position = posicionOriginal
 	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
 	var property habilidades
@@ -142,6 +139,8 @@ class Atributos {
 
 	var image = imagenInicial
 	
+	method posicionAtaque() = game.at(position.x()-1, position.y())
+
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
 			return imagenMuerto
@@ -151,63 +150,35 @@ class Atributos {
 	method image(ruta) {
 		image = ruta
 	}
-
-	method animarAtaque() {
-		self.image(imagenAtaque)
-		game.schedule(1000, { => self.image(imagenInicial) })
-	}
 	
 	method estaMuerto() = hp == 0
 
 	method reducirHP(danio) {
 		hp = (hp - danio).max(0)
 		vida.hpActual(hp)
+		self.image()
 		
-		if (self.estaMuerto()) {
-			game.removeVisual(self)
-		}
 	}
 	
 	method aumentarHP(restauracion) {
 		hp = (hp + restauracion).min(maxHP)
 		vida.hpActual(hp)
 	}
-	
-	/*method recibirHabilidad(ataque, potencia){
-		var def = 0
-		if (ataque.esFisico()){
-			def = vigor
-			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
-		} 
-		else if (ataque.esMagico()) {
-			def = mente
-			self.reducirHP((potencia - def).max(ataque.potenciaInicial()))
-		}
-		else if (ataque.esCurativo()) {
-			self.aumentarHP(potencia)
-		}
-		// else if (ataque.naturaleza() == lazaro) ...
-	}*/
-	
-	method recibirHabilidad(ataque,potencia){
-		if (ataque.esOfensiva()){
-			self.reducirHP(potencia )
-		}
-		else 
-			self.aumentarHP(potencia)
+
+	method recibirHabilidad(ataque, potencia){
+		ataque.hacerEfecto(self, potencia)
 	}
 	
 	
-	/*method hacerHabilidad(ataque, enemigo) {
-		var potencia = 0
-		if (ataque.esFisico()) potencia = ataque.potenciaInicial() + fuerza
-		else if (ataque.esMagico()) potencia = ataque.potenciaInicial() + intelecto
-		else if (ataque.esCurativo()) potencia = ataque.potenciaInicial() + mente
-		// else if (ataque.naturaleza() == lazaro) ...
-		enemigo.recibirHabilidad(ataque, potencia)
-		}*/
-		
-	//method potenciaTotal(ataque) = return ataque.potenciaInicial() + ataque.atributoPorNaturaleza(self)
+	method animarAtaqueFisico() {
+		tocadiscos.tocar(sonidoPunio)
+		position = self.posicionAtaque()
+		game.schedule(1000, { => position = self.posicionOriginal() })
+	}
+
+	method animarAtaqueMagico() {
+		tocadiscos.tocar(sonidoMagia)
+	}
 	
 }
 
@@ -216,9 +187,9 @@ const ladron = new Personaje (
 		icono = new Icono(position = game.at(16,2),image = "personajes/Thief2M.gif"),
 		imagenInicial = "personajes/Thief2M-SW.gif",
 		imagenAtaque = "personajes/Thief2M-SW.gif",
-		imagenMuerto = "personajes/Thief2M-SW.gif",
+		imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
 
-		position = game.at(5, 8),
+		posicionOriginal = game.at(5, 8),
 
 		maxHP = 100,
 		vida = new Hp(hpInicial = 100,position= game.at(14,2)),
@@ -240,9 +211,9 @@ const clerigo = new Personaje (
 		icono = new Icono(position = game.at(16,4),image = "personajes/WhiteMage2F.gif"),
 		imagenInicial = "personajes/WhiteMage2F-SW.gif",
 		imagenAtaque =  "personajes/WhiteMage2F-SW.gif",
-		imagenMuerto =  "personajes/WhiteMage2F-SW.gif",
+		imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
 
-		position = game.at(5, 6),
+		posicionOriginal = game.at(5, 6),
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(14,4)),
@@ -251,21 +222,22 @@ const clerigo = new Personaje (
 		intelecto = 70,
 		mente = 70,
 		
-		habilidades = [curacion, ataqueMagico]
+		habilidades = [curacion, ataqueMagico, hechizoLazaro]
 		// cambiar estadísticas
 		),
 	text = "clerigo",
 	position = game.at(4, 1)
 )
+
 const poseidon = new Personaje(
 	atributos = new Atributos(
 		icono = new Icono(position = game.at(13,2),image = "personajes/Summoner2M.gif"),
 		//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
 		imagenInicial = "personajes/Summoner2M-SW.gif", 
 		imagenAtaque = "personajes/Summoner2M-SW.gif",
-		imagenMuerto = "personajes/Summoner2M-SW.gif",
+		imagenMuerto = "personajes/Summoner2M-Dead-SW.gif",
 
-		position = game.at(6, 10),	
+		posicionOriginal = game.at(6, 10),	
 		
 		//icono = new Icono(position = game.at(16,3),image = "images/WhiteMage2F2.gif"),
 	
@@ -290,9 +262,9 @@ const hercules = new Personaje(
 		
 		imagenInicial = "personajes/Knight3M-SW.gif", 
 		imagenAtaque = "personajes/Knight3M-SW.gif",
-		imagenMuerto = "personajes/Knight3M-SW.gif",
+		imagenMuerto = "personajes/Knight1M-Dead-SW.gif",
 
-		position = game.at(9, 9),
+		posicionOriginal = game.at(9, 9),
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120,position= game.at(11,4)),

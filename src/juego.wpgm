@@ -10,8 +10,6 @@ program juego {
 	game.height(15)
 	game.width(20)
 	
-	
-	
 	pantallaInicio.iniciar()
 	game.boardGround("background/inicio.jpeg")
 	keyboard.down().onPressDo{ modo.puntero().moverseHacia(abajo) }

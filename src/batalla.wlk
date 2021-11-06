@@ -49,11 +49,11 @@ class Batalla {
 
 const batallaFacil = new Batalla(
     heroes = [ladron, clerigo],
-    enemigos = [flan, cactrot], 
+    enemigos = [flan, duendeInmortal], 
     image = "background/fondo2.jpeg",
-    estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1),  items = [ladron, clerigo]),
-    menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [ladron, clerigo] ),
-   menuEnemigos= new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [flan, cactrot]),
+    estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2, ancho = 4, distanciaY = 2), position = game.at(10,1), items = [ladron, clerigo]),
+    menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1), image = "menu/MenuBase.png", items = [ladron, clerigo] ),
+    menuEnemigos= new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1), image = "menu/MenuBase.png", items = [flan, duendeInmortal]),
     proximaAccion = { => batallaDificil.iniciar() }
 )//rango = [[13,16],[2,4]]rango = [[3,5],[1,2,3]]
 
@@ -61,10 +61,10 @@ const batallaDificil = new Batalla (
     heroes = [poseidon, hercules],
     enemigos = [tomberi, duende], 
     image = "background/bosque.png", 
-    estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1), items = [poseidon, hercules]),
-	menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [poseidon, hercules]),
+    estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2, ancho = 4,distanciaY=2),position = game.at(10,1), items = [poseidon, hercules]),
+	menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1),image = "menu/MenuBase.png", items = [poseidon, hercules]),
     proximaAccion = { => pantallaInicio.iniciar() },
-    menuEnemigos = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [tomberi, duende])
+    menuEnemigos = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1),image = "menu/MenuBase.png", items = [tomberi, duende])
     
 )
 
