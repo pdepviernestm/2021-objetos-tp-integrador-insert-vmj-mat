@@ -1,6 +1,5 @@
 import wollok.game.*
 import menu.*
-//import aaaa.*
 import batalla.*
 import pantallaInicio.*
 import elementos.*
@@ -8,9 +7,10 @@ import elementos.*
 const menuMapa = new Menu (
 	position = game.origin(),
 	image = "background/mapaLindo.jpg",
-	area = new AreaMenu(inicio = game.at(16,2), alto = 2,ancho = 3),
+	area = new AreaMenu(inicio = game.at(16, 2), alto = 2, ancho = 3),
 	items = [opcionBatallaFacil, opcionBatallaDificil]
-	)
+)
+
 class Opcion {
     const destino
     const nombre

@@ -58,6 +58,8 @@ class Personaje {
 		}
 	}
 
+	method posicionar(posicion) { atributos.posicionOriginal(posicion) }
+
 	//traer la habilidad seleccionada. Si es lázaro, siempre devolver true. Si no, ver el color.
 	//además, cambiar el color si es lázaro.
 
@@ -120,7 +122,7 @@ class Personaje {
 }
 
 class Atributos {
-	const property posicionOriginal
+	var posicionOriginal
 	var property position = posicionOriginal
 	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
@@ -139,6 +141,13 @@ class Atributos {
 
 	var image = imagenInicial
 	
+	method posicionOriginal(posicion){
+		posicionOriginal = posicion
+		position = posicion
+	}
+
+	method posicionOriginal() = posicionOriginal
+
 	method posicionAtaque() = game.at(position.x()-1, position.y())
 
 	method image() {					// para que se quede muerto
@@ -184,7 +193,7 @@ class Atributos {
 
 const ladron = new Personaje (
 	atributos = new Atributos(
-		icono = new Icono(position = game.at(16,2),image = "personajes/Thief2M.gif"),
+		icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),
 		imagenInicial = "personajes/Thief2M-SW.gif",
 		imagenAtaque = "personajes/Thief2M-SW.gif",
 		imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
@@ -192,7 +201,7 @@ const ladron = new Personaje (
 		posicionOriginal = game.at(5, 8),
 
 		maxHP = 100,
-		vida = new Hp(hpInicial = 100,position= game.at(14,2)),
+		vida = new Hp(hpInicial = 100, position = game.at(14, 2)),
 		fuerza = 70,
 		vigor = 70,
 		intelecto = 25, 
@@ -208,7 +217,7 @@ const ladron = new Personaje (
 
 const clerigo = new Personaje (
 	atributos = new Atributos(	
-		icono = new Icono(position = game.at(16,4),image = "personajes/WhiteMage2F.gif"),
+		icono = new Icono(position = game.at(16, 4),image = "personajes/WhiteMage2F.gif"),
 		imagenInicial = "personajes/WhiteMage2F-SW.gif",
 		imagenAtaque =  "personajes/WhiteMage2F-SW.gif",
 		imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
@@ -231,7 +240,7 @@ const clerigo = new Personaje (
 
 const poseidon = new Personaje(
 	atributos = new Atributos(
-		icono = new Icono(position = game.at(13,2),image = "personajes/Summoner2M.gif"),
+		icono = new Icono(position = game.at(13, 2), image = "personajes/Summoner2M.gif"),
 		//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
 		imagenInicial = "personajes/Summoner2M-SW.gif", 
 		imagenAtaque = "personajes/Summoner2M-SW.gif",

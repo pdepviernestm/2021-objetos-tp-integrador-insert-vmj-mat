@@ -23,13 +23,16 @@ class Puntero {
 			position = donde.mover(position)
 		}
 	}
+
 	method seleccionar(){
 		game.uniqueCollider(self).pulsar()
-	}}
-	
+	}
+}
+
+
+
 class AreaMenu {
 	var inicio
-	//var actual = inicio
 	var proxima = inicio
 	var ancho
 	var alto
@@ -47,6 +50,8 @@ class AreaMenu {
 	method proximaPosicionLibre(){
 	  	if (self.puedePosicionarse(proxima.up(distanciaY)))
 	  	return proxima.up(distanciaY)
+		if (self.puedePosicionarse(proxima.down(distanciaY)))
+	  	return proxima.down(distanciaY)
 	  	else if (self.puedePosicionarse(proxima.right(distanciaX)))
 	  	return proxima.right(distanciaX)
 	  	else return proxima
@@ -54,7 +59,7 @@ class AreaMenu {
 	
 	method posicionarItems(items){
 		proxima = inicio
-		items.forEach{i => if (self.estaLibre(proxima)) self.posicionarItem(i) else {}}
+		items.forEach{ i => if (self.estaLibre(proxima)) self.posicionarItem(i) }
 	}
 	
 	method posicionarItem(i){

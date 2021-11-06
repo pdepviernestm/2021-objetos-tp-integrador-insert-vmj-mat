@@ -7,7 +7,7 @@ import tocadiscos.*
 
 class AtributosEnemigo {
 	const property imagenInicial
-	const property posicionOriginal
+	var posicionOriginal
 	var property position = posicionOriginal
 	var property hp = maxHP
 	const property maxHP
@@ -24,7 +24,14 @@ class AtributosEnemigo {
 		game.schedule(1000, { => position = game.at(position.x()-1, position.y()) })
 	}*/
 
-	method posicionAtaque() = game.at(position.x()+1, position.y())
+	method posicionOriginal(posicion){
+		posicionOriginal = posicion
+		position = posicion
+	}
+
+	method posicionOriginal() = posicionOriginal
+
+	method posicionAtaque() = game.at(position.x() + 1, position.y())
 	
 	method estaMuerto() {
 		return hp <= 0
