@@ -14,7 +14,7 @@ class NombreHabilidad {
 	method pulsar() {
 		turno.proximaAccion(self.tipoHabilidad())
 	}
-	
+	//method agregarseAlMenu(){game.addVisual(self)}
 	method esDefensiva() = tipoHabilidad.rol() == defensa
 	method esOfensiva() = tipoHabilidad.rol() == ofensa
 }

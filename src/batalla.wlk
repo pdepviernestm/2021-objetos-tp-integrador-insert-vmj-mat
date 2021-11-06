@@ -9,6 +9,7 @@ import turnos.*
 import mapa.*
 
 class NombreBatalla {
+	const property image = "menu/espadita.gif"
 	const property text 
 	const property position 
 	var property textColor = "ffffff"
@@ -20,6 +21,7 @@ class NombreBatalla {
 }
 
 class Batalla {
+	const property nombre
     const property heroes = []
     const enemigos = []
     const property estadisticas
@@ -32,6 +34,7 @@ class Batalla {
     const property proximaAccion
 
     method iniciar() {
+    	
     	game.addVisual(self)
     	turno.batalla(self)
     	turno.enemigos(enemigos)
@@ -87,6 +90,7 @@ class Batalla {
 }
 
 const batallaFacil = new Batalla(
+	nombre = new NombreBatalla(text = "Batalla Facil", position = game.at(6,7)),
     heroes = heroesBatallaFacil,
     enemigos = enemigosBatallaFacil, 
     image = "background/fondo2.jpeg",
@@ -96,10 +100,11 @@ const batallaFacil = new Batalla(
     proximaAccion = { => batallaDificil.iniciar() }
 )
 
-const heroesBatallaFacil = [ladron, clerigo, poseidon, hercules]
-const enemigosBatallaFacil = [flan, tomberi, cactrot]
+const heroesBatallaFacil = [ladron, clerigo]
+const enemigosBatallaFacil = [flan, cactrot]
 
 const batallaDificil = new Batalla (
+	nombre = new NombreBatalla(text = "Batalla dificil", position = game.at(13,3)),
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
@@ -113,7 +118,7 @@ const heroesBatallaDificil = [poseidon, hercules]
 const enemigosBatallaDificil = [duende, tomberi]
 
 const llanura = new Batalla(
-	// nombre = new NombreBatalla(text = "Llanura inmutable", position = game.at(0,0)),
+	nombre = new NombreBatalla(text = "Llanura inmutable", position = game.at(0,0)),
     heroes = [ladron, clerigo],
     enemigos = [flan, cactrot], 
     image = "background/fondo1.jpeg",
@@ -125,7 +130,7 @@ const llanura = new Batalla(
 )
 
 const Bosque = new Batalla (
-	// nombre = new NombreBatalla(text = "Bosque del Paradigma Misterioso", position = game.at(0,0)),	
+	nombre = new NombreBatalla(text = "Bosque del Paradigma Misterioso", position = game.at(0,0)),	
     heroes = [poseidon, hercules],
     enemigos = [tomberi, duende], 
     image = "background/fondo1.jpeg", 

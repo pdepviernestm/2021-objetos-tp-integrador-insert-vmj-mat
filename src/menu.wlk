@@ -145,6 +145,7 @@ class Menu inherits Interfaz{
 	override method display(){
 		super()	
 		items.forEach({ item => game.addVisual(item) })
+		//items.forEach({ item => item.agregarseAlMenu() })
 		self.agregarPuntero()
 	}
 		

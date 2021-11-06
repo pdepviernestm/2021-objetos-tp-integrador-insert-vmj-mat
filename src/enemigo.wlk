@@ -28,7 +28,7 @@ class AtributosEnemigo {
 		posicionOriginal = posicion
 		position = posicion
 	}
-
+	//method agregarseAlMenu(){game.addVisual(self)}
 	method posicionOriginal() = posicionOriginal
 
 	method posicionAtaque() = game.at(position.x() + 1, position.y())

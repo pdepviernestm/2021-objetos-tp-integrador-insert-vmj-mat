@@ -7,7 +7,7 @@ import elementos.*
 const menuMapa = new Menu (
 	position = game.origin(),
 	image = "background/mapaLindo.jpg",
-	area = new AreaMenu(inicio = game.at(16, 2), alto = 2, ancho = 3),
+	area = new AreaMenu(inicio = game.at(2, 2), alto = 2, ancho = 3),
 	items = [opcionBatallaFacil, opcionBatallaDificil]
 )
 
@@ -18,15 +18,21 @@ class Opcion {
     var property position
 
 	
+	method nombre() = destino.nombre()
+	
     method pulsar() {
     	menuMapa.removerMenu()
         //game.removeVisual(punteroInicio)
     	//pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
+    	menuMapa.items().forEach{i=>game.removeVisual(i.nombre())}
         destino.iniciar()
     }
-
+	/*method agregarseAlMenu(){
+		game.addVisual(self)
+		game.addVisual(destino.nombre())
+	}*/
     method text() = nombre
-    method textColor() = "000000"
+    method textColor() = "ffffff"
 }
 
 const opcionBatallaFacil = new Opcion(

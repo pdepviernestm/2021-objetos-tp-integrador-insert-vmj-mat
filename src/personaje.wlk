@@ -39,7 +39,9 @@ class Personaje {
 	var property textColor = "ffffff"
 
 	method text() = text
-
+	
+	
+	//method agregarseAlMenu(){game.addVisual(self)}
 	method fuerza() = atributos.fuerza()
 	method vigor() = atributos.vigor()
 	method intelecto() = atributos.intelecto()
@@ -149,7 +151,7 @@ class Atributos {
 	method posicionOriginal() = posicionOriginal
 
 	method posicionAtaque() = game.at(position.x()-1, position.y())
-
+	//method agregarseAlMenu(){game.addVisual(self)}
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
 			return imagenMuerto
