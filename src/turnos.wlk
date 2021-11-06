@@ -89,15 +89,6 @@ object turno {
 		batalla.menuActivo().display()
 	}
 
-	method objetivosPosibles(accion){
-		// if (accion.esDefensiva()){
-		// 	batalla.menuActivo(batalla.menuAliados())
-		// }
-		// else {
-		// 	batalla.menuActivo(batalla.menuEnemigos())
-		// }
-		
-	}
 
 	method agregarAccion(objetivo) {
 		const movimiento = new Movimiento(habilidad = proximaAccion, origen = heroeActivo, destino = objetivo)

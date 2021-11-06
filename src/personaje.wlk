@@ -87,6 +87,8 @@ class Personaje {
 		}
 	}
 	
+	method posicion() = atributos.position()
+	
 	method agregarPersonaje() {
 		game.addVisual(self.atributos())
 	}
@@ -99,7 +101,10 @@ class Personaje {
 	method estaElPersonaje() = game.hasVisual(atributos)
 	
 	method recibirHabilidad(ataque, potencia){
-		if (ataque == lazaro) self.reset()
+		if (ataque == lazaro) {
+			salud.animar(self)
+			self.reset()
+		}
 		else atributos.recibirHabilidad(ataque, (potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))
 	}
 	

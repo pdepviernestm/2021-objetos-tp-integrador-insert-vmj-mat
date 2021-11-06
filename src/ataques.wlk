@@ -45,22 +45,25 @@ const basico = new Habilidad(naturaleza = fisico, rol = ofensa, potenciaInicial 
 class Magia inherits Habilidad(naturaleza = magico, rol = ofensa, potenciaInicial = 20) {
 	const elemento
 	// para cuando estÃ©n las animaciones de los elementos:
-	// override method realizar(atacante, atacado) {
-	// 	super(atacante, atacado)
-	// 	elemento.animar(atacante, atacado)
-	// }
+	override method realizar(atacante, atacado) {
+		super(atacante,atacado)
+		elemento.animar(atacado)
 }
+}
+class MagiaCurativa inherits Magia (naturaleza = regenerativo, rol = defensa, potenciaInicial = 20){}
+	
+
 
 class Elemento {
 	const property image
 	var property position = game.at(0,0)
 	
-	/*method animar(origen,destino){
-		self.position(origen)
+	method animar(destino){
+		position = destino.posicion()
 		game.addVisual(self)
-		game.schedule(1000, { => self.position(destino) game.removeVisual(self) })
-		
-	}*/
+		game.schedule(500, { => game.removeVisual(self) })
+	}
+	
 }
 
 object defensa {
@@ -101,16 +104,18 @@ object regenerativo {
 	method animacion(atacante) { atacante.animarAtaqueMagico() }
 }
 
-const fuego = new Elemento(image = "/ataques/Fireball.gif")
-const hielo = new Elemento(image = "/ataques/IceBall.gif")
-const aire = new Elemento(image = "/ataques/AeroExplode.gif")
-const electro = new Elemento(image = "/ataques/ElectroExplode.gif")
-const salud = new Elemento(image = "/ataques/curaThrow.gif")
+const fuego = new Elemento(image = "ataques/Fireball.gif")
+const hielo = new Elemento(image = "ataques/IceBall.gif")
+const aire = new Elemento(image = "ataques/AeroExplode.gif")
+const electro = new Elemento(image = "ataques/ElectroExplode.gif")
+const salud = new Elemento(image = "ataques/Cura.gif")
+const magiaBlanca = new Elemento(image = "ataques/cositoVerde.gif")
 
-const curacion = new NombreHabilidad(tipoHabilidad = cura, text = "Curacion")
+const curacion = new NombreHabilidad(tipoHabilidad = new MagiaCurativa(elemento = salud), text = "Curacion")
+//const curacion = new NombreHabilidad(tipoHabilidad = cura, text = "Curacion")
 const ataqueFisico = new NombreHabilidad(tipoHabilidad = basico, text = "Golpe Fisico")
 const ataqueEspada = new NombreHabilidad(tipoHabilidad = basico, text = "Corte Sangriento")
-const ataqueMagico = new NombreHabilidad(tipoHabilidad = new Magia(elemento = fuego), text = "Ataque Magico")
+const ataqueMagico = new NombreHabilidad(tipoHabilidad = new Magia(elemento = magiaBlanca), text = "Ataque Magico")
 const ataquePiro = new NombreHabilidad(tipoHabilidad = new Magia(elemento = fuego), text = "Piro")
 const ataqueHielo = new NombreHabilidad(tipoHabilidad = new Magia(elemento = hielo), text = "Golpe Helado")
 const ataqueElectro = new NombreHabilidad(tipoHabilidad = new Magia(elemento = electro), text = "Rayo Electrico")
@@ -121,3 +126,4 @@ object hechizoLazaro inherits NombreHabilidad(tipoHabilidad = lazaro, text = "LÃ
 		turno.heroesMuertos().forEach{ personaje => personaje.habilitar() }
 	}
 }
+
