@@ -39,18 +39,32 @@ class Habilidad {
 	method objetivosPosibles(batalla) { rol.objetivosPosibles(batalla) }
 }
 
-const cura = new Habilidad(naturaleza = regenerativo, rol = defensa, potenciaInicial = 20)
-const lazaro = new Habilidad(naturaleza = regenerativo, rol = defensa, potenciaInicial = 0)
+//const cura = new Habilidad(naturaleza = regenerativo, rol = defensa, potenciaInicial = 20)
+//const lazaro = new Habilidad(naturaleza = regenerativo, rol = defensa, potenciaInicial = 0)
 const basico = new Habilidad(naturaleza = fisico, rol = ofensa, potenciaInicial = 20)
 class Magia inherits Habilidad(naturaleza = magico, rol = ofensa, potenciaInicial = 20) {
 	const elemento
 	// para cuando estén las animaciones de los elementos:
-	override method realizar(atacante, atacado) {
+	/*override method realizar(atacante, atacado) {
 		super(atacante,atacado)
-		elemento.animar(atacado)
+		//naturaleza.animarMagia(elemento)
+		if(!atacante.estaMuerto()) elemento.animar(atacado)
+}*/
+	override method realizar(atacante, atacado) {
+		if(!atacante.estaMuerto()) {
+			atacante.hacerHabilidad(self, atacado)
+			naturaleza.animacion(atacante,elemento,atacado)
+			}
+		//if(!atacante.estaMuerto()) elemento.animar(atacado)
 }
 }
-class MagiaCurativa inherits Magia (naturaleza = regenerativo, rol = defensa, potenciaInicial = 20){}
+
+
+
+object cura inherits Magia (elemento = salud,naturaleza = regenerativo, rol = defensa, potenciaInicial = 20)
+{}
+object lazaro inherits Magia (elemento = fenix ,naturaleza = regenerativo, rol = defensa, potenciaInicial = 0)
+{}
 	
 
 
@@ -61,7 +75,7 @@ class Elemento {
 	method animar(destino){
 		position = destino.posicion()
 		game.addVisual(self)
-		game.schedule(500, { => game.removeVisual(self) })
+		game.schedule(1000, { => game.removeVisual(self) })
 	}
 	
 }
@@ -86,23 +100,39 @@ object ofensa {
 	}
 }
 
+
+class NaturalezaMagica {
+	method estadisticaDePotencia(atacante) = atacante.intelecto()
+	method estadisticaDeDefensa(atacado)
+	method animacion(atacante,elemento,atacado) { atacante.animarAtaqueMagico(elemento,atacado) }
+}
+
 object fisico {
 	method estadisticaDePotencia(atacante) = atacante.fuerza()
 	method estadisticaDeDefensa(atacado) = atacado.vigor()
 	method animacion(atacante) { atacante.animarAtaqueFisico() }
 }
+
+object magico inherits NaturalezaMagica{
+	override method estadisticaDeDefensa(atacado) = atacado.mente()
+}
  
-object magico {
+object regenerativo inherits NaturalezaMagica{
+	override method estadisticaDeDefensa(atacado) = 0
+} 
+/*object magico {
 	method estadisticaDePotencia(atacante) = atacante.intelecto()
 	method estadisticaDeDefensa(atacado) = atacado.mente()
-	method animacion(atacante) { atacante.animarAtaqueMagico() }
+	method animacion(atacante,elemento,atacado) { atacante.animarAtaqueMagico(elemento,atacado) }
 }
  
 object regenerativo {
 	method estadisticaDePotencia(atacante) = atacante.mente()
 	method estadisticaDeDefensa(atacado) = 0
-	method animacion(atacante) { atacante.animarAtaqueMagico() }
-}
+	method animacion(atacante,elemento,atacado) { atacante.animarAtaqueMagico(elemento,atacado) }
+}*/
+
+
 
 const fuego = new Elemento(image = "ataques/Fireball.gif")
 const hielo = new Elemento(image = "ataques/IceBall.gif")
@@ -110,8 +140,9 @@ const aire = new Elemento(image = "ataques/AeroExplode.gif")
 const electro = new Elemento(image = "ataques/ElectroExplode.gif")
 const salud = new Elemento(image = "ataques/Cura.gif")
 const magiaBlanca = new Elemento(image = "ataques/cositoVerde.gif")
+const fenix = new Elemento(image = "ataques/CuraThrow.gif" )
 
-const curacion = new NombreHabilidad(tipoHabilidad = new MagiaCurativa(elemento = salud), text = "Curacion")
+const curacion = new NombreHabilidad(tipoHabilidad = cura  , text = "Curacion")
 //const curacion = new NombreHabilidad(tipoHabilidad = cura, text = "Curacion")
 const ataqueFisico = new NombreHabilidad(tipoHabilidad = basico, text = "Golpe Fisico")
 const ataqueEspada = new NombreHabilidad(tipoHabilidad = basico, text = "Corte Sangriento")

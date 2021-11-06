@@ -102,7 +102,7 @@ class Personaje {
 	
 	method recibirHabilidad(ataque, potencia){
 		if (ataque == lazaro) {
-			salud.animar(self)
+			//salud.animar(self)
 			self.reset()
 		}
 		else atributos.recibirHabilidad(ataque, (potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))
@@ -123,8 +123,20 @@ class Personaje {
 	method elegirAtaque() = atributos.elegirAtaque()
 	method elegirObjetivo(objetivos) = atributos.elegirObjetivo(objetivos)
 
-	method animarAtaqueFisico() { atributos.animarAtaqueFisico() }
-	method animarAtaqueMagico() { atributos.animarAtaqueMagico() }
+	//method animarAtaqueFisico() { atributos.animarAtaqueFisico() }
+	//method animarAtaqueMagico() { atributos.animarAtaqueMagico() }
+	
+	
+	method animarAtaqueFisico() {
+		tocadiscos.tocar(sonidoPunio)
+		atributos.position(atributos.posicionAtaque()) 
+		game.schedule(1000, { => atributos.position(atributos.posicionOriginal()) })
+	}
+
+	method animarAtaqueMagico(elemento,atacado) {
+		elemento.animar(atacado)
+		tocadiscos.tocar(sonidoMagia)
+	}
 
 }
 
@@ -183,10 +195,16 @@ class Atributos {
 
 	method recibirHabilidad(ataque, potencia){
 		ataque.hacerEfecto(self, potencia)
+		self.animarRecepcion()
+	}
+	
+	method animarRecepcion(){
+		image = imagenAtaque
+		game.schedule(1000, { => image = imagenInicial })
 	}
 	
 	
-	method animarAtaqueFisico() {
+	/*method animarAtaqueFisico() {
 		tocadiscos.tocar(sonidoPunio)
 		position = self.posicionAtaque()
 		game.schedule(1000, { => position = self.posicionOriginal() })
@@ -194,7 +212,7 @@ class Atributos {
 
 	method animarAtaqueMagico() {
 		tocadiscos.tocar(sonidoMagia)
-	}
+	}*/
 	
 }
 
@@ -202,7 +220,7 @@ const ladron = new Personaje (
 	atributos = new Atributos(
 		icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),
 		imagenInicial = "personajes/Thief2M-SW.gif",
-		imagenAtaque = "personajes/Thief2M-SW.gif",
+		imagenAtaque = "personajes/Thief2M-Weak-SW.gif",
 		imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
 
 		posicionOriginal = game.at(5, 8),
@@ -226,7 +244,7 @@ const clerigo = new Personaje (
 	atributos = new Atributos(	
 		icono = new Icono(position = game.at(16, 4),image = "personajes/WhiteMage2F.gif"),
 		imagenInicial = "personajes/WhiteMage2F-SW.gif",
-		imagenAtaque =  "personajes/WhiteMage2F-SW.gif",
+		imagenAtaque =  "personajes/WhiteMage2F-Weak-SW.gif",
 		imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
 
 		posicionOriginal = game.at(5, 6),
@@ -250,7 +268,7 @@ const poseidon = new Personaje(
 		icono = new Icono(position = game.at(13, 2), image = "personajes/Summoner2M.gif"),
 		//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
 		imagenInicial = "personajes/Summoner2M-SW.gif", 
-		imagenAtaque = "personajes/Summoner2M-SW.gif",
+		imagenAtaque = "personajes/Summoner2M-Weak-SW.gif",
 		imagenMuerto = "personajes/Summoner2M-Dead-SW.gif",
 
 		posicionOriginal = game.at(6, 10),	
@@ -277,7 +295,7 @@ const hercules = new Personaje(
 		//hp= new Hp(hpInicial = 120,position= game.at(14,2)),
 		
 		imagenInicial = "personajes/Knight3M-SW.gif", 
-		imagenAtaque = "personajes/Knight3M-SW.gif",
+		imagenAtaque = "personajes/Knight3M-Weak-SW.gif",
 		imagenMuerto = "personajes/Knight1M-Dead-SW.gif",
 
 		posicionOriginal = game.at(9, 9),
