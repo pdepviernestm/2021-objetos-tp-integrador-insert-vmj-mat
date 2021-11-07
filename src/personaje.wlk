@@ -41,7 +41,6 @@ class Personaje {
 
 	method text() = text
 	
-	
 	//method agregarseAlMenu(){game.addVisual(self)}
 	method fuerza() = atributos.fuerza()
 	method vigor() = atributos.vigor()
@@ -51,6 +50,7 @@ class Personaje {
 	method estaMuerto() = atributos.estaMuerto()
 	method reducirHP(danio) { atributos.reducirHP(danio) }
 	method aumentarHP(restauracion) { atributos.aumentarHP(restauracion) }
+	method maxHP() = atributos.maxHP()
 
 	method pulsar() {
 		if(self.habilitado()) {
@@ -82,13 +82,18 @@ class Personaje {
 	
 	method reset(){
 		if(self.estaMuerto()) {
-			self.aumentarHP(self.atributos().maxHP())
+			self.aumentarHP(self.maxHP())
 			atributos.image()
 			self.habilitar()
 		}
 	}
 	
 	method posicion() = atributos.position()
+	
+	method comenzarBatalla() {
+		self.aumentarHP(self.maxHP())
+		self.habilitar()
+	}
 	
 	method agregarPersonaje() {
 		game.addVisual(self.atributos())
@@ -186,7 +191,6 @@ class Atributos {
 		hp = (hp - danio).max(0)
 		vida.hpActual(hp)
 		self.image()
-		
 	}
 	
 	method aumentarHP(restauracion) {

@@ -7,6 +7,7 @@ import ataques.*
 import elementos.*
 import turnos.*
 import mapa.*
+import paleta.*
 
 class NombreBatalla {
 	const property image = "menu/espadita.gif"
@@ -15,7 +16,7 @@ class NombreBatalla {
 	var property textColor = "ffffff"
 		
 	method inhabilitar() {
-		textColor = "9b9b9b"
+		textColor = paleta.gris()
 	}
 	
 }
@@ -34,15 +35,18 @@ class Batalla {
     const property proximaAccion
 
     method iniciar() {
-    	
     	game.addVisual(self)
     	turno.batalla(self)
     	turno.enemigos(enemigos)
     	turno.heroes(heroes)
     	turno.heroeActivo(heroes.head())
-        turno.heroeActivo().cambiarColor("00FF00FF")
+        turno.heroeActivo().cambiarColor(paleta.verde())
+        turno.heroes().drop(1).forEach{ heroe => heroe.cambiarColor(paleta.blanco()) }
+        // para que al volver a empezar una batalla no quede otro resaltado
         self.agregarHeroes()
         self.agregarEnemigos()
+		turno.rutina([])
+		// si no se reinicia la rutina, la próxima vez que se ejecuta la batalla quedan acciones de más
         menuBase.display()
         estadisticas.display()
     }
@@ -51,6 +55,7 @@ class Batalla {
         var x = 15
         var y = 10
         heroes.forEach{ heroe => 
+        	heroe.comenzarBatalla()
             heroe.posicionar(game.at(x, y))
             heroe.agregarPersonaje()
             if (x == 15) {
@@ -64,7 +69,8 @@ class Batalla {
         }
     }
 
-    method agregarEnemigos(){
+    method agregarEnemigos() {
+    	enemigos.forEach{ enemigo => enemigo.comenzarBatalla() }
         if (enemigos.size() < 3) {
             var x = 7 - enemigos.size()
             var y = 7 + enemigos.size()

@@ -40,8 +40,6 @@ class Habilidad {
 	method objetivosPosibles(batalla) { rol.objetivosPosibles(batalla) }
 }
 
-//const cura = new Habilidad(naturaleza = regenerativo, rol = defensa, potenciaInicial = 20)
-//const lazaro = new Habilidad(naturaleza = regenerativo, rol = defensa, potenciaInicial = 0)
 const basico = new Habilidad(naturaleza = fisico, rol = ofensa, potenciaInicial = 20)
 class Magia inherits Habilidad(naturaleza = magico, rol = ofensa, potenciaInicial = 20) {
 	const elemento
@@ -138,7 +136,7 @@ const salud = new Elemento(image = "ataques/Cura.gif")
 const magiaBlanca = new Elemento(image = "ataques/cositoVerde.gif")
 const fenix = new Elemento(image = "ataques/CuraThrow.gif" )
 
-const curacion = new NombreHabilidad(tipoHabilidad = cura  , text = "Curacion")
+const curacion = new NombreHabilidad(tipoHabilidad = cura, text = "Curacion")
 const ataqueFisico = new NombreHabilidad(tipoHabilidad = basico, text = "Golpe Fisico")
 const ataqueEspada = new NombreHabilidad(tipoHabilidad = basico, text = "Corte Sangriento")
 const ataqueMagico = new NombreHabilidad(tipoHabilidad = new Magia(elemento = magiaBlanca), text = "Ataque Magico")

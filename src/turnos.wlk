@@ -55,8 +55,6 @@ object turno {
 		})
 	}
 
-
-
 	method ganar() {
 		self.terminarBatalla()
 		batalla.proximaAccion().apply()
@@ -89,7 +87,6 @@ object turno {
 		accion.objetivosPosibles(batalla)
 		batalla.menuActivo().display()
 	}
-
 
 	method agregarAccion(objetivo) {
 		const movimiento = new Movimiento(habilidad = proximaAccion, origen = heroeActivo, destino = objetivo)
