@@ -96,7 +96,7 @@ class Batalla {
 }
 
 const batallaFacil = new Batalla(
-	nombre = new NombreBatalla(text = "Batalla Facil", position = game.at(6,7)),
+	nombre = new NombreBatalla(text = "Batalla Facil", position = game.at(5,7)),
     heroes = heroesBatallaFacil,
     enemigos = enemigosBatallaFacil, 
     image = "background/fondo2.jpeg",

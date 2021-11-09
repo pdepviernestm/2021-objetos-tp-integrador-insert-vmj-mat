@@ -8,7 +8,7 @@ import batalla.*
 import elementos.*
 import pantallaInicio.*
 import paleta.*
-
+import tocadiscos.*
 object turno {
 	var property rutina = []
 	var property batalla
@@ -36,9 +36,11 @@ object turno {
 
 		game.schedule(1000 + 2000 * cantAcciones, { =>
 			if(self.heroesVivos().isEmpty()) {
+				tocadiscos.tocar(sonidoPerder)
 				self.perder()
 			}
 			else if(self.enemigosVivos().isEmpty()) {
+				tocadiscos.tocar(sonidoGanar)
 				self.ganar()
 			}
 

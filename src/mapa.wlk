@@ -8,7 +8,7 @@ import paleta.*
 const menuMapa = new Menu (
 	position = game.origin(),
 	image = "background/mapaLindo.jpg",
-	area = new AreaMenu(inicio = game.at(2, 2), alto = 2, ancho = 3),
+	area = new AreaMenu(inicio = game.at(7, 5), alto = 2, ancho = 3),
 	items = [opcionBatallaFacil, opcionBatallaDificil]
 )
 
@@ -45,9 +45,9 @@ const opcionBatallaFacil = new Opcion(
 
 const opcionBatallaDificil = new Opcion(
     destino = batallaDificil,
-    nombre = "Batalla difícil",
-    position = game.at(5, 6),
-    indice = new Indice(position = game.at(7,2), nombre = "Batalla dificil")
+    nombre = "Batalla Difícil",
+    position = game.at(7, 2),
+    indice = new Indice(position = game.at(7,2), nombre = "Batalla Dificil")
 )
  
 
