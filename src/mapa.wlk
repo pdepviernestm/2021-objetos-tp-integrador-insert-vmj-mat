@@ -13,11 +13,6 @@ object mapa inherits Interfaz{
 	override method posicionarItems() {
 		self.itemsActuales().forEach{i => game.addVisual(i)}
 	}
-	/////
-	method removerMapa(){
-		game.removeVisual(self)
-		self.itemsActuales().forEach{i => game.removeVisual(i)}
-	}/////
 	
 	
 }
@@ -42,19 +37,9 @@ class Opcion {
 	
     method pulsar() {
     	menuMapa.removerse()
-    	//menuMapa.removerMenu()
-        //game.removeVisual(punteroInicio)
-    	//pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
-    	//menuMapa.items().forEach{i=>game.removeVisual(i.nombre())}
-    	
-    	//mapa.removerMapa()
     	mapa.removerse()
         destino.iniciar()
     }
-	/*method agregarseAlMenu(){
-		game.addVisual(self)
-		game.addVisual(destino.nombre())
-	}*/
     method text() = nombre
     method textColor() = paleta.blanco()
 }

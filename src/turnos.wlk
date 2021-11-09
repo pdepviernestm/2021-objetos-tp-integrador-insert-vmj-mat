@@ -18,9 +18,7 @@ object turno {
 	var property proximaAccion
 
 	method ejecutar(){
-		//batalla.menuActivo().removerMenu()
-		batalla.menuActivo().removerse()
-
+		batalla.removerMenuActivo()
 		self.enemigosVivos().forEach({ enemigo =>
 			self.agregarAccion(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos()))
 		})
@@ -52,8 +50,9 @@ object turno {
 				menuBase.display()
 				rutina = []
 				// se obtiene el primer héroe vivo
-				batalla.menuAliados().inhabilitarOpciones()
-				batalla.menuEnemigos().inhabilitarOpciones()
+				batalla.inhabilitarAliados()
+				batalla.inhabilitarEnemigos()
+				
 			}
 		})
 	}
@@ -69,8 +68,7 @@ object turno {
 	}
 
 	method terminarBatalla() {
-		//batalla.estadisticas().removerStats()
-		batalla.estadisticas().removerse()
+		batalla.removerEstadisticas()
 		game.removeVisual(batalla)
 		self.enemigosVivos().forEach({ x => x.eliminarPersonaje() })
 		heroes.forEach({ x => x.eliminarPersonaje() })
@@ -87,7 +85,6 @@ object turno {
 
 	method proximaAccion(accion) {
 		proximaAccion = accion
-		//menuBase.removerMenu()
 		menuBase.removerse()
 		accion.objetivosPosibles(batalla)
 		batalla.menuActivo().display()
@@ -103,7 +100,6 @@ object turno {
 			heroeActivo.cambiarColor("FFFFFFFF")
 			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
 			heroeActivo.cambiarColor("00FF00FF") // meter un object de colores
-			//batalla.menuActivo().removerMenu()
 			batalla.menuActivo().removerse()
 			menuBase.display()
 		}

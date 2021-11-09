@@ -33,7 +33,21 @@ class Batalla {
     var property menuActivo = menuEnemigos
     
     const property proximaAccion
-
+	
+	method inhabilitarAliados(){
+		menuAliados.inhabilitarOpciones()
+	}
+	method inhabilitarEnemigos(){
+		menuEnemigos.inhabilitarOpciones()
+	}
+	
+	method removerMenuActivo(){
+		menuActivo.removerse()
+	}
+	method removerEstadisticas(){
+		estadisticas.removerse()
+	}
+	
     method iniciar() {
     	game.addVisual(self)
     	turno.batalla(self)

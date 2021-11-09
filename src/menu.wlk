@@ -101,8 +101,6 @@ class Interfaz{
 }
 		
 		
-		
-		
 class Estadisticas inherits Interfaz{
 	const property position 
 	const property image = "menu/FondoStats.png"
@@ -122,12 +120,9 @@ class Estadisticas inherits Interfaz{
 		
 	}
 	
-	
 	method agregarIcono(p){	
 		game.addVisual(p.icono())
 	}
-	
-	
 	
 	override method removerItems(){
 		personajes.forEach{ item => 
@@ -135,14 +130,7 @@ class Estadisticas inherits Interfaz{
 			game.removeVisual(item.icono())
 		}
 	}
-	//////
-	method removerStats() {
-        personajes.forEach{ item => 
-			game.removeVisual(item.vida())
-			game.removeVisual(item.icono())
-		}
-		game.removeVisual(self)
-    }//////
+	
 }
 
 class Menu inherits Interfaz{
@@ -156,8 +144,6 @@ class Menu inherits Interfaz{
 	 
 	override method display(){
 		super()	
-		//items.forEach({ item => game.addVisual(item) })
-		//items.forEach({ item => item.agregarseAlMenu() })
 		self.agregarPuntero()
 	}
 	
@@ -165,12 +151,6 @@ class Menu inherits Interfaz{
 		super()
 		game.removeVisual(puntero)
 	}
-	///////
-	method removerMenu() {
-        game.removeVisual(puntero)
-        items.forEach({ item => game.removeVisual(item) })
-		game.removeVisual(self)
-	}///////
 	
 	method agregarPuntero(){
 		puntero.position(items.head().position())
@@ -182,7 +162,6 @@ class Menu inherits Interfaz{
 	
 	class Objetivos inherits Menu {
 	
-	//override method itemsActuales() = items
 	method inhabilitarOpciones() {
 		items.filter{ p => p.estaMuerto() }.forEach{ p => p.inhabilitar() }
 	}
@@ -195,10 +174,8 @@ const menuBase = new MenuHabilidades(
 )
 
 
-//const menuInicio = new Menu()
 
 
-// 
 // lista posiciones
 
 class MenuHabilidades inherits Menu {
