@@ -106,29 +106,15 @@ class Interfaz{
 class Estadisticas inherits Interfaz{
 	const property position 
 	const property image = "menu/FondoStats.png"
-	
-	//var property hpStats = items.map{i => i.vida()}
-	//var property personajes = items.map{i => i.icono()}
-	
 	const personajes = items
-	//const property items
-
-	//override method itemsActuales() = items.map{i => i.icono()}
 	
-	override method itemsActuales() = items.map{p => p.icono()}// + items.map{p => p.vida()}
-	// 
+	
+	override method itemsActuales() = personajes.map{p => p.icono()}
 	override method posicionarItems(){
 		super()
 		self.agregarVida()
 	}
-//	override method display
-	
-	//override method display(){
-		//super()
-		//items = personajes
-		//items.forEach({ p => self.agregarStats(p) })
-		
-	//}
+
 	
 	method agregarVida(){
 		personajes.forEach{ p => p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
@@ -136,28 +122,22 @@ class Estadisticas inherits Interfaz{
 		
 	}
 	
-	//method agregarVida(p){
-	//	p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
-	//	game.addVisual(p.vida())
-	//}
+	
 	method agregarIcono(p){	
 		game.addVisual(p.icono())
 	}
 	
-	//method agregarStats(p){
-	//	self.agregarIcono(p)
-	//	self.agregarVida(p)
-	//}
+	
 	
 	override method removerItems(){
-		items.forEach{ item => 
+		personajes.forEach{ item => 
 			game.removeVisual(item.vida())
 			game.removeVisual(item.icono())
 		}
 	}
 	//////
 	method removerStats() {
-        items.forEach{ item => 
+        personajes.forEach{ item => 
 			game.removeVisual(item.vida())
 			game.removeVisual(item.icono())
 		}

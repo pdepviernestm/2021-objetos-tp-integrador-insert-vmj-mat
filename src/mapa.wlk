@@ -41,11 +41,14 @@ class Opcion {
 	method nombre() = destino.nombre()
 	
     method pulsar() {
-    	menuMapa.removerMenu()
+    	menuMapa.removerse()
+    	//menuMapa.removerMenu()
         //game.removeVisual(punteroInicio)
     	//pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
     	//menuMapa.items().forEach{i=>game.removeVisual(i.nombre())}
-    	mapa.removerMapa()
+    	
+    	//mapa.removerMapa()
+    	mapa.removerse()
         destino.iniciar()
     }
 	/*method agregarseAlMenu(){
