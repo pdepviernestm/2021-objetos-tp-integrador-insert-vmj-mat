@@ -78,14 +78,25 @@ class Interfaz{
 	
 	method posicionarItems(){
 		area.posicionarItems(items)
+		items.forEach({ item => game.addVisual(item) })
 	}
 	method display(){
 		items = self.itemsActuales()
 		game.addVisual(self)
-		self.posicionarItems() 
+		self.posicionarItems()
+		 
 	}
 	
 	method itemsActuales()
+	
+	method removerse(){
+		game.removeVisual(self)
+		self.removerItems()
+	}
+	
+	method removerItems(){
+		self.itemsActuales().forEach{i => game.removeVisual(i)}
+	}
 	
 }
 		
@@ -102,35 +113,56 @@ class Estadisticas inherits Interfaz{
 	const personajes = items
 	//const property items
 
-	override method itemsActuales() = items.map{i => i.icono()}
-
-	override method display(){
+	//override method itemsActuales() = items.map{i => i.icono()}
+	
+	override method itemsActuales() = items.map{p => p.icono()}// + items.map{p => p.vida()}
+	// 
+	override method posicionarItems(){
 		super()
-		items = personajes
-		items.forEach({ p => self.agregarStats(p) })
+		self.agregarVida()
+	}
+//	override method display
+	
+	//override method display(){
+		//super()
+		//items = personajes
+		//items.forEach({ p => self.agregarStats(p) })
+		
+	//}
+	
+	method agregarVida(){
+		personajes.forEach{ p => p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
+		game.addVisual(p.vida()) }
 		
 	}
 	
-	method agregarVida(p){
-		p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
-		game.addVisual(p.vida())
-	}
+	//method agregarVida(p){
+	//	p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
+	//	game.addVisual(p.vida())
+	//}
 	method agregarIcono(p){	
 		game.addVisual(p.icono())
 	}
 	
-	method agregarStats(p){
-		self.agregarIcono(p)
-		self.agregarVida(p)
-	}
+	//method agregarStats(p){
+	//	self.agregarIcono(p)
+	//	self.agregarVida(p)
+	//}
 	
+	override method removerItems(){
+		items.forEach{ item => 
+			game.removeVisual(item.vida())
+			game.removeVisual(item.icono())
+		}
+	}
+	//////
 	method removerStats() {
         items.forEach{ item => 
 			game.removeVisual(item.vida())
 			game.removeVisual(item.icono())
 		}
 		game.removeVisual(self)
-    }
+    }//////
 }
 
 class Menu inherits Interfaz{
@@ -144,16 +176,21 @@ class Menu inherits Interfaz{
 	 
 	override method display(){
 		super()	
-		items.forEach({ item => game.addVisual(item) })
+		//items.forEach({ item => game.addVisual(item) })
 		//items.forEach({ item => item.agregarseAlMenu() })
 		self.agregarPuntero()
 	}
-		
+	
+	override method removerItems(){
+		super()
+		game.removeVisual(puntero)
+	}
+	///////
 	method removerMenu() {
         game.removeVisual(puntero)
         items.forEach({ item => game.removeVisual(item) })
 		game.removeVisual(self)
-	}
+	}///////
 	
 	method agregarPuntero(){
 		puntero.position(items.head().position())

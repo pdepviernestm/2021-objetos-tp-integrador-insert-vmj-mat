@@ -5,12 +5,31 @@ import pantallaInicio.*
 import elementos.*
 import paleta.*
 
+object mapa inherits Interfaz{
+	const property image = "background/mapaLindo.jpg"
+	const property position = game.origin()
+
+	override method itemsActuales() = menuMapa.items().map{i => i.nombre()}
+	override method posicionarItems() {
+		self.itemsActuales().forEach{i => game.addVisual(i)}
+	}
+	/////
+	method removerMapa(){
+		game.removeVisual(self)
+		self.itemsActuales().forEach{i => game.removeVisual(i)}
+	}/////
+	
+	
+}
+
 const menuMapa = new Menu (
 	position = game.origin(),
-	image = "background/mapaLindo.jpg",
-	area = new AreaMenu(inicio = game.at(7, 5), alto = 2, ancho = 3),
+	image = "menu/menuMapita.png",
+	area = new AreaMenu(inicio = game.at(1, 1), alto = 3, ancho = 1),
 	items = [opcionBatallaFacil, opcionBatallaDificil]
 )
+
+
 
 class Opcion {
     const destino
@@ -25,7 +44,8 @@ class Opcion {
     	menuMapa.removerMenu()
         //game.removeVisual(punteroInicio)
     	//pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }
-    	menuMapa.items().forEach{i=>game.removeVisual(i.nombre())}
+    	//menuMapa.items().forEach{i=>game.removeVisual(i.nombre())}
+    	mapa.removerMapa()
         destino.iniciar()
     }
 	/*method agregarseAlMenu(){

@@ -23,9 +23,9 @@ object comenzar {
         tocadiscos.tocar(sonidoComenzar)
         game.removeVisual(punteroInicio)
     	pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }  
+        mapa.display()
         menuMapa.display()
-        
-        menuMapa.items().forEach{i=>game.addVisual(i.nombre())}
+        //menuMapa.items().forEach{i=>game.addVisual(i.nombre())}
         tocadiscos.tocar(sonidoFondo)
     }
 }
