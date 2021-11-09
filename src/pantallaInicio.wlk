@@ -13,6 +13,10 @@ object pantallaInicio {
         game.addVisual(punteroInicio)
         modo.puntero(punteroInicio)
     }
+    method removerse(){
+    	game.removeVisual(punteroInicio)
+    	opciones.forEach{ opcion => game.removeVisual(opcion) }
+    }
 }
 
 object comenzar {
@@ -21,8 +25,7 @@ object comenzar {
     
     method pulsar() {
         tocadiscos.tocar(sonidoComenzar)
-        game.removeVisual(punteroInicio)
-    	pantallaInicio.opciones().forEach{ opcion => game.removeVisual(opcion) }  
+    	pantallaInicio.removerse()  
         mapa.display()
         menuMapa.display()
         tocadiscos.tocar(sonidoFondo)

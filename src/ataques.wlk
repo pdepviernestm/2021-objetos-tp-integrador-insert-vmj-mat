@@ -91,6 +91,7 @@ object ofensa {
 
 	method hacerEfecto(personaje, potencia) {
 		personaje.reducirHP(potencia)
+		personaje.animarRecepcion()
 	}
 }
 

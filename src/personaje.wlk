@@ -200,13 +200,14 @@ class Atributos {
 
 	method recibirHabilidad(ataque, potencia){
 		ataque.hacerEfecto(self, potencia)
-		self.animarRecepcion()
 	}
 	
 	method animarRecepcion(){
 		image = imagenAtaque
 		game.schedule(1000, { => image = imagenInicial })
 	}
+	
+	
 	
 	
 	/*method animarAtaqueFisico() {
