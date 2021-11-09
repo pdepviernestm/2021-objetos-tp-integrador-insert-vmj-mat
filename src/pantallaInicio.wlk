@@ -13,6 +13,7 @@ object pantallaInicio {
         game.addVisual(punteroInicio)
         modo.puntero(punteroInicio)
     }
+    
     method removerse(){
     	game.removeVisual(punteroInicio)
     	opciones.forEach{ opcion => game.removeVisual(opcion) }

@@ -3,6 +3,7 @@ import menu.*
 import pantallaInicio.*
 import mapa.*
 import elementos.*
+import pausa.*
 
 program juego {
 	
@@ -17,6 +18,7 @@ program juego {
 	keyboard.x().onPressDo{ modo.seleccionar() }
 	keyboard.left().onPressDo{ modo.moverseHacia(izquierda) }
 	keyboard.right().onPressDo{ modo.moverseHacia(derecha) }
+	keyboard.z().onPressDo{ pausa.pausar() }
 
 	game.start()
 

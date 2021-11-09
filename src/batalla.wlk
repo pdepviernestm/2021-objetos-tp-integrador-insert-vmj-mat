@@ -13,7 +13,7 @@ class NombreBatalla {
 	const property image = "menu/espadita.gif"
 	const property text 
 	const property position 
-	var property textColor = "ffffff"
+	var property textColor = paleta.blanco()
 		
 	method inhabilitar() {
 		textColor = paleta.gris()

@@ -63,9 +63,6 @@ class Personaje {
 
 	method posicionar(posicion) { atributos.posicionOriginal(posicion) }
 
-	//traer la habilidad seleccionada. Si es lázaro, siempre devolver true. Si no, ver el color.
-	//además, cambiar el color si es lázaro.
-
 	method habilitado() = textColor == paleta.blanco()
 	
 	method inhabilitar() {
@@ -80,7 +77,7 @@ class Personaje {
 		atributos.vida().cambiarColor(color)
 	}
 	
-	method reset(){
+	method reset() {
 		if(self.estaMuerto()) {
 			self.aumentarHP(self.maxHP())
 			atributos.image()
@@ -205,21 +202,7 @@ class Atributos {
 	method animarRecepcion(){
 		image = imagenAtaque
 		game.schedule(1000, { => image = imagenInicial })
-	}
-	
-	
-	
-	
-	/*method animarAtaqueFisico() {
-		tocadiscos.tocar(sonidoPunio)
-		position = self.posicionAtaque()
-		game.schedule(1000, { => position = self.posicionOriginal() })
-	}
-
-	method animarAtaqueMagico() {
-		tocadiscos.tocar(sonidoMagia)
-	}*/
-	
+	}	
 }
 
 const ladron = new Personaje (

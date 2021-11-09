@@ -24,7 +24,7 @@ class Puntero {
 		}
 	}
 
-	method seleccionar(){
+	method seleccionar() {
 		game.uniqueCollider(self).pulsar()
 	}
 }
@@ -71,7 +71,7 @@ class AreaMenu {
 }
 
  
-class Interfaz{
+class Interfaz {
 	var property items = []
 	var area = new AreaMenu(inicio = game.at(0,0),alto=0,ancho=0)
 	
@@ -80,11 +80,11 @@ class Interfaz{
 		area.posicionarItems(items)
 		items.forEach({ item => game.addVisual(item) })
 	}
+	
 	method display(){
 		items = self.itemsActuales()
 		game.addVisual(self)
 		self.posicionarItems()
-		 
 	}
 	
 	method itemsActuales()
@@ -101,7 +101,7 @@ class Interfaz{
 }
 		
 		
-class Estadisticas inherits Interfaz{
+class Estadisticas inherits Interfaz {
 	const property position 
 	const property image = "menu/FondoStats.png"
 	const personajes = items
@@ -133,7 +133,7 @@ class Estadisticas inherits Interfaz{
 	
 }
 
-class Menu inherits Interfaz{
+class Menu inherits Interfaz {
 	const property position
 	const property image
 	var puntero = new Puntero (posicionInicial = game.at(0,0))
@@ -147,45 +147,34 @@ class Menu inherits Interfaz{
 		self.agregarPuntero()
 	}
 	
-	override method removerItems(){
+	override method removerItems() {
 		super()
 		game.removeVisual(puntero)
 	}
 	
-	method agregarPuntero(){
+	method agregarPuntero() {
 		puntero.position(items.head().position())
 		game.addVisual(puntero)
 		modo.puntero(puntero)
-		}
 	}
+}
 	
 	
-	class Objetivos inherits Menu {
-	
+class Objetivos inherits Menu {
 	method inhabilitarOpciones() {
 		items.filter{ p => p.estaMuerto() }.forEach{ p => p.inhabilitar() }
 	}
 }
+
 const menuBase = new MenuHabilidades(
 	position = game.at(1,1),
 	image = "menu/MenuBase.png",
 	area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3)
-	
 )
 
-
-
-
-// lista posiciones
-
 class MenuHabilidades inherits Menu {
-	
 	override method itemsActuales() = turno.heroeActivo().habilidades()
-	
-	}
-
-
-
+}
 
 class Lugar {
 	const proximoX

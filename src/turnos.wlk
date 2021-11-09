@@ -16,6 +16,8 @@ object turno {
 	var property heroes = []
 	var property enemigos = []
 	var property proximaAccion
+	var property seEstaEjecutando = false
+	var rutinaAbortada = false
 
 	method ejecutar(){
 		batalla.removerMenuActivo()
@@ -31,7 +33,7 @@ object turno {
 		// con 2 seg de diferencia entre cada una; rutina.get(x) es la acción en el índice "x",
 		// y se envía un mensaje a ella para que se realice (fue instanciada al agregarla)
 
-		// game.schedule(1000, {=> rutina.get(0).realizar()})
+		seEstaEjecutando = true
 
 		game.schedule(1000 + 2000 * cantAcciones, { =>
 			if(self.heroesVivos().isEmpty()) {
@@ -42,18 +44,24 @@ object turno {
 				tocadiscos.tocar(sonidoGanar)
 				self.ganar()
 			}
-
-			else {
+			else if(!rutinaAbortada) {
 				heroeActivo.cambiarColor(paleta.blanco())
 				heroeActivo = self.heroesVivos().head()
 				heroeActivo.cambiarColor(paleta.verde())
 				menuBase.display()
 				rutina = []
-				// se obtiene el primer héroe vivo
 				batalla.inhabilitarAliados()
 				batalla.inhabilitarEnemigos()
-				
 			}
+			else {
+				heroeActivo.cambiarColor(paleta.blanco())
+				heroeActivo = self.heroesVivos().head()
+				heroeActivo.cambiarColor(paleta.verde())
+				rutina = []
+				batalla.inhabilitarAliados()
+				batalla.inhabilitarEnemigos()
+			}
+			seEstaEjecutando = false
 		})
 	}
 
@@ -73,10 +81,16 @@ object turno {
 		self.enemigosVivos().forEach({ x => x.eliminarPersonaje() })
 		heroes.forEach({ x => x.eliminarPersonaje() })
 	}
-	method heroesMuertos() = heroes.filter{h=>h.estaMuerto()}
-	method heroesVivos() = heroes.filter({ heroe => !heroe.estaMuerto() })
+	
+	method abortarRutina() {
+		rutina = (0 .. rutina.size()).map{ x => habilidadNula }
+		rutinaAbortada = true
+	}
+	
+	method heroesMuertos() = heroes.filter{ heroe => heroe.estaMuerto() }
+	method heroesVivos() = heroes.filter{ heroe => !heroe.estaMuerto() }
 
-	method enemigosVivos() = enemigos.filter({ enemigo => !enemigo.estaMuerto() })
+	method enemigosVivos() = enemigos.filter{ enemigo => !enemigo.estaMuerto() }
 
 	method agregarAccion(accion, enemigoAtacante, heroeAtacado) {
 		const movimiento = new Movimiento(habilidad = accion, origen = enemigoAtacante, destino = heroeAtacado)
@@ -97,9 +111,9 @@ object turno {
 		if (heroeActivo == self.heroesVivos().last()) self.ejecutar()
 		else {
 			const indiceActual = self.encontrarActual()
-			heroeActivo.cambiarColor("FFFFFFFF")
+			heroeActivo.cambiarColor(paleta.blanco())
 			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
-			heroeActivo.cambiarColor("00FF00FF") // meter un object de colores
+			heroeActivo.cambiarColor(paleta.verde())
 			batalla.menuActivo().removerse()
 			menuBase.display()
 		}
@@ -127,4 +141,8 @@ class Movimiento {
 	method realizar() {
 		if((not destino.estaMuerto()) or habilidad == lazaro) habilidad.realizar(origen, destino)
 	}
+}
+
+object habilidadNula {
+	method realizar() {}
 }
