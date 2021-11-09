@@ -10,7 +10,7 @@ const punteroPausa = new Puntero(posicionInicial = game.at(7, 7))
 object pausa {
 	var punteroPrevio
 	method pausar() {
-		if(!game.hasVisual(menuPausa)) {
+		if(not game.hasVisual(menuPausa) and turno.batalla().enCurso()) {
 			punteroPrevio = modo.puntero()
 			modo.puntero(punteroPausa)
 			menuPausa.display()
@@ -39,13 +39,11 @@ object volverAlInicio {
 	method pulsar() { 
 		menuPausa.removerse()
 		turno.terminarBatalla()
-		if (!turno.seEstaEjecutando()) {
-			if (game.hasVisual(menuBase))
-				menuBase.removerse()
-			if (game.hasVisual(turno.batalla().menuActivo())) 
-				turno.batalla().menuActivo().removerse()
-		}
-		else turno.abortarRutina()
+		if (game.hasVisual(menuBase))
+			menuBase.removerse()
+		if (game.hasVisual(turno.batalla().menuActivo())) 
+			turno.batalla().menuActivo().removerse()
+		turno.abortarRutina()
 		pantallaInicio.iniciar()
 	}
 }

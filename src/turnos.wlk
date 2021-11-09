@@ -9,17 +9,17 @@ import elementos.*
 import pantallaInicio.*
 import paleta.*
 import tocadiscos.*
+
 object turno {
 	var property rutina = []
-	var property batalla
+	var property batalla = batallaFacil
 	var property heroeActivo
 	var property heroes = []
 	var property enemigos = []
 	var property proximaAccion
-	var property seEstaEjecutando = false
 	var rutinaAbortada = false
 
-	method ejecutar(){
+	method ejecutar() {
 		batalla.removerMenuActivo()
 		self.enemigosVivos().forEach({ enemigo =>
 			self.agregarAccion(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos()))
@@ -32,8 +32,6 @@ object turno {
 		// esto significa: por cada elemento de la lista, se hace que realice la acción
 		// con 2 seg de diferencia entre cada una; rutina.get(x) es la acción en el índice "x",
 		// y se envía un mensaje a ella para que se realice (fue instanciada al agregarla)
-
-		seEstaEjecutando = true
 
 		game.schedule(1000 + 2000 * cantAcciones, { =>
 			if(self.heroesVivos().isEmpty()) {
@@ -61,7 +59,6 @@ object turno {
 				batalla.inhabilitarAliados()
 				batalla.inhabilitarEnemigos()
 			}
-			seEstaEjecutando = false
 		})
 	}
 
@@ -78,6 +75,7 @@ object turno {
 	method terminarBatalla() {
 		batalla.removerEstadisticas()
 		game.removeVisual(batalla)
+		batalla.enCurso(false)
 		self.enemigosVivos().forEach({ x => x.eliminarPersonaje() })
 		heroes.forEach({ x => x.eliminarPersonaje() })
 	}

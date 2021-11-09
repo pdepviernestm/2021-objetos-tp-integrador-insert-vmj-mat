@@ -17,11 +17,11 @@ class NombreBatalla {
 		
 	method inhabilitar() {
 		textColor = paleta.gris()
-	}
-	
+	}	
 }
 
 class Batalla {
+	var property enCurso = false
 	const property nombre
     const property heroes = []
     const enemigos = []
@@ -63,6 +63,7 @@ class Batalla {
 		// si no se reinicia la rutina, la próxima vez que se ejecuta la batalla quedan acciones de más
         menuBase.display()
         estadisticas.display()
+        enCurso = true
     }
 
     method agregarHeroes() {
