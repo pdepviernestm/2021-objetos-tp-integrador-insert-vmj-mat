@@ -224,14 +224,14 @@ object abajo inherits Lugar(proximoX = 0, proximoY = -1) {
 }
 
 object izquierda inherits Lugar(proximoX = -3, proximoY = 0) { 
-	var property posPersonaje = game.at(7,7)
+	var property posPersonaje = game.at(5,8)
 	method mover(x){
 		return x.left(3)
 	}
 }
 
 object derecha inherits Lugar(proximoX = 3, proximoY = 0) { 
-	var property posPersonaje = game.at(13,7)
+	var property posPersonaje = game.at(13,8)
 	method mover(x){
 		return x.right(3)
 	}

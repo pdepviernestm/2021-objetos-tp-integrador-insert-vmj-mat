@@ -12,11 +12,12 @@ class AtributosEnemigo {
 	var property hp = maxHP
 	const property maxHP
 	var property carga = 0
-	const property fuerza 		// ataque fisico
+	var property fuerza 		// ataque fisico
 	const property vigor  		// defensa fisica
-	const property intelecto   	// ataque magico
+	var property intelecto   	// ataque magico
 	const property mente  		// defensa magica
 	const formaDeElegirObjetivo
+	const ataques
 
 	method image() = imagenInicial
 	
@@ -47,8 +48,16 @@ class AtributosEnemigo {
 			carga++
 		}
 		else {
+			const fuerzaInicial = fuerza
+			const intelectoInicial = intelecto
+			fuerza = fuerza * 2
+			intelecto = intelecto * 2
+			
 			ataqueElegido = ataqueMagico.tipoHabilidad()
 			carga = 0
+			
+			fuerza = fuerzaInicial
+			intelecto = intelectoInicial
 		}
 		return ataqueElegido
 	}
@@ -95,12 +104,54 @@ object elegirElementoAlAzar {
 	}
 }
 
+const jefeFinal = new Personaje(atributos = new AtributosEnemigo(
+		imagenInicial = "enemigos/32 - Mage Master.gif",
+		posicionOriginal = game.at(2, 8),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		ataques = [ataquePiro,ataqueHielo,ataqueElectro,ataqueAero],
+		maxHP = 3000,
+		fuerza = 100, 
+		vigor = 15, 
+		intelecto = 100, 
+		mente = 15 
+		),
+	text = "Mago Supremo",
+	position = game.at(2, 1))
+	
+const shiva = new Personaje(atributos = new AtributosEnemigo(
+		imagenInicial = "enemigos/12 - Shiva.gif",
+		posicionOriginal = game.at(2, 8),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		ataques = [ataqueHielo,ataqueAero],
+		maxHP = 500,
+		fuerza = 50, 
+		vigor = 15, 
+		intelecto = 100, 
+		mente = 15 
+		),
+	text = "Shiva",
+	position = game.at(2, 1))
+
+const dragoncito = new Personaje(atributos = new AtributosEnemigo(
+		imagenInicial = "enemigos/Pterodon.gif",
+		posicionOriginal = game.at(2, 8),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		ataques = [ataquePiro,ataqueFisico],
+		maxHP = 500,
+		fuerza = 100, 
+		vigor = 15, 
+		intelecto = 20, 
+		mente = 15 
+		),
+	text = "Pterodon",
+	position = game.at(2, 1))
+
 const cactrot = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Cactrot.gif",
 		posicionOriginal = game.at(2, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-	
+		ataques = [ataqueFisico],
 		maxHP = 100,
 		fuerza = 50, 
 		vigor = 15, 
@@ -116,7 +167,7 @@ const flan = new Personaje(
 		imagenInicial = "enemigos/Flan.gif",
 		posicionOriginal = game.at(3, 7),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-
+		ataques = [ataqueFisico],
 		maxHP = 150,
 	 	fuerza = 70, 
 		vigor = 30, 
@@ -132,11 +183,11 @@ const tomberi = new Personaje (
 		imagenInicial = "enemigos/Tonberry.gif",
 		posicionOriginal = game.at(5, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-	
+		ataques = [ataqueEspada,ataqueMagico],
 		maxHP = 200,
 		fuerza = 50, 
 		vigor = 40, 
-		intelecto = 30, 
+		intelecto = 100, 
 		mente = 40
 	), 
 	text = "Tomberi",
@@ -148,8 +199,8 @@ const duende = new Personaje (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(7, 9),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-	
-		maxHP = 170,
+		ataques = [ataqueFisico],
+		maxHP = 200,
 		fuerza = 40, 
 		vigor = 50, 
 		intelecto = 60, 
@@ -164,7 +215,7 @@ const duendeInmortal = new Personaje (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(9, 7),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-	
+		ataques = [ataqueFisico],
 		maxHP = 170,
 		fuerza = 40, 
 		vigor = 200, 

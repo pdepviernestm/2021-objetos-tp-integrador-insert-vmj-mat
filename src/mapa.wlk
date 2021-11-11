@@ -21,7 +21,7 @@ const menuMapa = new Menu (
 	position = game.origin(),
 	image = "menu/menuMapita.png",
 	area = new AreaMenu(inicio = game.at(1, 1), alto = 3, ancho = 1),
-	items = [opcionBatallaFacil, opcionBatallaDificil,opcionBatallaFinal]
+	items = [opcionBatallaFinal,opcionBatallaFacil, opcionBatallaDificil]
 )
 
 
@@ -29,7 +29,7 @@ const menuMapa = new Menu (
 class Opcion {
     const destino
     const nombre
-    const property indice 
+   // const property indice 
     var property position
 
 	
@@ -47,22 +47,22 @@ class Opcion {
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
     nombre = "Batalla fácil",
-    position = game.at(5, 5),
-    indice = new Indice(position = game.at(4,5), nombre = "Batalla Facil")
+    position = game.at(5, 5)//,
+    //indice = new Indice(position = game.at(4,5), nombre = "Batalla Facil")
 )
 
 const opcionBatallaDificil = new Opcion(
     destino = batallaDificil,
     nombre = "Batalla Difícil",
-    position = game.at(7, 2),
-    indice = new Indice(position = game.at(7,2), nombre = "Batalla Dificil")
+    position = game.at(7, 2)//,
+    //indice = new Indice(position = game.at(7,2), nombre = "Batalla Dificil")
 )
 
 const opcionBatallaFinal = new Opcion(
     destino = batallaFinal,
     nombre = "Batalla Final",
-    position = game.at(10, 2),
-    indice = new Indice(position = game.at(16,12), nombre = "Batalla Dificil")
+    position = game.at(2, 2)//,
+    //indice = new Indice(position = game.at(2,2), nombre = "Batalla Dificil")
 )
 
 

@@ -17,6 +17,7 @@ test "el enemigo está muerto si sus puntos HP son = 0" {
 	const enemigo = new Personaje(atributos = new AtributosEnemigo(maxHP = 0))	
 	assert.that(enemigo.estaMuerto())
 }	
+ 
 test "puntos del personaje si recibe un ataque fisico del enemigo" {
 	//tocadiscos.tocar(sonidoMagia)
 	const personaje = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),imagenInicial = "personajes/Thief2M-SW.gif",imagenAtaque = "personajes/Thief2M-Weak-SW.gif",imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
@@ -44,25 +45,31 @@ test "si la carga no es menor a 3, el enemigo elige un ataque mágico" {
 	cactrot.atributos().carga(3) 
 	assert.equals(ataqueMagico.tipoHabilidad(), cactrot.elegirAtaque())	
 }
-
-test "si un personaje cura a otro, los HP del curado no superan los HP máximos" {
+/* test "si un personaje cura a otro, los HP del curado no superan los HP máximos" {
 	const personaje = new Personaje(atributos = new Atributos(mente = 60))
 	const personaje2 = new Personaje(atributos = new Atributos(maxHP = 40))
-	personaje2.hp(30)
-	curacion.tipoHabilidad().realizar(personaje, personaje2)
+	personaje2.reducirHP(30)
+	//curacion.tipoHabilidad().realizar(clerigo, personaje2)
+	personaje2.recibirHabilidad(curacion.tipoHabilidad(),100)
 	assert.equals(40, personaje2.hp())
-}
+}*/
 
-test "al iniciar una batalla, al objeto turno se le transfieren las propiedades de ésta" {
+test "si un personaje es curado, los HP no superan los HP máximos" {
+	const personaje = new Personaje(atributos = new Atributos(maxHP = 40))
+	personaje.reducirHP(30)
+	personaje.recibirHabilidad(curacion.tipoHabilidad(),100)
+	assert.equals(40, personaje.hp())
+
+ test "al iniciar una batalla, al objeto turno se le transfieren las propiedades de ésta" {
 	const batallaDeEjemplo = new Batalla(enemigos = [cactrot], heroes = [clerigo, ladron],
-	estadisticas = new Estadisticas (position = game.at(10,1),
 	image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", 
-	items = [ladron, clerigo]), nombre = "", image = "", menuAliados = "", menuEnemigos = "", proximaAccion = "")
+	nombre = "", image = "", proximaAccion = "")
 	batallaDeEjemplo.iniciar()
 	assert.equals(batallaDeEjemplo, turno.batalla())
 	assert.equals([cactrot], turno.enemigos())
 	assert.equals([clerigo, ladron], turno.heroes())
 }
+
 
 test "el método heroesVivos retorna los héroes que están vivos en cierto momento" {
 	turno.heroes([ladron, clerigo])
