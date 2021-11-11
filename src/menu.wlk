@@ -104,7 +104,7 @@ class Interfaz {
 class Estadisticas inherits Interfaz {
 	const property position 
 	const property image = "menu/FondoStats.png"
-	const personajes = items
+	var property personajes = items
 	
 	
 	override method itemsActuales() = personajes.map{p => p.icono()}
@@ -166,7 +166,36 @@ class Objetivos inherits Menu {
 	}
 }
 
-const menuBase = new MenuHabilidades(
+
+const estadisticas = new Estadisticas (
+	area = new AreaMenu(inicio = game.at(13,1),
+						alto = 2, ancho = 4, distanciaY = 2), 
+						position = game.at(10,0), 
+						items = [])
+
+const menuBase =  new MenuHabilidades(
+	position = game.at(1,0),
+	image = "menu/MenuBase.png",
+	area = new AreaMenu(inicio = game.at(3,0), alto = 2, ancho = 3)
+)
+
+const menuHeroes = new Objetivos (
+	area = new AreaMenu(inicio = game.at(3,0),
+						alto = 2, ancho = 3),
+	position = game.at(1,0),
+	image = "menu/MenuBase.png", 
+	items = new List()
+)
+const menuEnemigos = new Objetivos (
+	area = new AreaMenu(inicio = game.at(3,0),
+						alto = 2, ancho = 3),
+	position = game.at(1,0),
+	image = "menu/MenuBase.png", 
+	items = new List()
+)
+
+
+const menuBase2 = new MenuHabilidades(
 	position = game.at(1,1),
 	image = "menu/MenuBase.png",
 	area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3)
@@ -195,12 +224,14 @@ object abajo inherits Lugar(proximoX = 0, proximoY = -1) {
 }
 
 object izquierda inherits Lugar(proximoX = -3, proximoY = 0) { 
+	var property posPersonaje = game.at(7,7)
 	method mover(x){
 		return x.left(3)
 	}
 }
 
 object derecha inherits Lugar(proximoX = 3, proximoY = 0) { 
+	var property posPersonaje = game.at(13,7)
 	method mover(x){
 		return x.right(3)
 	}

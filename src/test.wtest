@@ -7,20 +7,18 @@ import turnos.*
 import batalla.*
 import tocadiscos.*
 
-//const personajeMuerto = new 
 
-test "un personaje esta muerto si sus puntos son = 0" {
+test "un personaje esta muerto si sus puntos HP son = 0" {
 	const personaje = new Personaje(atributos = new Atributos(maxHP = 0))
 	assert.that(personaje.estaMuerto())
 	
 }
-test "el enemigo está muerto si sus puntos son = 0" {
-	cactrot.hp(0)
-	assert.that(cactrot.estaMuerto())
-}
-
+test "el enemigo está muerto si sus puntos HP son = 0" {
+	const enemigo = new Personaje(atributos = new AtributosEnemigo(maxHP = 0))	
+	assert.that(enemigo.estaMuerto())
+}	
 test "puntos del personaje si recibe un ataque fisico del enemigo" {
-	tocadiscos.tocar(sonidoMagia)
+	//tocadiscos.tocar(sonidoMagia)
 	const personaje = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),imagenInicial = "personajes/Thief2M-SW.gif",imagenAtaque = "personajes/Thief2M-Weak-SW.gif",imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
 						posicionOriginal = game.at(5, 8),maxHP = 100,vida = new Hp(hpInicial = 100, position = game.at(14, 2)),fuerza = 70,vigor = 70,intelecto = 25, mente = 30,habilidades = [ataqueFisico]),text="ladron", position = game.at(4,2))
 	const personaje2 = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 4),image = "personajes/WhiteMage2F.gif"),imagenInicial = "personajes/WhiteMage2F-SW.gif",imagenAtaque =  "personajes/WhiteMage2F-Weak-SW.gif",imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
@@ -30,7 +28,7 @@ test "puntos del personaje si recibe un ataque fisico del enemigo" {
 	}
 
 test "puntos del personaje si recibe un ataque mágico del enemigo" {
-	tocadiscos.tocar(sonidoMagia)
+	//tocadiscos.tocar(sonidoMagia)
 	const personaje = new Personaje(atributos = new Atributos(mente = 30, maxHP = 100))
 	const personaje2 = new Personaje(atributos = new Atributos(intelecto = 20))
 	ataqueMagico.tipoHabilidad().realizar(personaje2, personaje)

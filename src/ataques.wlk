@@ -5,6 +5,7 @@ import turnos.*
 import batalla.*
 import tocadiscos.*
 import paleta.*
+import menu.*
 
 class NombreHabilidad {
 	const property tipoHabilidad
@@ -69,7 +70,7 @@ class Elemento {
 
 object defensa {
 	method objetivosPosibles(batalla) {
-		batalla.menuActivo(batalla.menuAliados())
+		batalla.menuActivo(menuHeroes)
 	}
 
 	method hacerEfecto(personaje, potencia) {
@@ -79,7 +80,7 @@ object defensa {
 
 object ofensa {
 	method objetivosPosibles(batalla) {
-		batalla.menuActivo(batalla.menuEnemigos())
+		batalla.menuActivo(menuEnemigos)
 	}
 
 	method hacerEfecto(personaje, potencia) {

@@ -90,7 +90,7 @@ object elegirObjetivoConMenosMente {
 
 object elegirElementoAlAzar {
 	method apply() {
-		ataques = [ataquePiro.tipoHabilidad(), ataqueHielo.tipoHabilidad(), ataqueElectro.tipoHabilidad(), ataqueAero.tipoHabilidad()]
+		var ataque = [ataquePiro.tipoHabilidad(), ataqueHielo.tipoHabilidad(), ataqueElectro.tipoHabilidad(), ataqueAero.tipoHabilidad()]
 		return ataque.anyOne()
 	}
 }
