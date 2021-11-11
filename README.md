@@ -65,8 +65,8 @@ Bonus: si el enemigo tiene alguna forma aleatoria de calcular sus ataques, como 
 ✅ 9) Que se pueda modificar la posicion del menu sin tener que cambiar a mano todos los numeros de punteros e items
 ✅ 10) Cuidado con el encapsulamiento del personaje (!) 
 **No objetivos, pero hay que hacerlo**
-- Terminar de modelar las habilidades
-- Revisar las estadísticas de los personajes
+✅ Terminar de modelar las habilidades
+✅ Revisar las estadísticas de los personajes
 ✅ Arreglar el audio
 
 Los objetivos de este tp son practicar los conceptos vistos del paradigma de objetos.
