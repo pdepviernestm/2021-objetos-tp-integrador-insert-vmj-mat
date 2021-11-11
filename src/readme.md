@@ -9,7 +9,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
  ***
 ## Personajes
 
-###Clerigo    
+### Clerigo    
 ![WhiteMage2F](../assets/personajes/WhiteMage2F.gif)
 
 
