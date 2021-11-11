@@ -46,7 +46,7 @@ class Opcion {
 
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
-    nombre = "Batalla fácil",
+    nombre = "Batalla Fácil",
     position = game.at(5, 5)//,
     //indice = new Indice(position = game.at(4,5), nombre = "Batalla Facil")
 )

@@ -105,7 +105,7 @@ object elegirElementoAlAzar {
 }
 
 const jefeFinal = new Personaje(atributos = new AtributosEnemigo(
-		imagenInicial = "enemigos/32 - Mage Master.gif",
+		imagenInicial = "enemigos/32-Mage-Master.gif",
 		posicionOriginal = game.at(2, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 		ataques = [ataquePiro,ataqueHielo,ataqueElectro,ataqueAero],
@@ -119,7 +119,7 @@ const jefeFinal = new Personaje(atributos = new AtributosEnemigo(
 	position = game.at(2, 1))
 	
 const shiva = new Personaje(atributos = new AtributosEnemigo(
-		imagenInicial = "enemigos/12 - Shiva.gif",
+		imagenInicial = "enemigos/12-Shiva.gif",
 		posicionOriginal = game.at(2, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 		ataques = [ataqueHielo,ataqueAero],
@@ -144,7 +144,7 @@ const dragoncito = new Personaje(atributos = new AtributosEnemigo(
 		mente = 15 
 		),
 	text = "Pterodon",
-	position = game.at(2, 1))
+	position = game.at(2, 5))
 
 const cactrot = new Personaje(
 	atributos = new AtributosEnemigo(
