@@ -4,7 +4,7 @@ import pantallaInicio.*
 import mapa.*
 import elementos.*
 import pausa.*
-
+import tocadiscos.*
 program juego {
 	
 	game.cellSize(32)
@@ -19,7 +19,7 @@ program juego {
 	keyboard.left().onPressDo{ modo.moverseHacia(izquierda) }
 	keyboard.right().onPressDo{ modo.moverseHacia(derecha) }
 	keyboard.z().onPressDo{ pausa.pausar() }
-
+	
 	game.start()
 
 }

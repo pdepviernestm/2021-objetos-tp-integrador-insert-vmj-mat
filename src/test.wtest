@@ -6,6 +6,7 @@ import menu.*
 import personaje.*
 import turnos.*
 import batalla.*
+import tocadiscos.*
 
 test "un personaje esta muerto si sus puntos son = 0" {
 	const personaje = new Personaje(atributos = new Atributos(maxHP = 0))
@@ -18,13 +19,17 @@ test "el enemigo está muerto si sus puntos son = 0" {
 }
 
 test "puntos del personaje si recibe un ataque fisico del enemigo" {
-	const personaje = new Personaje(atributos = new Atributos(vigor = 30, maxHP = 100))
-	const personaje2 = new Personaje(atributos = new Atributos(fuerza = 50))
+	tocadiscos.tocar(sonidoMagia)
+	const personaje = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),imagenInicial = "personajes/Thief2M-SW.gif",imagenAtaque = "personajes/Thief2M-Weak-SW.gif",imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
+						posicionOriginal = game.at(5, 8),maxHP = 100,vida = new Hp(hpInicial = 100, position = game.at(14, 2)),fuerza = 70,vigor = 70,intelecto = 25, mente = 30,habilidades = [ataqueFisico]),text="ladron", position = game.at(4,2))
+	const personaje2 = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 4),image = "personajes/WhiteMage2F.gif"),imagenInicial = "personajes/WhiteMage2F-SW.gif",imagenAtaque =  "personajes/WhiteMage2F-Weak-SW.gif",imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
+		posicionOriginal = game.at(5, 6),maxHP = 120,vida = new Hp(hpInicial = 120,position= game.at(14,4)),fuerza = 20,vigor = 30,intelecto = 70,mente = 70,habilidades = [curacion, ataqueMagico, hechizoLazaro]),text="Clerigo",position = game.at(4, 1))
 	ataqueFisico.tipoHabilidad().realizar(personaje2, personaje) 
-	assert.equals(80, personaje.atributos().hp())
+	assert.equals(90, personaje.atributos().fuerza())
 	}
 
 test "puntos del personaje si recibe un ataque mágico del enemigo" {
+	tocadiscos.tocar(sonidoMagia)
 	const personaje = new Personaje(atributos = new Atributos(mente = 30, maxHP = 100))
 	const personaje2 = new Personaje(atributos = new Atributos(intelecto = 20))
 	ataqueMagico.tipoHabilidad().realizar(personaje2, personaje)
@@ -53,13 +58,7 @@ test "al iniciar una batalla, al objeto turno se le transfieren las propiedades 
 	const batallaDeEjemplo = new Batalla(enemigos = [cactrot], heroes = [clerigo, ladron],
 	estadisticas = new Estadisticas (position = game.at(10,1),
 	image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", 
-	items = [ladron, clerigo]),
-	menuObjetivo = new Objetivos (position = game.at(1,1), 
-		image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy 3.1.png", 
-		items = [ladron, clerigo] + [flan, cactrot]
-	)
-    
-	)
+	items = [ladron, clerigo]), nombre = "", image = "", menuAliados = "", menuEnemigos = "", proximaAccion = "")
 	batallaDeEjemplo.iniciar()
 	assert.equals(batallaDeEjemplo, turno.batalla())
 	assert.equals([cactrot], turno.enemigos())
