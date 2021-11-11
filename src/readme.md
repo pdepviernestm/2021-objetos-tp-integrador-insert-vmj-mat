@@ -9,8 +9,34 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
  ***
 ## Personajes
 
-### Clerigo    
-![WhiteMage2F](../assets/personajes/WhiteMage2F.gif)
+### Clerigo    ![WhiteMage2F](../assets/personajes/WhiteMage2F-SW.gif)
+
+* Vida = 120
+* Fuerza = 20
+* Vigor = 30
+* Intelecto = 70
+* Mente = 70
+
+### Ladron ![Thief2M](../assets/personajes/Thief2M-SW.gif)
+* Vida = 100
+* Fuerza = 70
+* Vigor = 70
+* Intelecto = 25
+* Mente = 30
+
+### Poseidon ![Summoner2M](../assets/personajes/Summoner2M-SW.gif)
+*	Vida = 150
+*	Fuerza = 40
+*	Vigor = 20
+*	Intelecto = 60
+*	Mente = 10
+
+### Hercules ![Hercules](../assets/personajes/Knight3M.gif)
+* Vida=120
+* Fuerza = 90
+* Vigor = 50
+* Intelecto = 40
+* Mente = 70
 
 
 **Pociones**
