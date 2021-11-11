@@ -1,6 +1,6 @@
   # FINAL FANTASY - INSERT VMJ
   
-  <p aling="center">
+  <p align="center">
   <img src="https://github.com/pdepviernestm/2021-objetos-tp-integrador-insert-vmj-mat/blob/main/assets/presentacion/inicioJuego.jpeg"/>
   </p>
 
