@@ -69,6 +69,26 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 *	Mente = 35
 
 
+### Pterodon ![Dragon](../assets/enemigos/Pterodon.gif)
+* Vida = 500
+*	Fuerza = 100 
+*	Vigor = 15 
+*	Intelecto = 20 
+*	Mente = 15
+
+### Shiva ![Shiva](../assets/enemigos/12-Shiva.gif)
+* Vida = 500
+*	Fuerza = 50 
+*	Vigor = 15 
+*	Intelecto = 100 
+*	Mente = 15
+
+### Mago Supremo ![jefe](../assets/enemigos/32-Mage-Master.gif)
+* Vida = 3000
+*	Fuerza = 100 
+*	Vigor = 15 
+*	Intelecto = 100 
+*	Mente = 15
 
 **Pociones**
 
