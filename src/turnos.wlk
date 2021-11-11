@@ -69,7 +69,8 @@ object turno {
 
 	method perder() {
 		self.terminarBatalla()
-		pantallaInicio.iniciar()
+		mapa.display()
+        menuMapa.display()
 	}
 
 	method terminarBatalla() {

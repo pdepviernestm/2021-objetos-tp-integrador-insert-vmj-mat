@@ -13,11 +13,15 @@ class NombreBatalla {
 	const property image = "menu/espadita.gif"
 	const property text 
 	const property position 
-	var property textColor = paleta.blanco()
+	var property textColor = paleta.gris()
 		
 	method inhabilitar() {
 		textColor = paleta.gris()
-	}	
+	}
+	
+	method habilitar() {
+		textColor = paleta.blanco()
+	}
 }
 
 
@@ -27,15 +31,19 @@ class Batalla {
 	const property nombre
     const property heroes = []
     const enemigos = []
-   // const property estadisticas
-    const property image //= "background/fondo1.jpeg"
+    const property image
     const property position = game.origin()
-   // const property menuAliados = menuHeroes
-    //const property menuEnemigos = menuEnemigos
     var property menuActivo = menuEnemigos
-
     
     const property proximaAccion
+    
+    method habilitar() {
+    	nombre.habilitar()
+    }
+    
+    method inhabilitar() {
+    	nombre.inhabilitar()
+    }
 	
 	method inhabilitarAliados(){
 		menuHeroes.inhabilitarOpciones()
@@ -59,15 +67,12 @@ class Batalla {
     	turno.heroeActivo(heroes.head())
         turno.heroeActivo().cambiarColor(paleta.verde())
         turno.heroes().drop(1).forEach{ heroe => heroe.cambiarColor(paleta.blanco()) }
-        // para que al volver a empezar una batalla no quede otro resaltado
-        //self.agregarHeroes()
         menuHeroes.items(heroes)
 		menuEnemigos.items(enemigos)
 		estadisticas.items(heroes)
 		estadisticas.personajes(heroes)
-        //self.agregarEnemigos()
-        self.agregar(enemigos,izquierda)
-        self.agregar(heroes,derecha)
+        self.agregar(enemigos, izquierda)
+        self.agregar(heroes, derecha)
 		turno.rutina([])
 		// si no se reinicia la rutina, la próxima vez que se ejecuta la batalla quedan acciones de más
 		menuHeroes.items(heroes)
@@ -77,121 +82,69 @@ class Batalla {
         estadisticas.display()
         enCurso = true
     }
-    
 
-
-   method agregar(personajes,donde){
-   var x = donde.posPersonaje().x()  
-   var y = donde.posPersonaje().y()
-   var indicador = true 
-   if (personajes.size() < 3){
-   		x -= personajes.size()
-   		y += personajes.size() -1 
-   		indicador = true}
-   	else indicador = false
-   	personajes.forEach{ p =>
-    p.comenzarBatalla()
-    p.posicionar(game.at(x, y))
-    p.agregarPersonaje()
-    if (indicador){
-            y -= 2
-            x += 3
-            }
-    else {
-    	y -= 1
-        if (x >= 5 and donde == izquierda || x >= 15 and donde == derecha) x -= 3
-        
-        else x += 3}
-        }
-        }
-
-
-	
-	/* 
-    method agregarHeroes() {
-        var x = 15
-        var y = 10
-        heroes.forEach{ heroe => 
-        	heroe.comenzarBatalla()
-            heroe.posicionar(game.at(x, y))
-            heroe.agregarPersonaje()
-            if (x == 15) {
-                x++
-                y--
-            }
-            else {
-                x--
-                y -= 2
-            }
-        }
-    }
-
-    method agregarEnemigos() {
-    	enemigos.forEach{ enemigo => enemigo.comenzarBatalla() }
-        if (enemigos.size() < 3) {
-            var x = 7 - enemigos.size()
-            var y = 7 + enemigos.size()
-            enemigos.forEach{ enemigo =>
-                enemigo.posicionar(game.at(x, y))
-                enemigo.agregarPersonaje()
-                y -= 2
-                x += 3
-            }
-        }
-        else {
-            var x = 5
-            var y = 9
-            enemigos.forEach{ enemigo => 
-                enemigo.posicionar(game.at(x, y))
-                enemigo.agregarPersonaje()
-                y -= 1
-                if (x == 5) x -= 3
-                else x += 3
-            }
-        }
-    }*/
+	method agregar(personajes, donde) {
+		var x = donde.posPersonaje().x()  
+	   	var y = donde.posPersonaje().y()
+	   	var indicador = true 
+	   	if (personajes.size() < 3){
+	   		x -= personajes.size()
+	   		y += personajes.size() -1 
+	   		indicador = true}
+	   	else indicador = false
+	   	personajes.forEach{ p =>
+		   	p.comenzarBatalla()
+		   	p.posicionar(game.at(x, y))
+		   	p.agregarPersonaje()
+		   	if (indicador){
+		   		y -= 2
+		        x += 3
+		    }
+		    else {
+		    	y -= 1
+		        if (x >= 5 and donde == izquierda or x >= 15 and donde == derecha) x -= 3
+		        else x += 3
+		    }
+	   	}
+	}
 }
 
-
-
 const batallaFinal = new Batalla(nombre = new NombreBatalla(text = "Batalla Final", position = game.at(12,12)),
-	 
     heroes = heroesBatallaFinal,
     enemigos = enemigosBatallaFinal, 
     image = "background/batallaFinal.png",
-    //estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2, ancho = 4, distanciaY = 2), position = game.at(10,1), items = heroesBatallaFacil),
-    //menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1), image = "menu/MenuBase.png", items = heroesBatallaFacil ),
-    //menuEnemigos= new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1), image = "menu/MenuBase.png", items = enemigosBatallaFacil),
     proximaAccion = { => pantallaInicio.iniciar() }
-    )
+)
 
 const batallaFacil = new Batalla(
-	nombre = new NombreBatalla(text = "Batalla Facil", position = game.at(5,7)),
+	nombre = new NombreBatalla(text = "Batalla Fácil", position = game.at(5,7)),
     heroes = heroesBatallaFacil,
-    //enemigos = enemigosBatallaFacil, 
     enemigos = enemigosBatallaFacil,
     image = "background/fondo2.jpeg",
-   // estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2, ancho = 4, distanciaY = 2), position = game.at(10,1), items = heroesBatallaFacil),
-   // menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1), image = "menu/MenuBase.png", items = heroesBatallaFacil ),
-   // menuEnemigos= new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1), image = "menu/MenuBase.png", items = enemigosBatallaFacil),
-    proximaAccion = { => batallaDificil.iniciar() }
+    proximaAccion = { => 
+		mapa.display()
+        menuMapa.display()
+    	batallaDificil.habilitar()
+    	opcionBatallaDificil.habilitar()
+    }
 )
 
 const heroesBatallaFacil = [ladron, clerigo]
 const enemigosBatallaFacil = [flan, cactrot]
 const heroesBatallaFinal = heroesBatallaFacil + heroesBatallaDificil
-const enemigosBatallaFinal = [jefeFinal,dragoncito,shiva]
-
+const enemigosBatallaFinal = [jefeFinal, dragoncito, shiva]
 
 const batallaDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Batalla dificil", position = game.at(13,3)),
+	nombre = new NombreBatalla(text = "Batalla difícil", position = game.at(13,3)),
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
-    //estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2, ancho = 4,distanciaY=2),position = game.at(10,1), items = heroesBatallaDificil),
-	//menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1),image = "menu/MenuBase.png", items = heroesBatallaDificil),
-    proximaAccion = { => batallaFinal.iniciar() }
-  //  menuEnemigos = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3), position = game.at(1,1),image = "menu/MenuBase.png", items = enemigosBatallaDificil)
+    proximaAccion = { => 
+    	mapa.display()
+        menuMapa.display()
+    	batallaDificil.habilitar()
+    	opcionBatallaDificil.habilitar() 
+    }
 )
 
 const heroesBatallaDificil = [poseidon, hercules]
@@ -202,11 +155,7 @@ const llanura = new Batalla(
     heroes = [ladron, clerigo],
     enemigos = [flan, cactrot], 
     image = "background/fondo1.jpeg",
-   // estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1),  items = [ladron, clerigo]),
-   // menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [ladron, clerigo]),
     proximaAccion = { => batallaFinal.iniciar() }
-   // menuEnemigos = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1), image = "menu/MenuBase.png", items = [flan, cactrot])
-    
 )
 
 const Bosque = new Batalla (
@@ -214,9 +163,6 @@ const Bosque = new Batalla (
     heroes = [poseidon, hercules],
     enemigos = [tomberi, duende], 
     image = "background/fondo1.jpeg", 
-   // estadisticas = new Estadisticas (area = new AreaMenu(inicio = game.at(13,2), alto = 2,ancho = 4,distanciaY=2),position = game.at(10,1),/*image = "menu/FondoStats.png", */ items = [poseidon, hercules]),
-	//menuAliados = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [poseidon, hercules]),
-   // menuEnemigos = new Objetivos (area = new AreaMenu(inicio = game.at(3,1), alto = 2,ancho = 3),position = game.at(1,1),image = "menu/MenuBase.png", items = [tomberi, duende]),
     proximaAccion = { => pantallaInicio.iniciar() }
 )
 

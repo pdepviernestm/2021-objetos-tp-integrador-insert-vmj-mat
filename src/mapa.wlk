@@ -13,15 +13,13 @@ object mapa inherits Interfaz{
 	override method posicionarItems() {
 		self.itemsActuales().forEach{i => game.addVisual(i)}
 	}
-	
-	
 }
 
 const menuMapa = new Menu (
 	position = game.origin(),
 	image = "menu/menuMapita.png",
 	area = new AreaMenu(inicio = game.at(1, 1), alto = 3, ancho = 1),
-	items = [opcionBatallaFinal,opcionBatallaFacil, opcionBatallaDificil]
+	items = [opcionBatallaFinal, opcionBatallaFacil, opcionBatallaDificil]
 )
 
 
@@ -29,40 +27,48 @@ const menuMapa = new Menu (
 class Opcion {
     const destino
     const nombre
-   // const property indice 
     var property position
-
+    var property textColor = paleta.gris()
 	
 	method nombre() = destino.nombre()
 	
     method pulsar() {
-    	menuMapa.removerse()
-    	mapa.removerse()
-        destino.iniciar()
+    	if(self.habilitada()) {
+	    	menuMapa.removerse()
+	    	mapa.removerse()
+	        destino.iniciar()
+    	}
     }
+    
     method text() = nombre
-    method textColor() = paleta.blanco()
+    
+    method habilitada() = textColor == paleta.blanco()
+    
+    method habilitar() {
+    	textColor = paleta.blanco()
+    }
+    
+    method inhabilitar() {
+    	textColor = paleta.gris()
+    }
 }
 
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
     nombre = "Batalla Fácil",
-    position = game.at(5, 5)//,
-    //indice = new Indice(position = game.at(4,5), nombre = "Batalla Facil")
+    position = game.at(5, 5)
 )
 
 const opcionBatallaDificil = new Opcion(
     destino = batallaDificil,
     nombre = "Batalla Difícil",
-    position = game.at(7, 2)//,
-    //indice = new Indice(position = game.at(7,2), nombre = "Batalla Dificil")
+    position = game.at(7, 2)
 )
 
 const opcionBatallaFinal = new Opcion(
     destino = batallaFinal,
     nombre = "Batalla Final",
-    position = game.at(2, 2)//,
-    //indice = new Indice(position = game.at(2,2), nombre = "Batalla Dificil")
+    position = game.at(2, 2)
 )
 
 

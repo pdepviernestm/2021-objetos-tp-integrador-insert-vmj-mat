@@ -29,6 +29,8 @@ object comenzar {
     	pantallaInicio.removerse()  
         mapa.display()
         menuMapa.display()
+        opcionBatallaFacil.habilitar()
+        batallaFacil.habilitar()
         tocadiscos.tocar(sonidoFondo)
     }
 }
