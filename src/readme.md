@@ -1,5 +1,5 @@
 
-![iniciojuego]("../assets/presentacion/inicioJuego.png")
+![iniciojuego]("../assets/presentacion/inicioJuego.jpeg")
 
 
 
