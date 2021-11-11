@@ -6,7 +6,7 @@
 El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes misticos y fantasiosos batallan por la gloria. Los niveles con los que el juego cuenta tienen una dificultad mayor a medida que se avanzan entre los distintos escenario, donde se van descubriendo nuevos ataques con mas potencia y enemigos con mas agresividad.     
 
 **Personajes**
-Clerigo     ![WhiteMage2F]("../assets/personajes/WhiteMage2F.gif")
+Clerigo     ![WhiteMage2F](../assets/personajes/WhiteMage2F.gif)
 
 
 **Pociones**
