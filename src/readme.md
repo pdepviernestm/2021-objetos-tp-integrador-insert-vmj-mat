@@ -1,7 +1,7 @@
   # FINAL FANTASY - INSERT VMJ
   
   <p aling="center">
-  ![iniciojuego](https://github.com/pdepviernestm/2021-objetos-tp-integrador-insert-vmj-mat/blob/main/assets/presentacion/inicioJuego.jpeg)
+  <img src="https://github.com/pdepviernestm/2021-objetos-tp-integrador-insert-vmj-mat/blob/main/assets/presentacion/inicioJuego.jpeg"/>
   </p>
 
 
