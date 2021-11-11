@@ -9,36 +9,56 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
  ***
 ## Personajes
 
-### Clerigo    ![WhiteMage2F](../assets/personajes/WhiteMage2F-SW.gif)
+<table>
+ <tr>
+    <th>Personaje</th>
+    <th>Foto</th>
+    <th>Vida</th>
+    <th>Fuerza</th>
+   <th>Vigor</th>
+   <th>Intelecto</th>
+   <th>Mente</th>
+  </tr>
+  <tr>
+    <td><b>Clerigo</b></td>
+    <td><img src="../assets/personajes/WhiteMage2F-SW.gif"/></td>
+    <td>120</td>
+    <td>20</td>
+    <td>30</td>
+    <td>70</td>
+    <td>70</td>
+  </tr>
+  <tr>
+    <td><b>Ladron</b></td>
+    <td><img src="../assets/personajes/Thief2M-SW.gif"/></td>
+    <td>100</td>
+    <td>70</td>
+    <td>70</td>
+    <td>25</td>
+    <td>30</td>
+  </tr>
+  <tr>
+    <td><b>Poseidon</b></td>
+    <td><img src="../assets/personajes/Summoner2M-SW.gif"/></td>
+    <td>150</td>
+    <td>40</td>
+    <td>20</td>
+    <td>60</td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td><b>Hercules</b></td>
+    <td><img src="../assets/personajes/Knight3M.gif"/></td>
+    <td>120</td>
+    <td>90</td>
+    <td>50</td>
+    <td>40</td>
+    <td>70</td>
+  </tr>
+</table 
 
-* Vida = 120
-* Fuerza = 20
-* Vigor = 30
-* Intelecto = 70
-* Mente = 70
-
-### Ladron ![Thief2M](../assets/personajes/Thief2M-SW.gif)
-* Vida = 100
-* Fuerza = 70
-* Vigor = 70
-* Intelecto = 25
-* Mente = 30
-
-### Poseidon  ![Summoner2M](../assets/personajes/Summoner2M-SW.gif)
-*	Vida = 150
-*	Fuerza = 40
-*	Vigor = 20
-*	Intelecto = 60
-*	Mente = 10
-
-### Hercules ![Hercules](../assets/personajes/Knight3M.gif)
-* Vida=120
-* Fuerza = 90
-* Vigor = 50
-* Intelecto = 40
-* Mente = 70
-
-## Enemigos 
+  
+ ## Enemigos 
 
 ### Cactroc ![Cactroc](../assets/enemigos/Cactrot.gif)
 * Vida = 100
