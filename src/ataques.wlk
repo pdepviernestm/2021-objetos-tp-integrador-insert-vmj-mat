@@ -15,7 +15,7 @@ class NombreHabilidad {
 	method pulsar() {
 		turno.proximaAccion(self.tipoHabilidad())
 	}
-	//method agregarseAlMenu(){game.addVisual(self)}
+
 	method esDefensiva() = tipoHabilidad.rol() == defensa
 	method esOfensiva() = tipoHabilidad.rol() == ofensa
 }
@@ -131,4 +131,3 @@ object hechizoLazaro inherits NombreHabilidad(tipoHabilidad = lazaro, text = "LÃ
 		turno.heroesMuertos().forEach{ personaje => personaje.habilitar() }
 	}
 }
-

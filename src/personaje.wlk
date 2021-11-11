@@ -40,8 +40,7 @@ class Personaje {
 	var property textColor = paleta.blanco()
 
 	method text() = text
-	
-	//method agregarseAlMenu(){game.addVisual(self)}
+	method hp() = atributos.hp()
 	method fuerza() = atributos.fuerza()
 	method vigor() = atributos.vigor()
 	method intelecto() = atributos.intelecto()
@@ -105,7 +104,7 @@ class Personaje {
 	
 	method recibirHabilidad(ataque, potencia){
 		if (ataque == lazaro) {
-			//salud.animar(self)
+		
 			self.reset()
 		}
 		else atributos.recibirHabilidad(ataque, (potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))
@@ -118,17 +117,11 @@ class Personaje {
 		enemigo.recibirHabilidad(ataque, self.potenciaTotal(ataque))	
 	}	
 	
-	// exclusivos para héroes
 	method vida() = atributos.vida()
 	method icono() = atributos.icono()
 
-	// exclusivos para enemigos
 	method elegirAtaque() = atributos.elegirAtaque()
 	method elegirObjetivo(objetivos) = atributos.elegirObjetivo(objetivos)
-
-	//method animarAtaqueFisico() { atributos.animarAtaqueFisico() }
-	//method animarAtaqueMagico() { atributos.animarAtaqueMagico() }
-	
 	
 	method animarAtaqueFisico() {
 		tocadiscos.tocar(sonidoPunio)
@@ -171,7 +164,7 @@ class Atributos {
 	method posicionOriginal() = posicionOriginal
 
 	method posicionAtaque() = game.at(position.x()-1, position.y())
-	//method agregarseAlMenu(){game.addVisual(self)}
+
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
 			return imagenMuerto
@@ -224,7 +217,7 @@ const ladron = new Personaje (
 		habilidades = [ataqueFisico]
 		
 	),
-	text = "ladron",
+	text = "Ladron",
 	position = game.at(4, 2)
 )
 
@@ -246,24 +239,22 @@ const clerigo = new Personaje (
 		mente = 70,
 		
 		habilidades = [curacion, ataqueMagico, hechizoLazaro]
-		// cambiar estadísticas
+		
 		),
-	text = "clerigo",
+	text = "Clerigo",
 	position = game.at(4, 1)
 )
 
 const poseidon = new Personaje(
 	atributos = new Atributos(
 		icono = new Icono(position = game.at(13, 2), image = "personajes/Summoner2M.gif"),
-		//hp = new Hp(hpInicial = 150,position= game.at(14,2)),
+		
 		imagenInicial = "personajes/Summoner2M-SW.gif", 
 		imagenAtaque = "personajes/Summoner2M-Weak-SW.gif",
 		imagenMuerto = "personajes/Summoner2M-Dead-SW.gif",
 
 		posicionOriginal = game.at(6, 10),	
 		
-		//icono = new Icono(position = game.at(16,3),image = "images/WhiteMage2F2.gif"),
-	
 		maxHP = 150,
 		vida = new Hp(hpInicial = 150,position= game.at(11,2)),
 		fuerza = 40,
@@ -273,15 +264,13 @@ const poseidon = new Personaje(
 		
 		habilidades = [ataquePiro, ataqueHielo,ataqueElectro,ataqueAero]
 	),
-	text = "poseidon",
+	text = "Poseidon",
 	position = game.at(4, 3)
 )
 
-const hercules = new Personaje(
-	//CAMBIAR IMAGENES 
+const hercules = new Personaje( 
 	atributos = new Atributos(
 		icono= new Icono(position = game.at(13,4),image ="personajes/Knight3M.gif" ),
-		//hp= new Hp(hpInicial = 120,position= game.at(14,2)),
 		
 		imagenInicial = "personajes/Knight3M-SW.gif", 
 		imagenAtaque = "personajes/Knight3M-Weak-SW.gif",
@@ -298,6 +287,6 @@ const hercules = new Personaje(
 		
 		habilidades = [ataqueFisico,ataqueEspada]
 	),
-	text = "hercules",
+	text = "Hercules",
 	position = game.at(4, 4)
 )

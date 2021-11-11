@@ -25,10 +25,10 @@ object comenzar {
     method position() = game.at(8,5)
     
     method pulsar() {
-        tocadiscos.tocar(sonidoComenzar)
+      //  tocadiscos.tocar(sonidoComenzar)
     	pantallaInicio.removerse()  
         mapa.display()
         menuMapa.display()
-        tocadiscos.tocar(sonidoFondo)
+    //    tocadiscos.tocar(sonidoFondo)
     }
 }

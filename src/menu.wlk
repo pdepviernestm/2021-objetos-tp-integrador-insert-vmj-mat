@@ -136,7 +136,7 @@ class Estadisticas inherits Interfaz {
 class Menu inherits Interfaz {
 	const property position
 	const property image
-	var puntero = new Puntero (posicionInicial = game.at(0,0))
+	var property puntero = new Puntero (posicionInicial = game.at(0,0))
 	
 	method puntero() = puntero
 

@@ -16,26 +16,20 @@ class AtributosEnemigo {
 	const property vigor  		// defensa fisica
 	const property intelecto   	// ataque magico
 	const property mente  		// defensa magica
+	const formaDeElegirObjetivo
 
 	method image() = imagenInicial
 	
-	/*method animarAtaque() {
-		position = game.at(position.x()+1, position.y())
-		game.schedule(1000, { => position = game.at(position.x()-1, position.y()) })
-	}*/
-
 	method posicionOriginal(posicion){
 		posicionOriginal = posicion
 		position = posicion
 	}
-	//method agregarseAlMenu(){game.addVisual(self)}
+	
 	method posicionOriginal() = posicionOriginal
 
 	method posicionAtaque() = game.at(position.x() + 1, position.y())
 	
-	method estaMuerto() {
-		return hp <= 0
-	}
+	method estaMuerto() = hp <= 0
 	
 	method reducirHP(n) {
 		hp = (hp - n).max(0)
@@ -59,9 +53,7 @@ class AtributosEnemigo {
 		return ataqueElegido
 	}
 		
-	method elegirObjetivo(objetivos){
-		return objetivos.min({ objetivo => objetivo.atributos().hp() })
-	}
+	method elegirObjetivo(objetivos) = formaDeElegirObjetivo.apply(objetivos)
 	
 	method recibirHabilidad(ataque, potenciaTotal){
 		self.reducirHP(potenciaTotal)
@@ -78,17 +70,42 @@ class AtributosEnemigo {
 	}
 }
 
+object elegirObjetivoAlAzar {
+	method apply(objetivos) = objetivos.anyOne()
+}
+
+object elegirObjetivoConMenosHP {
+	method apply(objetivos) = objetivos.min{ objetivo => objetivo.hp() }
+}
+
+object elegirObjetivoConMenosVigor {
+	method apply(objetivos) = objetivos.min{ objetivo => objetivo.vigor() }
+}
+
+object elegirObjetivoConMenosMente {
+	method apply(objetivos) = objetivos.min{ objetivo => objetivo.mente() }
+}
+
+//que cada enemigo tenga su propia lista de ataques, y sacar un ataque de la lista según diferentes criterios
+
+object elegirElementoAlAzar {
+	method apply() {
+		ataques = [ataquePiro.tipoHabilidad(), ataqueHielo.tipoHabilidad(), ataqueElectro.tipoHabilidad(), ataqueAero.tipoHabilidad()]
+		return ataque.anyOne()
+	}
+}
+
 const cactrot = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Cactrot.gif",
 		posicionOriginal = game.at(2, 8),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 	
 		maxHP = 100,
-		carga = 0,
-		fuerza = 50, // ataque fisico
-		vigor = 15, // defensa fisica
-		intelecto = 20, // ataque magico
-		mente = 15 // defensa magica
+		fuerza = 50, 
+		vigor = 15, 
+		intelecto = 20, 
+		mente = 15 
 		),
 	text = "Cactrot",
 	position = game.at(2, 1)
@@ -98,12 +115,13 @@ const flan = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Flan.gif",
 		posicionOriginal = game.at(3, 7),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+
 		maxHP = 150,
-		carga = 0,
-	 	fuerza = 70, // ataque fisico
-		vigor = 30, // defensa fisica
-		intelecto = 30, // ataque magico
-		mente = 10 // defensa magica
+	 	fuerza = 70, 
+		vigor = 30, 
+		intelecto = 30, 
+		mente = 10 
 		),
 	text = "Flan",
 	position = game.at(2, 2)
@@ -113,13 +131,13 @@ const tomberi = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Tonberry.gif",
 		posicionOriginal = game.at(5, 8),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 	
 		maxHP = 200,
-		carga = 0,
-		fuerza = 50, // ataque fisico
-		vigor = 40, // defensa fisica
-		intelecto = 30, // ataque magico
-		mente = 40 // defensa magica
+		fuerza = 50, 
+		vigor = 40, 
+		intelecto = 30, 
+		mente = 40
 	), 
 	text = "Tomberi",
 	position = game.at(2, 3)
@@ -129,13 +147,13 @@ const duende = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(7, 9),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 	
 		maxHP = 170,
-		carga = 0,
-		fuerza = 40, // ataque fisico
-		vigor = 50, // defensa fisica
-		intelecto = 60, // ataque magico
-		mente = 35 // defensa magica
+		fuerza = 40, 
+		vigor = 50, 
+		intelecto = 60, 
+		mente = 35 
 	),
 	text = "Duende",
 	position = game.at(2, 4)
@@ -145,13 +163,13 @@ const duendeInmortal = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(9, 7),
+		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 	
 		maxHP = 170,
-		carga = 0,
-		fuerza = 40, // ataque fisico
-		vigor = 200, // defensa fisica
-		intelecto = 60, // ataque magico
-		mente = 200 // defensa magica
+		fuerza = 40, 
+		vigor = 200, 
+		intelecto = 60, 
+		mente = 200 
 	),
 	text = "Duende inmortal",
 	position = game.at(2, 5)
