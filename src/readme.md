@@ -24,7 +24,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 * Intelecto = 25
 * Mente = 30
 
-### Poseidon ![Summoner2M](../assets/personajes/Summoner2M-SW.gif)
+### Poseidon  ![Summoner2M](../assets/personajes/Summoner2M-SW.gif)
 *	Vida = 150
 *	Fuerza = 40
 *	Vigor = 20
@@ -37,6 +37,37 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 * Vigor = 50
 * Intelecto = 40
 * Mente = 70
+
+## Enemigos 
+
+### Cactroc ![Cactroc](../assets/enemigos/Cactrot.gif)
+* Vida = 100
+*	Fuerza = 50 
+*	Vigor = 15 
+*	Intelecto = 20 
+*	Mente = 15
+
+### Flan ![Flan](../assets/enemigos/Flan.gif)
+* Vida = 150
+*	Fuerza = 70 
+*	Vigor = 30 
+*	Intelecto = 30 
+*	Mente = 10
+
+### Tomberi ![Tomberi](../assets/enemigos/Tonberry.gif)
+* Vida = 200
+*	Fuerza = 50 
+*	Vigor = 40 
+*	Intelecto = 30 
+*	Mente = 40
+
+### Duende ![Duende](../assets/enemigos/Goblin2.gif)
+* Vida = 170
+*	Fuerza = 40 
+*	Vigor = 50 
+*	Intelecto = 60 
+*	Mente = 35
+
 
 
 **Pociones**
