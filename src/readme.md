@@ -1,12 +1,12 @@
   # FINAL FANTASY - INSERT VMJ
-  ***
+ 
   ![iniciojuego](https://github.com/pdepviernestm/2021-objetos-tp-integrador-insert-vmj-mat/blob/main/assets/presentacion/inicioJuego.jpeg)
 
 
 
 El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes misticos y fantasiosos batallan por la gloria. Los niveles con los que el juego cuenta tienen una dificultad mayor a medida que se avanzan entre los distintos escenario, donde se van descubriendo nuevos ataques con mas potencia y enemigos con mas agresividad.     
-
-**Personajes**
+ ***
+## Personajes
 
 Clerigo     ![WhiteMage2F](../assets/personajes/WhiteMage2F.gif)
 
