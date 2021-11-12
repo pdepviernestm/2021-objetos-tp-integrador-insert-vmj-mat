@@ -55,60 +55,86 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
     <td>40</td>
     <td>70</td>
   </tr>
-</table 
+</table>
 
   
- ## Enemigos 
 
-### Cactroc ![Cactroc](../assets/enemigos/Cactrot.gif)
-* Vida = 100
-*	Fuerza = 50 
-*	Vigor = 15 
-*	Intelecto = 20 
-*	Mente = 15
+## Enemigos 
+<table>
+ <tr>
+    <th>Personaje</th>
+    <th>Foto</th>
+    <th>Vida</th>
+    <th>Fuerza</th>
+   <th>Vigor</th>
+   <th>Intelecto</th>
+   <th>Mente</th>
+  </tr>
+  <tr>
+    <td><b>Cactroc</b></td>
+    <td><img src="../assets/enemigos/Cactrot.gif"/></td>
+    <td>100</td>
+    <td>50</td>
+    <td>15</td>
+    <td>20</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td><b>Flan</b></td>
+    <td><img src="../assets/enemigos/Flan.gif"/></td>
+    <td>150</td>
+    <td>50</td>
+    <td>40</td>
+    <td>30</td>
+    <td>40</td>
+  </tr>
+  <tr>
+    <td><b>Tomberi</b></td>
+    <td><img src="../assets/enemigos/Tonberry.gif"/></td>
+    <td>200</td>
+    <td>50</td>
+    <td>40</td>
+    <td>30</td>
+    <td>40</td>
+  </tr>
+  <tr>
+    <td><b>Duende</b></td>
+    <td><img src="../assets/enemigos/Goblin2.gif"/></td>
+    <td>170</td>
+    <td>50</td>
+    <td>50</td>
+    <td>60</td>
+    <td>35</td>
+  </tr>
+   <tr>
+    <td><b>Pterodon</b></td>
+    <td><img src="../assets/enemigos/Pterodon.gif"/></td>
+    <td>500</td>
+    <td>100</td>
+    <td>15</td>
+    <td>20</td>
+    <td>15</td>
+  </tr>
+   <tr>
+    <td><b>Mago Supremo</b></td>
+    <td><img src="../assets/enemigos/12-Shiva.gif"/></td>
+    <td>500</td>
+    <td>50</td>
+    <td>15</td>
+    <td>100</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td><b>Shiva</b></td>
+    <td><img src="../assets/enemigos/32-Mage-Master.gif"/></td>
+    <td>3000</td>
+    <td>100</td>
+    <td>15</td>
+    <td>100</td>
+    <td>15</td>
+  </tr>
+</table>
 
-### Flan ![Flan](../assets/enemigos/Flan.gif)
-* Vida = 150
-*	Fuerza = 70 
-*	Vigor = 30 
-*	Intelecto = 30 
-*	Mente = 10
-
-### Tomberi ![Tomberi](../assets/enemigos/Tonberry.gif)
-* Vida = 200
-*	Fuerza = 50 
-*	Vigor = 40 
-*	Intelecto = 30 
-*	Mente = 40
-
-### Duende ![Duende](../assets/enemigos/Goblin2.gif)
-* Vida = 170
-*	Fuerza = 40 
-*	Vigor = 50 
-*	Intelecto = 60 
-*	Mente = 35
-
-
-### Pterodon ![Dragon](../assets/enemigos/Pterodon.gif)
-* Vida = 500
-*	Fuerza = 100 
-*	Vigor = 15 
-*	Intelecto = 20 
-*	Mente = 15
-
-### Shiva ![Shiva](../assets/enemigos/12-Shiva.gif)
-* Vida = 500
-*	Fuerza = 50 
-*	Vigor = 15 
-*	Intelecto = 100 
-*	Mente = 15
-
-### Mago Supremo ![jefe](../assets/enemigos/32-Mage-Master.gif)
-* Vida = 3000
-*	Fuerza = 100 
-*	Vigor = 15 
-*	Intelecto = 100 
-*	Mente = 15
 
 **Pociones**
 
