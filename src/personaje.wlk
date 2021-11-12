@@ -104,7 +104,6 @@ class Personaje {
 	
 	method recibirHabilidad(ataque, potencia){
 		if (ataque == lazaro) {
-		
 			self.reset()
 		}
 		else atributos.recibirHabilidad(ataque, (potencia - self.defensaTotal(ataque)).max(ataque.potenciaInicial()))

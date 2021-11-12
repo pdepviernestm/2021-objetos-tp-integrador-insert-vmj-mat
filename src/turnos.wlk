@@ -8,6 +8,7 @@ import batalla.*
 import pantallaInicio.*
 import paleta.*
 import tocadiscos.*
+import pausa.*
 
 object turno {
 	var property rutina = []
@@ -20,7 +21,7 @@ object turno {
 
 	method ejecutar() {
 		batalla.removerMenuActivo()
-		batalla.enCurso(false)
+		pausa.pausaHabilitada(false)
 		self.enemigosVivos().forEach({ enemigo =>
 			self.agregarAccion(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos()))
 		})
@@ -47,7 +48,7 @@ object turno {
 				heroeActivo.cambiarColor(paleta.blanco())
 				heroeActivo = self.heroesVivos().head()
 				heroeActivo.cambiarColor(paleta.verde())
-				batalla.enCurso(true)
+				pausa.pausaHabilitada(true)
 				menuBase.display()
 				rutina = []
 				batalla.inhabilitarAliados()
@@ -78,7 +79,7 @@ object turno {
 	method terminarBatalla() {
 		batalla.removerEstadisticas()
 		game.removeVisual(batalla)
-		batalla.enCurso(false)
+		pausa.pausaHabilitada(false)
 		self.enemigosVivos().forEach({ x => x.eliminarPersonaje() })
 		heroes.forEach({ x => x.eliminarPersonaje() })
 	}

@@ -7,9 +7,10 @@ import mapa.*
 import tocadiscos.*
 
 object pausa {
+	var property pausaHabilitada = false
 	var punteroPrevio
 	method pausar() {
-		if(not game.hasVisual(menuPausa) and turno.batalla().enCurso()) {
+		if(not game.hasVisual(menuPausa) and pausaHabilitada) {
 			punteroPrevio = modo.puntero()
 			modo.puntero(menuPausa.puntero())
 			menuPausa.display()

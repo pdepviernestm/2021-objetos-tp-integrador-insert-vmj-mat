@@ -9,6 +9,7 @@ import mapa.*
 import paleta.*
 import creditos.*
 import tocadiscos.*
+import pausa.*
 
 class NombreBatalla {
 	const property image = "menu/espadita.gif"
@@ -28,7 +29,6 @@ class NombreBatalla {
 
 
 class Batalla {
-	var property enCurso = false
 	const property nombre
     const property heroes = []
     const enemigos = []
@@ -82,7 +82,7 @@ class Batalla {
 		estadisticas.items(heroes)
         menuBase.display()
         estadisticas.display()
-        enCurso = true
+        pausa.pausaHabilitada(true)
         turno.rutinaAbortada(false)
     }
 

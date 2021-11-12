@@ -61,6 +61,8 @@ class AtributosEnemigo {
 	}
 }
 
+// Formas de elegir objetivo
+
 object elegirObjetivoAlAzar {
 	method apply(objetivos) = objetivos.anyOne()
 }
@@ -76,6 +78,8 @@ object elegirObjetivoConMenosVigor {
 object elegirObjetivoConMenosMente {
 	method apply(objetivos) = objetivos.min{ objetivo => objetivo.mente() }
 }
+
+// Formas de elegir ataque
 
 class Ciclar {
 	var indice = 0
@@ -140,7 +144,7 @@ const dragoncito = new Personaje(atributos = new AtributosEnemigo(
 		posicionOriginal = game.at(2, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosVigor,
 		formaDeElegirAtaque = new Cargar(),
-		ataques = [ataqueFisico,ataquePiro],
+		ataques = [ataqueFisico, ataquePiro],
 		maxHP = 500,
 		fuerza = 100, 
 		vigor = 15, 

@@ -1,8 +1,9 @@
 import wollok.game.*
 
 object tocadiscos {
-	var musicaCreditos 
+	var cancionCreditos
 	var fondo
+	
     method tocar(ruta) {
         const sonido = game.sound(ruta)
         sonido.play()
@@ -14,20 +15,21 @@ object tocadiscos {
     	fondo.volume(0.5)
     	fondo.play()
     }
+    
     method tocarCreditos() {
-    	musicaCreditos=game.sound(creditos)
-    	musicaCreditos.play()
-    		
+    	cancionCreditos=game.sound(musicaCreditos)
+    	cancionCreditos.play()
     }
     
-     method detenerfondo() {
+    method detenerfondo() {
     	fondo.stop()
     }
+    
     method detenerCreditos() {
-    	musicaCreditos.stop()
+    	cancionCreditos.stop()
     }
 }
-const creditos="assets/music/creditos_musica.mp3"
+const musicaCreditos="assets/music/creditos_musica.mp3"
 const finalBattle="assets/music/finalBattle.mp3"
 const avanBattle="assets/music/avanBattle.mp3"
 const mediaBattle="assets/music/mediaBattle.mp3"

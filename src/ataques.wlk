@@ -17,8 +17,8 @@ class NombreHabilidad {
 		turno.proximaAccion(self.tipoHabilidad())
 	}
 
-	method esDefensiva() = tipoHabilidad.rol() == defensa
-	method esOfensiva() = tipoHabilidad.rol() == ofensa
+	method esDefensiva() = tipoHabilidad.esDefensiva()
+	method esOfensiva() = tipoHabilidad.esOfensiva()
 }
 
 class Habilidad {
