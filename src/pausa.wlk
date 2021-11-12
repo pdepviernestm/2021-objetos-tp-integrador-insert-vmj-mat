@@ -22,7 +22,7 @@ object pausa {
 	}
 }
 
-const menuPausa = new Menu(image = "menu/menuBase.png", area = new AreaMenu(inicio = game.at(8,6), alto = 2,ancho = 1), position = game.at(5, 5), items = [reanudar, volverAlInicio, volverAlMapa])
+const menuPausa = new Menu(image = "menu/menuBase.png", area = new AreaMenu(inicio = game.at(8, 5), alto = 2, ancho = 1), position = game.at(5, 5), items = [reanudar, volverAlInicio, volverAlMapa])
 
 object reanudar {
 	var property position 

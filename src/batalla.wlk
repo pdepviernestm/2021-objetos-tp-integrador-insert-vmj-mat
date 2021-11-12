@@ -83,6 +83,7 @@ class Batalla {
         menuBase.display()
         estadisticas.display()
         enCurso = true
+        turno.rutinaAbortada(false)
     }
 
 	method agregar(personajes, donde) {
