@@ -128,6 +128,12 @@ class Personaje {
 		atributos.position(atributos.posicionAtaque()) 
 		game.schedule(1000, { => atributos.position(atributos.posicionOriginal()) })
 	}
+	
+	method animarAtaqueEspada() {
+		tocadiscos.tocar(sonidoEspada)
+		atributos.position(atributos.posicionAtaque()) 
+		game.schedule(1000, { => atributos.position(atributos.posicionOriginal()) })
+	}
 
 	method animarAtaqueMagico(elemento,atacado) {
 		elemento.animar(atacado)

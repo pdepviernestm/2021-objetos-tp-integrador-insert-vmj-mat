@@ -111,7 +111,7 @@ class Batalla {
 }
 
 const batallaFacil = new Batalla(
-	nombre = new NombreBatalla(text = "Llanura perezosa", position = game.at(5,7)),
+	nombre = new NombreBatalla(text = "Llanura Perezosa", position = game.at(5,7)),
     heroes = heroesBatallaFacil,
     enemigos = enemigosBatallaFacil,
     image = "background/fondo2.jpeg",
@@ -124,7 +124,7 @@ const batallaFacil = new Batalla(
 )
 
 const batallaDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Bosque del camino inversible", position = game.at(13,3)),
+	nombre = new NombreBatalla(text = "Bosque del Camino Inversible", position = game.at(13,3)),
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
@@ -137,7 +137,7 @@ const batallaDificil = new Batalla (
 )
 
 const batallaMasDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Desierto de los mensajes perdidos", position = game.at(13, 6)),
+	nombre = new NombreBatalla(text = "Desierto de los Mensajes Perdidos", position = game.at(13, 6)),
 	heroes = heroesBatallaMasDificil,
 	enemigos = enemigosBatallaMasDificil,
 	image = "background/desierto2.png",

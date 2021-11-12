@@ -42,6 +42,8 @@ class Habilidad {
 }
 
 const basico = new Habilidad(naturaleza = fisico, rol = ofensa, potenciaInicial = 20)
+const espada = new Habilidad(naturaleza = corte, rol = ofensa, potenciaInicial = 20)
+
 class Magia inherits Habilidad(naturaleza = magico, rol = ofensa, potenciaInicial = 20) {
 	const elemento
 	override method realizar(atacante, atacado) {
@@ -102,6 +104,12 @@ object fisico {
 	method animacion(atacante) { atacante.animarAtaqueFisico() }
 }
 
+object corte {
+	method estadisticaDePotencia(atacante) = atacante.fuerza() + (-10 .. 10).anyOne()
+	method estadisticaDeDefensa(atacado) = atacado.vigor()
+	method animacion(atacante) { atacante.animarAtaqueEspada() }
+}
+
 object magico inherits NaturalezaMagica {
 	override method estadisticaDeDefensa(atacado) = atacado.mente()
 }
@@ -120,7 +128,7 @@ const fenix = new Elemento(image = "ataques/CuraThrow.gif" )
 
 const curacion = new NombreHabilidad(tipoHabilidad = cura, text = "Curación")
 const ataqueFisico = new NombreHabilidad(tipoHabilidad = basico, text = "Golpe Físico")
-const ataqueEspada = new NombreHabilidad(tipoHabilidad = basico, text = "Corte Sangriento")
+const ataqueEspada = new NombreHabilidad(tipoHabilidad = espada, text = "Corte Sangriento")
 const ataqueMagico = new NombreHabilidad(tipoHabilidad = new Magia(elemento = magiaBlanca), text = "Ataque Mágico")
 const ataquePiro = new NombreHabilidad(tipoHabilidad = new Magia(elemento = fuego), text = "Piro")
 const ataqueHielo = new NombreHabilidad(tipoHabilidad = new Magia(elemento = hielo), text = "Golpe Helado")
