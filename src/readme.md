@@ -5,7 +5,7 @@
   </p>
 
 
-El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes misticos y fantasiosos batallan por la gloria. Los niveles con los que el juego cuenta tienen una dificultad mayor a medida que se avanzan entre los distintos escenarios, donde se van descubriendo nuevos ataques con mas potencia y enemigos con mas agresividad.     
+El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes misticos y fantasiosos batallan por la gloria. Los niveles con los que el juego se desbloquean a medida que los vamos ganando, estos cuentan con una dificultad mayor mientras se avanzan entre los distintos escenarios, donde se van descubriendo nuevos ataques con mas potencia y enemigos con mas agresividad.     
  ***
 ## Personajes
 
@@ -137,6 +137,23 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 
 
 ## Batallas
-<img src="../assets/presentacion/mapaJuego.JPG" align="center"/>
-
+<div align="center">
+  <h4>Mapa inicial del Juego.</h4>
+  <img src="../assets/presentacion/mapaJuego.JPG"/>
+  <h4>Batalla en Llanura Perezosa (Dificultad = Facil).</h4>
+  <img src="../assets/presentacion/batallaFacil.JPG"/>
+  <h4>Una vez ganada la batalla en Llanura Perezosa desbloqueamos la segunda batalla.</h4>
+  <img src="../assets/presentacion/mapaJuego2.JPG"/>
+  <h4>Batalla en el Bosque del Camino Inversible (Dificultad = Dificil). </h4>
+  <img src="../assets/presentacion/BatallaDificil.JPG"/>
+  <h4>Si ganamos en el bosque, obtenemos la tercera batalla.</h4>
+  <img src="../assets/presentacion/mapajuego3.JPG"/>
+  <h4>Batalla en el Desierto de los Mensajes Perdidos (Dificultad = Legendario). </h4>
+  <img src="../assets/presentacion/batallaAvanzada.JPG"/>
+  <h4>Si sobrevivimos al desierto, la batalla final nos espera.</h4>
+  <img src="../assets/presentacion/mapaJuego4.JPG"/>
+  <h4>Batalla en el abismo del final (Dificultad = Sensei). </h4>
+  <img src="../assets/presentacion/batallaFinal.JPG"/>
+</div>  
+  
 
