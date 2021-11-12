@@ -4,7 +4,7 @@ import turnos.*
 import paleta.*
 import pantallaInicio.*
 import mapa.*
-
+import tocadiscos.*
 
 object pausa {
 	var punteroPrevio
@@ -36,6 +36,7 @@ object volverAlInicio {
 	method text() = "Volver al inicio"
 	method textColor() = paleta.blanco()
 	method pulsar() { 
+		tocadiscos.detenerfondo()
 		menuPausa.removerse()
 		turno.terminarBatalla()
 		if (game.hasVisual(menuBase))
@@ -51,7 +52,8 @@ object volverAlMapa {
 	var property position 
 	method text() = "Volver al mapa"
 	method textColor() = paleta.blanco()
-	method pulsar() { 
+	method pulsar() {
+		tocadiscos.detenerfondo() 
 		menuPausa.removerse()
 		turno.terminarBatalla()
 		if (game.hasVisual(menuBase))

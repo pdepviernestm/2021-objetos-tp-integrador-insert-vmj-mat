@@ -8,6 +8,7 @@ import turnos.*
 import mapa.*
 import paleta.*
 import creditos.*
+import tocadiscos.*
 
 class NombreBatalla {
 	const property image = "menu/espadita.gif"
@@ -34,7 +35,7 @@ class Batalla {
     const property image
     const property position = game.origin()
     var property menuActivo = menuEnemigos
-    
+    var cancion 
     const property proximaAccion
     
     method habilitar() {
@@ -71,6 +72,7 @@ class Batalla {
 		menuEnemigos.items(enemigos)
 		estadisticas.items(heroes)
 		estadisticas.personajes(heroes)
+		tocadiscos.tocarFondo(cancion)
         self.agregar(enemigos, izquierda)
         self.agregar(heroes, derecha)
 		turno.rutina([])
@@ -114,7 +116,9 @@ const batallaFacil = new Batalla(
     heroes = heroesBatallaFacil,
     enemigos = enemigosBatallaFacil,
     image = "background/fondo2.jpeg",
+    cancion=facilBattle,
     proximaAccion = { => 
+    	tocadiscos.detenerfondo()
 		mapa.display()
         menuMapa.display()
     	batallaDificil.habilitar()
@@ -127,7 +131,9 @@ const batallaDificil = new Batalla (
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
-    proximaAccion = { => 
+    cancion=mediaBattle,
+    proximaAccion = { =>
+    	tocadiscos.detenerfondo() 
     	mapa.display()
         menuMapa.display()
     	batallaMasDificil.habilitar()
@@ -140,7 +146,9 @@ const batallaMasDificil = new Batalla (
 	heroes = heroesBatallaMasDificil,
 	enemigos = enemigosBatallaMasDificil,
 	image = "background/desierto2.png",
+	cancion=avanBattle,
 	proximaAccion = { => 
+		tocadiscos.detenerfondo()
 		mapa.display()
         menuMapa.display()
     	batallaFinal.habilitar()
@@ -153,7 +161,11 @@ const batallaFinal = new Batalla(
     heroes = heroesBatallaFinal,
     enemigos = enemigosBatallaFinal, 
     image = "background/batallaFinal.png",
-    proximaAccion = { => creditos.mostrar() }
+    cancion= finalBattle,
+    proximaAccion = { => 
+    	tocadiscos.detenerfondo()
+    	creditos.mostrar()
+    }
 )
 
 const heroesBatallaFacil = [ladron, clerigo]

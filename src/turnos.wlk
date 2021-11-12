@@ -34,6 +34,7 @@ object turno {
 
 		game.schedule(1000 + 2000 * cantAcciones, { =>
 			if(self.heroesVivos().isEmpty()) {
+				tocadiscos.detenerfondo()
 				tocadiscos.tocar(sonidoPerder)
 				self.perder()
 			}
