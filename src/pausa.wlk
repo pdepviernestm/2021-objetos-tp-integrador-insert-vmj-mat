@@ -4,6 +4,7 @@ import elementos.*
 import turnos.*
 import paleta.*
 import pantallaInicio.*
+import mapa.*
 
 
 object pausa {
@@ -22,7 +23,7 @@ object pausa {
 	}
 }
 
-const menuPausa = new Menu(image = "menu/menuBase.png",area = new AreaMenu(inicio = game.at(8,6), alto = 2,ancho = 1), position = game.at(5, 5), items = [reanudar, volverAlInicio])
+const menuPausa = new Menu(image = "menu/menuBase.png", area = new AreaMenu(inicio = game.at(8,6), alto = 2,ancho = 1), position = game.at(5, 5), items = [reanudar, volverAlInicio, volverAlMapa])
 
 object reanudar {
 	var property position 
@@ -44,5 +45,22 @@ object volverAlInicio {
 			turno.batalla().menuActivo().removerse()
 		turno.abortarRutina()
 		pantallaInicio.iniciar()
+	}
+}
+
+object volverAlMapa {
+	var property position 
+	method text() = "Volver al mapa"
+	method textColor() = paleta.blanco()
+	method pulsar() { 
+		menuPausa.removerse()
+		turno.terminarBatalla()
+		if (game.hasVisual(menuBase))
+			menuBase.removerse()
+		if (game.hasVisual(turno.batalla().menuActivo())) 
+			turno.batalla().menuActivo().removerse()
+		turno.abortarRutina()
+		mapa.display()
+		menuMapa.display()
 	}
 }

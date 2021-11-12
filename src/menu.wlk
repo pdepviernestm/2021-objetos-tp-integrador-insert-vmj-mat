@@ -36,8 +36,8 @@ class AreaMenu {
 	var proxima = inicio
 	var ancho
 	var alto
-	var distanciaX = 3
-	var distanciaY = 1
+	const distanciaX = 3
+	const distanciaY = 1
 	
 	method estaLibre(posicion) = game.getObjectsIn(posicion).isEmpty()
 	
@@ -73,8 +73,7 @@ class AreaMenu {
  
 class Interfaz {
 	var property items = []
-	var area = new AreaMenu(inicio = game.at(0,0),alto=0,ancho=0)
-	
+	const area = new AreaMenu(inicio = game.at(0,0),alto=0,ancho=0)
 	
 	method posicionarItems(){
 		area.posicionarItems(items)
@@ -105,7 +104,6 @@ class Estadisticas inherits Interfaz {
 	const property position 
 	const property image = "menu/FondoStats.png"
 	var property personajes = items
-	
 	
 	override method itemsActuales() = personajes.map{p => p.icono()}
 	override method posicionarItems(){
@@ -170,8 +168,8 @@ class Objetivos inherits Menu {
 const estadisticas = new Estadisticas (
 	area = new AreaMenu(inicio = game.at(13,1),
 						alto = 2, ancho = 4, distanciaY = 2), 
-						position = game.at(10,0), 
-						items = [])
+	position = game.at(10,0), 
+	items = [])
 
 const menuBase =  new MenuHabilidades(
 	position = game.at(1,0),

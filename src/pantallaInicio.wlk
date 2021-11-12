@@ -23,14 +23,18 @@ object pantallaInicio {
 object comenzar {
     method image() = "menu/comenzar.png"
     method position() = game.at(8,5)
-    
     method pulsar() {
         tocadiscos.tocar(sonidoComenzar)
     	pantallaInicio.removerse()  
         mapa.display()
         menuMapa.display()
+        // para que volver al inicio sea como un reset del juego
         opcionBatallaFacil.habilitar()
         batallaFacil.habilitar()
+        opcionBatallaDificil.inhabilitar()
+        batallaDificil.inhabilitar()
+        opcionBatallaFinal.inhabilitar()
+        batallaFinal.inhabilitar()
         tocadiscos.tocar(sonidoFondo)
     }
 }

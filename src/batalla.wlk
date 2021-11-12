@@ -128,44 +128,22 @@ const batallaFacil = new Batalla(
     	opcionBatallaDificil.habilitar()
     }
 )
-
-const heroesBatallaFacil = [ladron, clerigo]
-const enemigosBatallaFacil = [flan, cactrot]
-const heroesBatallaFinal = heroesBatallaFacil + heroesBatallaDificil
-const enemigosBatallaFinal = [jefeFinal, dragoncito, shiva]
-
 const batallaDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Batalla difícil", position = game.at(13,3)),
+	nombre = new NombreBatalla(text = "Batalla Difícil", position = game.at(13,3)),
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
     proximaAccion = { => 
     	mapa.display()
         menuMapa.display()
-    	batallaDificil.habilitar()
-    	opcionBatallaDificil.habilitar() 
-    }
+    	batallaFinal.habilitar()
+    	opcionBatallaFinal.habilitar() 
+    } 
 )
 
+const heroesBatallaFacil = [ladron, clerigo]
+const enemigosBatallaFacil = [flan, cactrot]
 const heroesBatallaDificil = [poseidon, hercules]
 const enemigosBatallaDificil = [duende, tomberi]
-
-const llanura = new Batalla(
-	nombre = new NombreBatalla(text = "Llanura inmutable", position = game.at(0,0)),
-    heroes = [ladron, clerigo],
-    enemigos = [flan, cactrot], 
-    image = "background/fondo1.jpeg",
-    proximaAccion = { => batallaFinal.iniciar() }
-)
-
-const Bosque = new Batalla (
-	nombre = new NombreBatalla(text = "Bosque del Paradigma Misterioso", position = game.at(0,0)),	
-    heroes = [poseidon, hercules],
-    enemigos = [tomberi, duende], 
-    image = "background/fondo1.jpeg", 
-    proximaAccion = { => pantallaInicio.iniciar() }
-)
-
-
-
-
+const heroesBatallaFinal = heroesBatallaFacil + heroesBatallaDificil
+const enemigosBatallaFinal = [jefeFinal, dragoncito, shiva]

@@ -17,6 +17,7 @@ class AtributosEnemigo {
 	var property intelecto   	// ataque magico
 	const property mente  		// defensa magica
 	const formaDeElegirObjetivo
+	const formaDeElegirAtaque
 	const ataques
 
 	method image() = imagenInicial
@@ -40,28 +41,9 @@ class AtributosEnemigo {
 	method aumentarHP(restauracion) {
 		hp = (hp + restauracion).min(maxHP)
 	}
-
-	method elegirAtaque() {
-		var ataqueElegido
-		if (carga < 3) {
-			ataqueElegido = ataqueFisico.tipoHabilidad()
-			carga++
-		}
-		else {
-			const fuerzaInicial = fuerza
-			const intelectoInicial = intelecto
-			fuerza = fuerza * 2
-			intelecto = intelecto * 2
+	
+	method elegirAtaque() = formaDeElegirAtaque.apply(ataques).tipoHabilidad()
 			
-			ataqueElegido = ataqueMagico.tipoHabilidad()
-			carga = 0
-			
-			fuerza = fuerzaInicial
-			intelecto = intelectoInicial
-		}
-		return ataqueElegido
-	}
-		
 	method elegirObjetivo(objetivos) = formaDeElegirObjetivo.apply(objetivos)
 	
 	method recibirHabilidad(ataque, potenciaTotal){
@@ -95,20 +77,41 @@ object elegirObjetivoConMenosMente {
 	method apply(objetivos) = objetivos.min{ objetivo => objetivo.mente() }
 }
 
-//que cada enemigo tenga su propia lista de ataques, y sacar un ataque de la lista según diferentes criterios
+class Ciclar {
+	var indice = 0
+	method apply(ataques) {
+		const ataque = ataques.get(indice)
+		if (indice + 1 == ataques.size()) indice = 0
+		else indice++
+		return ataque
+	} 
+}
 
-object elegirElementoAlAzar {
-	method apply() {
-		var ataque = [ataquePiro.tipoHabilidad(), ataqueHielo.tipoHabilidad(), ataqueElectro.tipoHabilidad(), ataqueAero.tipoHabilidad()]
-		return ataque.anyOne()
-	}
+class Cargar { 
+// este método debe usarse con listas de 2 ataques, 
+// el débil primero, el fuerte último
+	var carga = 0
+	method apply(ataques) {
+		if (ataques.size() != 2) 
+			self.error("Este método sólo se usa para listas de 2 ataques")
+		if (carga < 2) {
+			carga++
+			console.println(carga)
+			return ataques.head()
+		}
+		else {
+			carga = 0
+			return ataques.last()
+		}
+	} 
 }
 
 const jefeFinal = new Personaje(atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/32-Mage-Master.gif",
 		posicionOriginal = game.at(2, 8),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-		ataques = [ataquePiro,ataqueHielo,ataqueElectro,ataqueAero],
+		formaDeElegirObjetivo = elegirObjetivoAlAzar,
+		formaDeElegirAtaque = new Ciclar(),
+		ataques = [ataquePiro, ataqueHielo, ataqueElectro, ataqueAero],
 		maxHP = 3000,
 		fuerza = 100, 
 		vigor = 15, 
@@ -121,8 +124,9 @@ const jefeFinal = new Personaje(atributos = new AtributosEnemigo(
 const shiva = new Personaje(atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/12-Shiva.gif",
 		posicionOriginal = game.at(2, 8),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-		ataques = [ataqueHielo,ataqueAero],
+		formaDeElegirObjetivo = elegirObjetivoConMenosMente,
+		formaDeElegirAtaque = new Ciclar(),
+		ataques = [ataqueHielo, ataqueAero],
 		maxHP = 500,
 		fuerza = 50, 
 		vigor = 15, 
@@ -135,8 +139,9 @@ const shiva = new Personaje(atributos = new AtributosEnemigo(
 const dragoncito = new Personaje(atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Pterodon.gif",
 		posicionOriginal = game.at(2, 8),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-		ataques = [ataquePiro,ataqueFisico],
+		formaDeElegirObjetivo = elegirObjetivoConMenosVigor,
+		formaDeElegirAtaque = new Cargar(),
+		ataques = [ataquePiro, ataqueFisico],
 		maxHP = 500,
 		fuerza = 100, 
 		vigor = 15, 
@@ -150,7 +155,8 @@ const cactrot = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Cactrot.gif",
 		posicionOriginal = game.at(2, 8),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		formaDeElegirObjetivo = elegirObjetivoAlAzar,
+		formaDeElegirAtaque = new Ciclar(),
 		ataques = [ataqueFisico],
 		maxHP = 100,
 		fuerza = 50, 
@@ -166,7 +172,8 @@ const flan = new Personaje(
 	atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Flan.gif",
 		posicionOriginal = game.at(3, 7),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		formaDeElegirObjetivo = elegirObjetivoAlAzar,
+		formaDeElegirAtaque = new Ciclar(),
 		ataques = [ataqueFisico],
 		maxHP = 150,
 	 	fuerza = 70, 
@@ -183,7 +190,8 @@ const tomberi = new Personaje (
 		imagenInicial = "enemigos/Tonberry.gif",
 		posicionOriginal = game.at(5, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-		ataques = [ataqueEspada,ataqueMagico],
+		formaDeElegirAtaque = new Cargar(),
+		ataques = [ataqueEspada, ataqueMagico],
 		maxHP = 200,
 		fuerza = 50, 
 		vigor = 40, 
@@ -199,6 +207,7 @@ const duende = new Personaje (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(7, 9),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		formaDeElegirAtaque = new Ciclar(),
 		ataques = [ataqueFisico],
 		maxHP = 200,
 		fuerza = 40, 
@@ -215,6 +224,7 @@ const duendeInmortal = new Personaje (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(9, 7),
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		formaDeElegirAtaque = new Ciclar(),
 		ataques = [ataqueFisico],
 		maxHP = 170,
 		fuerza = 40, 
