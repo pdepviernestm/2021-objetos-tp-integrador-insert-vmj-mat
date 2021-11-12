@@ -2,6 +2,7 @@ import wollok.game.*
 
 object tocadiscos {
 	const musicaCreditos = game.sound("assets/music/creditos_musica.mp3")
+	var fueTocado = false
 	
     method tocar(ruta) {
         const sonido = game.sound(ruta)
@@ -9,7 +10,10 @@ object tocadiscos {
     }
     
     method tocarCreditos() {
-    	musicaCreditos.play()
+    	if(not fueTocado) {
+    		musicaCreditos.play()
+    		fueTocado = true
+    	}
     }
     
     method detenerCreditos() {
