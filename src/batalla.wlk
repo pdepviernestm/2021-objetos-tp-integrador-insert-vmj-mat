@@ -8,6 +8,7 @@ import elementos.*
 import turnos.*
 import mapa.*
 import paleta.*
+import creditos.*
 
 class NombreBatalla {
 	const property image = "menu/espadita.gif"
@@ -109,15 +110,8 @@ class Batalla {
 	}
 }
 
-const batallaFinal = new Batalla(nombre = new NombreBatalla(text = "Batalla Final", position = game.at(12,12)),
-    heroes = heroesBatallaFinal,
-    enemigos = enemigosBatallaFinal, 
-    image = "background/batallaFinal.png",
-    proximaAccion = { => pantallaInicio.iniciar() }
-)
-
 const batallaFacil = new Batalla(
-	nombre = new NombreBatalla(text = "Batalla Fácil", position = game.at(5,7)),
+	nombre = new NombreBatalla(text = "Llanura perezosa", position = game.at(5,7)),
     heroes = heroesBatallaFacil,
     enemigos = enemigosBatallaFacil,
     image = "background/fondo2.jpeg",
@@ -128,22 +122,46 @@ const batallaFacil = new Batalla(
     	opcionBatallaDificil.habilitar()
     }
 )
+
 const batallaDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Batalla Difícil", position = game.at(13,3)),
+	nombre = new NombreBatalla(text = "Bosque del camino inversible", position = game.at(13,3)),
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
     proximaAccion = { => 
     	mapa.display()
         menuMapa.display()
+    	batallaMasDificil.habilitar()
+    	opcionBatallaMasDificil.habilitar() 
+    } 
+)
+
+const batallaMasDificil = new Batalla (
+	nombre = new NombreBatalla(text = "Desierto de los mensajes perdidos", position = game.at(13, 6)),
+	heroes = heroesBatallaMasDificil,
+	enemigos = enemigosBatallaMasDificil,
+	image = "background/desierto2.png",
+	proximaAccion = { => 
+		mapa.display()
+        menuMapa.display()
     	batallaFinal.habilitar()
     	opcionBatallaFinal.habilitar() 
-    } 
+	}
+)
+
+const batallaFinal = new Batalla(
+	nombre = new NombreBatalla(text = "Abismo del Final", position = game.at(12,12)),
+    heroes = heroesBatallaFinal,
+    enemigos = enemigosBatallaFinal, 
+    image = "background/batallaFinal.png",
+    proximaAccion = { => creditos.mostrar() }
 )
 
 const heroesBatallaFacil = [ladron, clerigo]
 const enemigosBatallaFacil = [flan, cactrot]
 const heroesBatallaDificil = [poseidon, hercules]
 const enemigosBatallaDificil = [duende, tomberi]
+const heroesBatallaMasDificil = [ladron, clerigo, poseidon]
+const enemigosBatallaMasDificil = [tomberi, dragoncito, cactrot]
 const heroesBatallaFinal = heroesBatallaFacil + heroesBatallaDificil
 const enemigosBatallaFinal = [jefeFinal, dragoncito, shiva]

@@ -5,6 +5,7 @@ import mapa.*
 import elementos.*
 import pausa.*
 import tocadiscos.*
+import creditos.*
 program juego {
 	
 	game.cellSize(32)
@@ -19,6 +20,7 @@ program juego {
 	keyboard.left().onPressDo{ modo.moverseHacia(izquierda) }
 	keyboard.right().onPressDo{ modo.moverseHacia(derecha) }
 	keyboard.z().onPressDo{ pausa.pausar() }
+	keyboard.r().onPressDo{ creditos.volver() }
 	
 	game.start()
 

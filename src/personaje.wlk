@@ -78,7 +78,7 @@ class Personaje {
 	
 	method reset() {
 		if(self.estaMuerto()) {
-			self.aumentarHP(self.maxHP())
+			self.aumentarHP((self.maxHP() * 2 / 3).roundUp())
 			atributos.image()
 			self.habilitar()
 		}

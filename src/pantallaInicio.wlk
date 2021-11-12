@@ -33,6 +33,8 @@ object comenzar {
         batallaFacil.habilitar()
         opcionBatallaDificil.inhabilitar()
         batallaDificil.inhabilitar()
+        opcionBatallaMasDificil.inhabilitar()
+        batallaMasDificil.inhabilitar()
         opcionBatallaFinal.inhabilitar()
         batallaFinal.inhabilitar()
         tocadiscos.tocar(sonidoFondo)

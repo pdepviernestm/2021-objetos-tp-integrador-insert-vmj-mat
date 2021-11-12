@@ -19,7 +19,7 @@ const menuMapa = new Menu (
 	position = game.origin(),
 	image = "menu/menuMapita.png",
 	area = new AreaMenu(inicio = game.at(1, 1), alto = 3, ancho = 1),
-	items = [opcionBatallaFinal, opcionBatallaFacil, opcionBatallaDificil]
+	items = [opcionBatallaFacil, opcionBatallaDificil, opcionBatallaMasDificil, opcionBatallaFinal]
 )
 
 
@@ -27,7 +27,7 @@ const menuMapa = new Menu (
 class Opcion {
     const destino
     const nombre
-    var property position
+    var property position = game.origin()
     var property textColor = paleta.gris()
 	
 	method nombre() = destino.nombre()
@@ -55,20 +55,22 @@ class Opcion {
 
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
-    nombre = "Batalla Fácil",
-    position = game.at(5, 5)
+    nombre = "Llanura"
 )
 
 const opcionBatallaDificil = new Opcion(
     destino = batallaDificil,
-    nombre = "Batalla Difícil",
-    position = game.at(7, 2)
+    nombre = "Bosque"
+)
+
+const opcionBatallaMasDificil = new Opcion(
+	destino = batallaMasDificil,
+	nombre = "Desierto"
 )
 
 const opcionBatallaFinal = new Opcion(
     destino = batallaFinal,
-    nombre = "Batalla Final",
-    position = game.at(2, 2)
+    nombre = "Abismo"
 )
 
 

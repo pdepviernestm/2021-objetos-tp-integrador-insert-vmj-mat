@@ -96,7 +96,6 @@ class Cargar {
 			self.error("Este método sólo se usa para listas de 2 ataques")
 		if (carga < 2) {
 			carga++
-			console.println(carga)
 			return ataques.head()
 		}
 		else {
@@ -206,7 +205,7 @@ const duende = new Personaje (
 	atributos = new AtributosEnemigo (
 		imagenInicial = "enemigos/Goblin2.gif",
 		posicionOriginal = game.at(7, 9),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
+		formaDeElegirObjetivo = elegirObjetivoAlAzar,
 		formaDeElegirAtaque = new Ciclar(),
 		ataques = [ataqueFisico],
 		maxHP = 200,
@@ -217,21 +216,4 @@ const duende = new Personaje (
 	),
 	text = "Duende",
 	position = game.at(2, 4)
-)
-
-const duendeInmortal = new Personaje (
-	atributos = new AtributosEnemigo (
-		imagenInicial = "enemigos/Goblin2.gif",
-		posicionOriginal = game.at(9, 7),
-		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
-		formaDeElegirAtaque = new Ciclar(),
-		ataques = [ataqueFisico],
-		maxHP = 170,
-		fuerza = 40, 
-		vigor = 200, 
-		intelecto = 60, 
-		mente = 200 
-	),
-	text = "Duende inmortal",
-	position = game.at(2, 5)
 )

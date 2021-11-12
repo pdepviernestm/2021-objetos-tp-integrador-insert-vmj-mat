@@ -1,9 +1,19 @@
 import wollok.game.*
 
 object tocadiscos {
+	const musicaCreditos = game.sound("assets/music/creditos_musica.mp3")
+	
     method tocar(ruta) {
         const sonido = game.sound(ruta)
         sonido.play()
+    }
+    
+    method tocarCreditos() {
+    	musicaCreditos.play()
+    }
+    
+    method detenerCreditos() {
+    	musicaCreditos.stop()
     }
 }
 
