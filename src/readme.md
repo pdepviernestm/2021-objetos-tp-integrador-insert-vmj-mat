@@ -136,6 +136,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 </table>
 
 
-
+## Batallas
+<img src="../assets/presentacion/mapaJuego.JPG" align="center"/>
 
 
