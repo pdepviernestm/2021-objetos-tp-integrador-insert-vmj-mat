@@ -48,7 +48,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Hercules</b></td>
-    <td><img src="../assets/personajes/Knight3M.gif"/></td>
+    <td><img src="../assets/personajes/Knight3M-SW.gif"/></td>
     <td>120</td>
     <td>90</td>
     <td>50</td>
@@ -136,38 +136,6 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 </table>
 
 
-**Pociones**
 
-Panacea
-Ultrapocion
-Pocion
-Cola de fenix
-
-**Clases** 
-
-Personaje
-Enemigo
-Artefacto (equipables)
-Arma (equipables)
-ObjetoConsumible (Consumibles)
-Encantamiento (tiene un efecto)
-
-
-Si un personaje esta ko, ponerlo en gris
-Seleccionar con color la opcion en el menu
-
-Ataques fisicos
-Ataque normal
-
-**Ataques magicos**
-Piro
-Hielo
-Electro
-Aero
-
-**Encantamientos**
-antiCoraza
-Antimagia
-Bio
 
 
