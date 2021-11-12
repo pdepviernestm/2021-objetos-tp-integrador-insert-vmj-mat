@@ -16,8 +16,8 @@ class AtributosEnemigo {
 	const property vigor  		// defensa fisica
 	var property intelecto   	// ataque magico
 	const property mente  		// defensa magica
-	const formaDeElegirObjetivo
-	const formaDeElegirAtaque
+	const property formaDeElegirObjetivo
+	const property formaDeElegirAtaque
 	const ataques
 
 	method image() = imagenInicial
@@ -35,7 +35,7 @@ class AtributosEnemigo {
 	
 	method reducirHP(n) {
 		hp = (hp - n).max(0)
-		if (self.estaMuerto()) game.removeVisual(self)
+		if (self.estaMuerto() && game.hasVisual(self)) game.removeVisual(self)
 	} 
 	
 	method aumentarHP(restauracion) {
@@ -90,7 +90,7 @@ class Ciclar {
 class Cargar { 
 // este método debe usarse con listas de 2 ataques, 
 // el débil primero, el fuerte último
-	var carga = 0
+	var property carga = 0
 	method apply(ataques) {
 		if (ataques.size() != 2) 
 			self.error("Este método sólo se usa para listas de 2 ataques")
@@ -140,7 +140,7 @@ const dragoncito = new Personaje(atributos = new AtributosEnemigo(
 		posicionOriginal = game.at(2, 8),
 		formaDeElegirObjetivo = elegirObjetivoConMenosVigor,
 		formaDeElegirAtaque = new Cargar(),
-		ataques = [ataquePiro, ataqueFisico],
+		ataques = [ataqueFisico,ataquePiro],
 		maxHP = 500,
 		fuerza = 100, 
 		vigor = 15, 
@@ -194,7 +194,7 @@ const tomberi = new Personaje (
 		maxHP = 200,
 		fuerza = 50, 
 		vigor = 40, 
-		intelecto = 100, 
+		intelecto = 30, 
 		mente = 40
 	), 
 	text = "Tomberi",
@@ -208,8 +208,8 @@ const duende = new Personaje (
 		formaDeElegirObjetivo = elegirObjetivoAlAzar,
 		formaDeElegirAtaque = new Ciclar(),
 		ataques = [ataqueFisico],
-		maxHP = 200,
-		fuerza = 40, 
+		maxHP = 170,
+		fuerza = 50, 
 		vigor = 50, 
 		intelecto = 60, 
 		mente = 35 
@@ -217,3 +217,7 @@ const duende = new Personaje (
 	text = "Duende",
 	position = game.at(2, 4)
 )
+
+
+
+

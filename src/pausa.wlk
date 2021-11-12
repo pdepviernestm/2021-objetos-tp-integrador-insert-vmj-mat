@@ -1,6 +1,5 @@
 import wollok.game.*
 import menu.*
-import elementos.*
 import turnos.*
 import paleta.*
 import pantallaInicio.*

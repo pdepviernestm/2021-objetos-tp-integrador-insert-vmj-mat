@@ -4,9 +4,14 @@ import personaje.*
 import turnos.*
 import ataques.*
 import batalla.*
-import elementos.*
 
-
+const punteroInicio = new Puntero(posicionInicial = game.at(8, 5))
+ 
+object modo {
+	var property puntero = punteroInicio
+	method moverseHacia(lugar){ puntero.moverseHacia(lugar) }
+	method seleccionar(){ puntero.seleccionar() }
+}
 
 class Puntero {
 	var property posicionInicial

@@ -296,3 +296,4 @@ const hercules = new Personaje(
 	text = "Hercules",
 	position = game.at(4, 4)
 )
+

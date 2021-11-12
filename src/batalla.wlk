@@ -4,7 +4,6 @@ import personaje.*
 import enemigo.*
 import pantallaInicio.*
 import ataques.*
-import elementos.*
 import turnos.*
 import mapa.*
 import paleta.*

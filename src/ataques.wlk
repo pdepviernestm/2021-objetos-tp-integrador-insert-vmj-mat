@@ -42,7 +42,7 @@ class Habilidad {
 }
 
 const basico = new Habilidad(naturaleza = fisico, rol = ofensa, potenciaInicial = 20)
-const espada = new Habilidad(naturaleza = corte, rol = ofensa, potenciaInicial = 20)
+const espada = new Habilidad(naturaleza = corte, rol = ofensa, potenciaInicial = 30)
 
 class Magia inherits Habilidad(naturaleza = magico, rol = ofensa, potenciaInicial = 20) {
 	const elemento

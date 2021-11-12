@@ -2,7 +2,6 @@ import wollok.game.*
 import menu.*
 import batalla.*
 import pantallaInicio.*
-import elementos.*
 import paleta.*
 
 object mapa inherits Interfaz{
@@ -18,7 +17,7 @@ object mapa inherits Interfaz{
 const menuMapa = new Menu (
 	position = game.origin(),
 	image = "menu/menuMapita.png",
-	area = new AreaMenu(inicio = game.at(1, 1), alto = 3, ancho = 1),
+	area = new AreaMenu(inicio = game.at(1, 0), alto = 3, ancho = 1),
 	items = [opcionBatallaFacil, opcionBatallaDificil, opcionBatallaMasDificil, opcionBatallaFinal]
 )
 

@@ -5,7 +5,6 @@ import mapa.*
 import personaje.*
 import ataques.*
 import batalla.*
-import elementos.*
 import pantallaInicio.*
 import paleta.*
 import tocadiscos.*

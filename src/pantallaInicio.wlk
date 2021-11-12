@@ -2,7 +2,6 @@ import wollok.game.*
 import menu.*
 import batalla.*
 import mapa.*
-import elementos.*
 import tocadiscos.*
 
 object pantallaInicio {

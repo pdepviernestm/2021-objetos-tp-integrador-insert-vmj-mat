@@ -8,67 +8,54 @@ import batalla.*
 import tocadiscos.*
 
 
-test "un personaje esta muerto si sus puntos HP son = 0" {
-	const personaje = new Personaje(atributos = new Atributos(maxHP = 0))
-	assert.that(personaje.estaMuerto())
-	
+test "un heroe esta muerto si sus puntos HP son = 0" {
+	assert.equals(120,hercules.hp())
+	hercules.reducirHP(120)	
+	assert.that(hercules.estaMuerto())	
 }
 test "el enemigo está muerto si sus puntos HP son = 0" {
-	const enemigo = new Personaje(atributos = new AtributosEnemigo(maxHP = 0))	
-	assert.that(enemigo.estaMuerto())
+	assert.equals(170,duende.hp())
+	duende.reducirHP(170)	
+	assert.that(duende.estaMuerto())
 }	
  
-test "puntos del personaje si recibe un ataque fisico del enemigo" {
-	//tocadiscos.tocar(sonidoMagia)
-	const personaje = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),imagenInicial = "personajes/Thief2M-SW.gif",imagenAtaque = "personajes/Thief2M-Weak-SW.gif",imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
-						posicionOriginal = game.at(5, 8),maxHP = 100,vida = new Hp(hpInicial = 100, position = game.at(14, 2)),fuerza = 70,vigor = 70,intelecto = 25, mente = 30,habilidades = [ataqueFisico]),text="ladron", position = game.at(4,2))
-	const personaje2 = new Personaje(atributos = new Atributos(icono = new Icono(position = game.at(16, 4),image = "personajes/WhiteMage2F.gif"),imagenInicial = "personajes/WhiteMage2F-SW.gif",imagenAtaque =  "personajes/WhiteMage2F-Weak-SW.gif",imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
-		posicionOriginal = game.at(5, 6),maxHP = 120, vida = new Hp(hpInicial = 120,position= game.at(14,4)),fuerza = 20,vigor = 30,intelecto = 70,mente = 70,habilidades = [curacion, ataqueMagico, hechizoLazaro]),text="Clerigo",position = game.at(4, 1))
-	ataqueFisico.tipoHabilidad().realizar(personaje2, personaje) 
-	assert.equals(90, personaje.fuerza())
-	}
 
-test "puntos del personaje si recibe un ataque mágico del enemigo" {
-	//tocadiscos.tocar(sonidoMagia)
-	const personaje = new Personaje(atributos = new Atributos(mente = 30, maxHP = 100))
-	const personaje2 = new Personaje(atributos = new Atributos(intelecto = 20))
-	ataqueMagico.tipoHabilidad().realizar(personaje2, personaje)
-	assert.equals(70, personaje.hp())
-	}
-
-test "si la carga es menor a 3, el enemigo elige un ataque físico" {
-	cactrot.atributos().carga(2) 
-	assert.equals(ataqueFisico.tipoHabilidad(), cactrot.elegirAtaque())
+test "si un enemigo recibe un ataque, a la potencia se le restan los atributos de defensa del enemigo"{
+	assert.equals(170,duende.hp())
+	duende.recibirHabilidad(ataqueEspada.tipoHabilidad(),80)
+	assert.equals(50,duende.vigor())
+	assert.equals(140,duende.hp())
 }
 
-test "si la carga no es menor a 3, el enemigo elige un ataque mágico" {
-	cactrot.atributos().carga(3) 
-	assert.equals(ataqueMagico.tipoHabilidad(), cactrot.elegirAtaque())	
+test "si un personaje recibe un ataque, a la potencia se le restan los atributos de defensa del personaje"{
+	assert.equals(120,hercules.hp())
+	hercules.recibirHabilidad(ataqueEspada.tipoHabilidad(),150)
+	assert.equals(50,hercules.vigor())
+	assert.equals(20,hercules.hp())
 }
-/* test "si un personaje cura a otro, los HP del curado no superan los HP máximos" {
-	const personaje = new Personaje(atributos = new Atributos(mente = 60))
-	const personaje2 = new Personaje(atributos = new Atributos(maxHP = 40))
-	personaje2.reducirHP(30)
-	//curacion.tipoHabilidad().realizar(clerigo, personaje2)
-	personaje2.recibirHabilidad(curacion.tipoHabilidad(),100)
-	assert.equals(40, personaje2.hp())
-}*/
+
+test "si un personaje recibe un ataque con potencia menor a sus atributos, la potencia del impacto es la inicial del ataque"{
+	assert.equals(120,hercules.hp())
+	hercules.recibirHabilidad(ataqueEspada.tipoHabilidad(),40)
+	assert.equals(50,hercules.vigor())
+	assert.equals(30,ataqueEspada.tipoHabilidad().potenciaInicial())
+	assert.equals(90,hercules.hp())
+}
+
+test "si un enemigo recibe un ataque con potencia menor a sus atributos, la potencia del impacto es la inicial del ataque"{
+	assert.equals(170,duende.hp())
+	duende.recibirHabilidad(ataqueEspada.tipoHabilidad(),20)
+	assert.equals(50,duende.vigor())
+	assert.equals(30,ataqueEspada.tipoHabilidad().potenciaInicial())
+	assert.equals(140,duende.hp())
+}
+
 
 test "si un personaje es curado, los HP no superan los HP máximos" {
-	const personaje = new Personaje(atributos = new Atributos(maxHP = 40))
-	personaje.reducirHP(30)
-	personaje.recibirHabilidad(curacion.tipoHabilidad(),100)
-	assert.equals(40, personaje.hp())
-
- test "al iniciar una batalla, al objeto turno se le transfieren las propiedades de ésta" {
-	const batallaDeEjemplo = new Batalla(enemigos = [cactrot], heroes = [clerigo, ladron],
-	image = "menu/Game Boy Advance - Final Fantasy 1 Dawn of Souls - Font and Menu - Copy (2).png", 
-	nombre = "", image = "", proximaAccion = "")
-	batallaDeEjemplo.iniciar()
-	assert.equals(batallaDeEjemplo, turno.batalla())
-	assert.equals([cactrot], turno.enemigos())
-	assert.equals([clerigo, ladron], turno.heroes())
-}
+	assert.equals(100,ladron.maxHP())
+	ladron.reducirHP(5)
+	ladron.recibirHabilidad(curacion.tipoHabilidad(),100)
+	assert.equals(100, ladron.hp())}
 
 
 test "el método heroesVivos retorna los héroes que están vivos en cierto momento" {
@@ -94,3 +81,24 @@ test "el método siguienteVivo retorna el próximo héroe con vida, comenzando d
 	clerigo.atributos().hp(0)
 	assert.equals(hercules, turno.siguienteVivo(0))
 }
+
+test "si la forma de elegir el ataque es ciclando, el enemigo elige sus ataques de su lista ciclicamente"{
+	var primerAtaque = shiva.elegirAtaque()
+	assert.equals(ataqueHielo.tipoHabilidad(),primerAtaque)
+	var segundoAtaque = shiva.elegirAtaque()
+	assert.equals(ataqueAero.tipoHabilidad(),segundoAtaque)
+}
+
+test "si la forma de elegir ataque es por carga, el enemigo acumula la carga hasta lanzar el ataque cargado y se vuelve a restear"{
+	assert.equals(0,dragoncito.atributos().formaDeElegirAtaque().carga())
+	var ataque = dragoncito.elegirAtaque()
+	assert.equals(1,dragoncito.atributos().formaDeElegirAtaque().carga())
+	ataque = dragoncito.elegirAtaque()
+	assert.equals(ataqueFisico.tipoHabilidad(),ataque)
+	assert.equals(2,dragoncito.atributos().formaDeElegirAtaque().carga())
+	ataque = dragoncito.elegirAtaque()
+	assert.equals(ataquePiro.tipoHabilidad(),ataque)
+	assert.equals(0,dragoncito.atributos().formaDeElegirAtaque().carga())
+}
+
+
