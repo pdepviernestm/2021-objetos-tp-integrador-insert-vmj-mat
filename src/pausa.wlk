@@ -9,6 +9,7 @@ import config.*
 object pausa {
 	var property pausaHabilitada = false
 	var punteroPrevio
+	
 	method pausar() {
 		if(not game.hasVisual(menuPausa) and pausaHabilitada) {
 			punteroPrevio = modo.puntero()
@@ -42,7 +43,6 @@ class VolverAOpcion{
 			menuBase.removerse()
 		if (game.hasVisual(turno.batalla().menuActivo())) 
 			turno.batalla().menuActivo().removerse()
-		turno.abortarRutina()
 	}
 }
 

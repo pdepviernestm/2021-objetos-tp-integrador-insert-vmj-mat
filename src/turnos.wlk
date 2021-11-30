@@ -17,7 +17,6 @@ object turno {
 	var property heroes = []
 	var property enemigos = []
 	var property proximaAccion
-	var property rutinaAbortada = false
 
 
 
@@ -43,16 +42,10 @@ object turno {
 			else if(self.enemigosVivos().isEmpty()) {
 				self.ganar()
 			}
-			else if(!rutinaAbortada) {
+			else {
 				self.cambiarHeroeActivoPor(self.heroesVivos().head())
 				pausa.pausaHabilitada(true)
 				menuBase.display()
-				rutina = []
-				batalla.inhabilitarAliados()
-				batalla.inhabilitarEnemigos()
-			}
-			else {
-				self.cambiarHeroeActivoPor(self.heroesVivos().head())				
 				rutina = []
 				batalla.inhabilitarAliados()
 				batalla.inhabilitarEnemigos()
@@ -99,11 +92,6 @@ object turno {
 		heroes.forEach({ x => x.eliminarPersonaje() })
 	}
 	
-	method abortarRutina() {
-		rutina = (0 .. rutina.size()).map{ x => habilidadNula }
-		rutinaAbortada = true
-	}
-	
 	method heroesMuertos() = heroes.filter{ heroe => heroe.estaMuerto() }
 	method heroesVivos() = heroes.filter{ heroe => !heroe.estaMuerto() }
 	method enemigosVivos() = enemigos.filter{ enemigo => !enemigo.estaMuerto() }
@@ -133,8 +121,6 @@ object turno {
 		}
 	}
 	
-	
-	
 	method cantHeroes() = heroes.size()
 
 	method encontrarActual() {
@@ -157,8 +143,4 @@ class Movimiento {
 	method realizar() {
 		if((not destino.estaMuerto()) or habilidad == lazaro) habilidad.realizar(origen, destino)
 	}
-}
-
-object habilidadNula {
-	method realizar() {}
 }

@@ -82,7 +82,6 @@ class Batalla {
         menuBase.display()
         estadisticas.display()
         pausa.pausaHabilitada(true)
-        turno.rutinaAbortada(false)
     }
 
 	method agregarABatalla(personajes,donde,area){
