@@ -5,8 +5,25 @@
   </p>
 
 
-El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes misticos y fantasiosos batallan por la gloria. Los niveles con los que el juego se desbloquean a medida que los vamos ganando, estos cuentan con una dificultad mayor mientras se avanzan entre los distintos escenarios, donde se van descubriendo nuevos ataques con mas potencia y enemigos con mas agresividad.     
- ***
+El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes misticos y fantasiosos batallan por la gloria. Los niveles con los que el juego se desbloquean a medida que los vamos ganando, estos cuentan con una dificultad mayor mientras se avanzan entre los distintos escenarios, donde se van descubriendo nuevos ataques con mas potencia y enemigos con mas agresividad.
+
+### Equipo
+<li>Garro, Agustina Mercedes</li>
+<li>Ramos, Milagros</li>
+<li>Rau Robayo, Valentina Luján</li>
+<li>Recalde, Martina Del Rosario</li>
+<li>Antonio, Tomás Julián</li>
+<li>Waibschnaider, Julian Ioel</li>
+
+***
+
+## Instrucciones
+
+<li><b>X</b> Para seleccionar</li>
+<li><b>Z</b> Para poner pausa durante una batalla</li>
+<li>↑ ↓ ← → Para moverse en los menúes</li>
+<li><b>R</b> Para reiniciar una vez finalizada la batalla final</li>
+
 ## Personajes
 
 <table>
