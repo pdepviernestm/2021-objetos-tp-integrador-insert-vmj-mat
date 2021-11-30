@@ -42,19 +42,30 @@ object turno {
 				self.ganar()
 			}
 			else if(!rutinaAbortada) {
+				heroeActivo.cambiarColor(paleta.blanco())
+				heroeActivo = self.heroesVivos().head()
+				heroeActivo.cambiarColor(paleta.verde())
 				pausa.pausaHabilitada(true)
 				menuBase.display()
+				rutina = []
+				batalla.inhabilitarAliados()
+				batalla.inhabilitarEnemigos()
 			}
-			
+			else {
+				heroeActivo.cambiarColor(paleta.blanco())
+
 				heroeActivo.cambiarColor(colorHabilitado)
 				heroeActivo = self.heroesVivos().head()
+				heroeActivo.cambiarColor(paleta.verde())
 				heroeActivo.cambiarColor(colorPersonajeActual)
 				rutina = []
 				batalla.inhabilitarAliados()
 				batalla.inhabilitarEnemigos()
-			
-			})
+			}
+		})
+
 	}
+	
 	
 	method iniciar(nuevaBatalla,enemigosBatalla,heroesBatalla){
 		self.batalla(nuevaBatalla)
