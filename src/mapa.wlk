@@ -45,10 +45,12 @@ class Opcion {
     
     method habilitar() {
     	textColor = paleta.blanco()
+    	destino.habilitar()
     }
     
     method inhabilitar() {
     	textColor = paleta.gris()
+    	destino.inhabilitar()
     }
 }
 

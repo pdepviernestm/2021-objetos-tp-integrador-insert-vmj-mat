@@ -36,41 +36,45 @@ object turno {
 
 		game.schedule(1000 + 2000 * cantAcciones, { =>
 			if(self.heroesVivos().isEmpty()) {
-				tocadiscos.detenerfondo()
-				tocadiscos.tocar(sonidoPerder)
 				self.perder()
 			}
 			else if(self.enemigosVivos().isEmpty()) {
-				tocadiscos.tocar(sonidoGanar)
 				self.ganar()
 			}
 			else if(!rutinaAbortada) {
-				heroeActivo.cambiarColor(paleta.blanco())
-				heroeActivo = self.heroesVivos().head()
-				heroeActivo.cambiarColor(paleta.verde())
 				pausa.pausaHabilitada(true)
 				menuBase.display()
-				rutina = []
-				batalla.inhabilitarAliados()
-				batalla.inhabilitarEnemigos()
 			}
-			else {
-				heroeActivo.cambiarColor(paleta.blanco())
+			
+				heroeActivo.cambiarColor(colorHabilitado)
 				heroeActivo = self.heroesVivos().head()
-				heroeActivo.cambiarColor(paleta.verde())
+				heroeActivo.cambiarColor(colorPersonajeActual)
 				rutina = []
 				batalla.inhabilitarAliados()
 				batalla.inhabilitarEnemigos()
-			}
-		})
+			
+			})
 	}
-
+	
+	method iniciar(nuevaBatalla,enemigosBatalla,heroesBatalla){
+		self.batalla(nuevaBatalla)
+    	self.enemigos(enemigosBatalla)
+    	self.heroes(heroesBatalla)
+    	self.heroeActivo(heroes.head())
+        self.heroeActivo().cambiarColor(colorPersonajeActual)
+        self.heroes().drop(1).forEach{ heroe => heroe.cambiarColor(colorHabilitado) }
+        self.rutina([])
+	}
+	
 	method ganar() {
+		tocadiscos.tocar(sonidoGanar)
 		self.terminarBatalla()
 		batalla.proximaAccion().apply()
 	}
 
 	method perder() {
+		tocadiscos.detenerfondo()
+		tocadiscos.tocar(sonidoPerder)
 		self.terminarBatalla()
 		mapa.display()
         menuMapa.display()
@@ -113,9 +117,9 @@ object turno {
 		if (heroeActivo == self.heroesVivos().last()) self.ejecutar()
 		else {
 			const indiceActual = self.encontrarActual()
-			heroeActivo.cambiarColor(paleta.blanco())
+			heroeActivo.cambiarColor(colorHabilitado)
 			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
-			heroeActivo.cambiarColor(paleta.verde())
+			heroeActivo.cambiarColor(colorPersonajeActual)
 			batalla.menuActivo().removerse()
 			menuBase.display()
 		}

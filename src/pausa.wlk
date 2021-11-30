@@ -32,9 +32,9 @@ object reanudar {
 	method pulsar() { pausa.reanudar() }
 }
 
-object volverAlInicio {
-	var property position 
-	method text() = "Volver al inicio"
+class VolverAOpcion{
+	var property position = game.origin()
+	method text() 
 	method textColor() = paleta.blanco()
 	method pulsar() { 
 		tocadiscos.detenerfondo()
@@ -45,23 +45,21 @@ object volverAlInicio {
 		if (game.hasVisual(turno.batalla().menuActivo())) 
 			turno.batalla().menuActivo().removerse()
 		turno.abortarRutina()
+	}
+}
+
+object volverAlInicio inherits VolverAOpcion{
+	method text() = "Volver al inicio"
+	override method pulsar() { 
+		super()
 		pantallaInicio.iniciar()
 	}
 }
 
-object volverAlMapa {
-	var property position 
+object volverAlMapa inherits VolverAOpcion{
 	method text() = "Volver al mapa"
-	method textColor() = paleta.blanco()
-	method pulsar() {
-		tocadiscos.detenerfondo() 
-		menuPausa.removerse()
-		turno.terminarBatalla()
-		if (game.hasVisual(menuBase))
-			menuBase.removerse()
-		if (game.hasVisual(turno.batalla().menuActivo())) 
-			turno.batalla().menuActivo().removerse()
-		turno.abortarRutina()
+	override method pulsar() {
+		super()
 		mapa.display()
 		menuMapa.display()
 	}

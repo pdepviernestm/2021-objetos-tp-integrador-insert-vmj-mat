@@ -29,13 +29,9 @@ object comenzar {
         menuMapa.display()
         // para que volver al inicio sea como un reset del juego
         opcionBatallaFacil.habilitar()
-        batallaFacil.habilitar()
         opcionBatallaDificil.inhabilitar()
-        batallaDificil.inhabilitar()
         opcionBatallaMasDificil.inhabilitar()
-        batallaMasDificil.inhabilitar()
         opcionBatallaFinal.inhabilitar()
-        batallaFinal.inhabilitar()
         tocadiscos.tocar(sonidoFondo)
     }
 }

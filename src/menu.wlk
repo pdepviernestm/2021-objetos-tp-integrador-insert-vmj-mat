@@ -4,6 +4,7 @@ import personaje.*
 import turnos.*
 import ataques.*
 import batalla.*
+import posiciones.*
 
 const punteroInicio = new Puntero(posicionInicial = game.at(8, 5))
  
@@ -23,17 +24,18 @@ class Puntero {
 		position = posicionInicial
 	}
 	
-	method moverseHacia(donde){
-		if (donde.hayElementos(position.x(), position.y())){
+	//auxiliar
+	 method moverseHacia(donde){
+		if (donde.hayElementos(position)){
 			position = donde.mover(position)
 		}
 	}
+	 
 
 	method seleccionar() {
 		game.uniqueCollider(self).pulsar()
 	}
 }
-
 
 
 class AreaMenu {
@@ -43,35 +45,78 @@ class AreaMenu {
 	var alto
 	const distanciaX = 3
 	const distanciaY = 1
-	
+
 	method estaLibre(posicion) = game.getObjectsIn(posicion).isEmpty()
 	
-	method dentroDeArea(posicion) = ancho + inicio.x() - posicion.x() >= 0 and alto + inicio.y() - posicion.y() >= 0
+	method dentroDeArea(posicion) = self.dentroDeAncho(posicion.x()) and self.dentroDeAlto(posicion.y())
+	
+	
+	method dentroDeAlto(posicion){
+		if(posicion.between(0,inicio.y()))
+			return posicion.between(inicio.y()-alto,inicio.y())
+		else return posicion.between(inicio.y(),inicio.y() + alto)
+	}
+	
+	method dentroDeAncho(posicion){
+		if(posicion.between(0,inicio.x()))
+			return posicion.between(inicio.x()-ancho,inicio.x())
+		else return posicion.between(inicio.x(),inicio.x() + ancho)
+	}
+	
+	
 	
 	method puedePosicionarse(posicion){
 		return self.dentroDeArea(posicion) and self.estaLibre(posicion)
 	}
-
+	
+	
+	//auxiliar
 	method proximaPosicionLibre(){
-	  	if (self.puedePosicionarse(proxima.up(distanciaY)))
-	  	return proxima.up(distanciaY)
-	  	else if (self.puedePosicionarse(proxima.right(distanciaX)))
-	  	return proxima.right(distanciaX)
-	  	else {proxima.right(distanciaX)
-	  		if (self.puedePosicionarse(proxima.down(distanciaY)))
-	  		return proxima.down(distanciaY)
-	  		else return proxima
-	  		}
+	const proximasPosiciones = [proxima.up(distanciaY),proxima.right(distanciaX),proxima.down(distanciaY)]
+	return proximasPosiciones.find{posicion => self.puedePosicionarse(posicion)}
+}
+
+
+method siguientePosicionDiagonal(direccion) = direccion.mover(proxima)
+
+method posicionarDiagonal(direccion,items){
+	const proximasDirecciones = self.armarDirecciones(direccion,items)
+	if (!items.isEmpty()) {
+		const proximoItem=items.head()
+		if(self.puedePosicionarse(proxima)){
+			self.posicionarItem(proximoItem)
+			items.remove(proximoItem)
+			proximasDirecciones.remove(direccion)
+			proxima = self.siguientePosicionDiagonal(proximasDirecciones.head())
+			self.posicionarDiagonal(proximasDirecciones.head(),items)
+		}
+		else self.error("no hay mas posiciones")
 	}
+}
+
+method armarDirecciones(direccion,items){
+	const lista = []
+	const direccionOpuesta = direccion.sentidoOpuesto()
+	
+		lista.add(direccionOpuesta)
+		lista.add(direccion)
+		lista.add(direccionOpuesta)
+		lista.add(direccion)
+	
+	
+	return lista
+} 
+
+
+	
 	
 	method posicionarItems(items){
 		proxima = inicio
-		items.forEach{ i => if (self.estaLibre(proxima)) self.posicionarItem(i) }
+		items.forEach{ i => if (self.estaLibre(proxima)) self.posicionarItem(i) proxima = self.proximaPosicionLibre()}
 	}
 	
 	method posicionarItem(i){
 		i.position(proxima)
-		proxima = self.proximaPosicionLibre()
 	}
 }
 
@@ -116,12 +161,17 @@ class Estadisticas inherits Interfaz {
 		self.agregarVida()
 	}
 
-	
-	method agregarVida(){
+	//auxiliar
+	 method agregarVida(){
+		personajes.forEach{ p => p.vida().position(posicionDeIconos.mover(p.icono().position()))
+		game.addVisual(p.vida()) }
+	}
+	//
+	/*method agregarVida(){
 		personajes.forEach{ p => p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
 		game.addVisual(p.vida()) }
-		
-	}
+	}*/
+	
 	
 	method agregarIcono(p){	
 		game.addVisual(p.icono())
@@ -208,34 +258,3 @@ class MenuHabilidades inherits Menu {
 	override method itemsActuales() = turno.heroeActivo().habilidades()
 }
 
-class Lugar {
-	const proximoX
-	const proximoY
-	method hayElementos(x, y) = !game.getObjectsIn(game.at(x + proximoX, y + proximoY)).isEmpty()
-}
-
-object arriba inherits Lugar(proximoX = 0, proximoY = 1) { 
-	method mover(y){
-		return y.up(1)
-	}
-}
-
-object abajo inherits Lugar(proximoX = 0, proximoY = -1) { 
-	method mover(y){
-		return y.down(1)
-	}
-}
-
-object izquierda inherits Lugar(proximoX = -3, proximoY = 0) { 
-	var property posPersonaje = game.at(5,8)
-	method mover(x){
-		return x.left(3)
-	}
-}
-
-object derecha inherits Lugar(proximoX = 3, proximoY = 0) { 
-	var property posPersonaje = game.at(13,8)
-	method mover(x){
-		return x.right(3)
-	}
-}

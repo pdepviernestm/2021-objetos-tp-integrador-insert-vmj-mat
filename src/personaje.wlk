@@ -7,7 +7,7 @@ import tocadiscos.*
 import paleta.*
 
 class Icono{
-	var property position
+	var property position = game.origin()
 	const image
 	method image() = image
 	
@@ -18,8 +18,8 @@ class Icono{
 class Hp{
 	const hpInicial 
 	var property hpActual = hpInicial
-	var property position
-	var property textColor = paleta.blanco()
+	var property position = game.origin()
+	var property textColor = colorHabilitado
 	
 	
 	method posicionar(x,y){
@@ -34,10 +34,11 @@ class Hp{
 }
 
 class Personaje {
-	var property position
+	var property position = game.origin()
+	var property habilitado = true
 	const text
 	const property atributos
-	var property textColor = paleta.blanco()
+	var property textColor = colorHabilitado
 
 	method text() = text
 	method hp() = atributos.hp()
@@ -52,7 +53,7 @@ class Personaje {
 	method maxHP() = atributos.maxHP()
 
 	method pulsar() {
-		if(self.habilitado()) {
+		if(habilitado) {
 			turno.agregarAccion(self)
 			if(turno.proximaAccion() == lazaro) {
 				turno.heroesMuertos().forEach{ personaje => personaje.inhabilitar() }
@@ -61,15 +62,15 @@ class Personaje {
 	}
 
 	method posicionar(posicion) { atributos.posicionOriginal(posicion) }
-
-	method habilitado() = textColor == paleta.blanco()
 	
 	method inhabilitar() {
-		textColor = paleta.gris()
+		habilitado = false
+		textColor = colorInhabilitado
 	}
 
 	method habilitar() {
-		textColor = paleta.blanco()
+		habilitado = true
+		textColor = colorHabilitado
 	}
 	
 	method cambiarColor(color) {
@@ -79,7 +80,6 @@ class Personaje {
 	method reset() {
 		if(self.estaMuerto()) {
 			self.aumentarHP((self.maxHP() * 2 / 3).roundUp())
-			atributos.image()
 			self.habilitar()
 		}
 	}
@@ -92,6 +92,7 @@ class Personaje {
 	}
 	
 	method agregarPersonaje() {
+		self.posicionar(atributos.position())
 		game.addVisual(self.atributos())
 	}
 	
@@ -142,7 +143,7 @@ class Personaje {
 }
 
 class Atributos {
-	var posicionOriginal
+	var posicionOriginal = game.origin()
 	var property position = posicionOriginal
 	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
@@ -159,7 +160,8 @@ class Atributos {
 	const property imagenAtaque
 	const property imagenMuerto
 
-	var image = imagenInicial
+	var property image = imagenInicial
+	
 	
 	method posicionOriginal(posicion){
 		posicionOriginal = posicion
@@ -176,16 +178,12 @@ class Atributos {
 		else return image  
 	}
 
-	method image(ruta) {
-		image = ruta
-	}
 	
 	method estaMuerto() = hp == 0
 
 	method reducirHP(danio) {
 		hp = (hp - danio).max(0)
 		vida.hpActual(hp)
-		self.image()
 	}
 	
 	method aumentarHP(restauracion) {
@@ -205,15 +203,14 @@ class Atributos {
 
 const ladron = new Personaje (
 	atributos = new Atributos(
-		icono = new Icono(position = game.at(16, 2),image = "personajes/Thief2M.gif"),
+		icono = new Icono(image = "personajes/Thief2M.gif"),
 		imagenInicial = "personajes/Thief2M-SW.gif",
 		imagenAtaque = "personajes/Thief2M-Weak-SW.gif",
 		imagenMuerto = "personajes/Thief2M-Dead-SW.gif",
 
-		posicionOriginal = game.at(5, 8),
 
 		maxHP = 100,
-		vida = new Hp(hpInicial = 100, position = game.at(14, 2)),
+		vida = new Hp(hpInicial = 100),
 		fuerza = 70,
 		vigor = 70,
 		intelecto = 25, 
@@ -222,22 +219,20 @@ const ladron = new Personaje (
 		habilidades = [ataqueFisico]
 		
 	),
-	text = "Ladron",
-	position = game.at(4, 2)
+	text = "Ladron"
 )
 
 
 const clerigo = new Personaje (
 	atributos = new Atributos(	
-		icono = new Icono(position = game.at(16, 4),image = "personajes/WhiteMage2F.gif"),
+		icono = new Icono(image = "personajes/WhiteMage2F.gif"),
 		imagenInicial = "personajes/WhiteMage2F-SW.gif",
 		imagenAtaque =  "personajes/WhiteMage2F-Weak-SW.gif",
 		imagenMuerto =  "personajes/WhiteMage2F-Dead-SW.gif",
 
-		posicionOriginal = game.at(5, 6),
 		
 		maxHP = 120,
-		vida = new Hp(hpInicial = 120,position= game.at(14,4)),
+		vida = new Hp(hpInicial = 120),
 		fuerza = 20,
 		vigor = 30,
 		intelecto = 70,
@@ -246,22 +241,20 @@ const clerigo = new Personaje (
 		habilidades = [curacion, ataqueMagico, hechizoLazaro]
 		
 		),
-	text = "Clerigo",
-	position = game.at(4, 1)
+	text = "Clerigo"
 )
 
 const poseidon = new Personaje(
 	atributos = new Atributos(
-		icono = new Icono(position = game.at(13, 2), image = "personajes/Summoner2M.gif"),
+		icono = new Icono(image = "personajes/Summoner2M.gif"),
 		
 		imagenInicial = "personajes/Summoner2M-SW.gif", 
 		imagenAtaque = "personajes/Summoner2M-Weak-SW.gif",
 		imagenMuerto = "personajes/Summoner2M-Dead-SW.gif",
 
-		posicionOriginal = game.at(6, 10),	
 		
 		maxHP = 150,
-		vida = new Hp(hpInicial = 150,position= game.at(11,2)),
+		vida = new Hp(hpInicial = 150),
 		fuerza = 40,
 		vigor = 20,
 		intelecto = 60,
@@ -269,22 +262,20 @@ const poseidon = new Personaje(
 		
 		habilidades = [ataquePiro, ataqueHielo,ataqueElectro,ataqueAero]
 	),
-	text = "Poseidon",
-	position = game.at(4, 3)
+	text = "Poseidon"
 )
 
 const hercules = new Personaje( 
 	atributos = new Atributos(
-		icono= new Icono(position = game.at(13,4),image ="personajes/Knight3M.gif" ),
+		icono= new Icono(image ="personajes/Knight3M.gif" ),
 		
 		imagenInicial = "personajes/Knight3M-SW.gif", 
 		imagenAtaque = "personajes/Knight3M-Weak-SW.gif",
 		imagenMuerto = "personajes/Knight1M-Dead-SW.gif",
 
-		posicionOriginal = game.at(9, 9),
 		
 		maxHP = 120,
-		vida = new Hp(hpInicial = 120,position= game.at(11,4)),
+		vida = new Hp(hpInicial = 120),
 		fuerza = 90,
 		vigor = 50,
 		intelecto = 40,
@@ -292,7 +283,6 @@ const hercules = new Personaje(
 		
 		habilidades = [ataqueFisico,ataqueEspada]
 	),
-	text = "Hercules",
-	position = game.at(4, 4)
+	text = "Hercules"
 )
 

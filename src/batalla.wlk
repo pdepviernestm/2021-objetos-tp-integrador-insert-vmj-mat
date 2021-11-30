@@ -10,6 +10,7 @@ import paleta.*
 import creditos.*
 import tocadiscos.*
 import pausa.*
+import posiciones.*
 
 class NombreBatalla {
 	const property image = "menu/espadita.gif"
@@ -26,9 +27,12 @@ class NombreBatalla {
 	}
 }
 
+ 
 
 
 class Batalla {
+	var areaEnemigosBatalla = new AreaMenu(inicio = game.at(3,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15) 
+	var areaHeroesBatalla = new AreaMenu(inicio = game.at(15,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
 	const property nombre
     const property heroes = []
     const enemigos = []
@@ -61,21 +65,17 @@ class Batalla {
 	}
 	
     method iniciar() {
+    	areaEnemigosBatalla = new AreaMenu(inicio = game.at(3,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
+    	areaHeroesBatalla = new AreaMenu(inicio = game.at(15,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
     	game.addVisual(self)
-    	turno.batalla(self)
-    	turno.enemigos(enemigos)
-    	turno.heroes(heroes)
-    	turno.heroeActivo(heroes.head())
-        turno.heroeActivo().cambiarColor(paleta.verde())
-        turno.heroes().drop(1).forEach{ heroe => heroe.cambiarColor(paleta.blanco()) }
+    	turno.iniciar(self,enemigos,heroes)
         menuHeroes.items(heroes)
 		menuEnemigos.items(enemigos)
 		estadisticas.items(heroes)
 		estadisticas.personajes(heroes)
 		tocadiscos.tocarFondo(cancion)
-        self.agregar(enemigos, izquierda)
-        self.agregar(heroes, derecha)
-		turno.rutina([])
+        self.agregarABatalla(enemigos, posicionEnemigos,areaEnemigosBatalla)
+        self.agregarABatalla(heroes, posicionHeroes,areaHeroesBatalla)
 		// si no se reinicia la rutina, la próxima vez que se ejecuta la batalla quedan acciones de más
 		menuHeroes.items(heroes)
 		menuEnemigos.items(enemigos)
@@ -86,30 +86,12 @@ class Batalla {
         turno.rutinaAbortada(false)
     }
 
-	method agregar(personajes, donde) {
-		var x = donde.posPersonaje().x()  
-	   	var y = donde.posPersonaje().y()
-	   	var indicador = true 
-	   	if (personajes.size() < 3){
-	   		x -= personajes.size()
-	   		y += personajes.size() -1 
-	   		indicador = true}
-	   	else indicador = false
-	   	personajes.forEach{ p =>
-		   	p.comenzarBatalla()
-		   	p.posicionar(game.at(x, y))
-		   	p.agregarPersonaje()
-		   	if (indicador){
-		   		y -= 2
-		        x += 3
-		    }
-		    else {
-		    	y -= 1
-		        if (x >= 5 and donde == izquierda or x >= 15 and donde == derecha) x -= 3
-		        else x += 3
-		    }
-	   	}
+	method agregarABatalla(personajes,donde,area){
+		area.posicionarDiagonal(donde,personajes.map{p=>p.atributos()})
+		personajes.forEach{p => p.comenzarBatalla() p.agregarPersonaje()}
 	}
+
+
 }
 
 const batallaFacil = new Batalla(

@@ -5,6 +5,8 @@ import mapa.*
 import pausa.*
 import tocadiscos.*
 import creditos.*
+import posiciones.*
+
 program juego {
 	
 	game.cellSize(32)
@@ -13,11 +15,11 @@ program juego {
 	
 	pantallaInicio.iniciar()
 	game.boardGround("background/inicio.jpeg")
-	keyboard.down().onPressDo{ modo.moverseHacia(abajo) }
-	keyboard.up().onPressDo{ modo.moverseHacia(arriba) }
+	keyboard.down().onPressDo{ modo.moverseHacia(opcionAbajo) }
+	keyboard.up().onPressDo{ modo.moverseHacia(opcionArriba) }
 	keyboard.x().onPressDo{ modo.seleccionar() }
-	keyboard.left().onPressDo{ modo.moverseHacia(izquierda) }
-	keyboard.right().onPressDo{ modo.moverseHacia(derecha) }
+	keyboard.left().onPressDo{ modo.moverseHacia(opcionIzquierda) }
+	keyboard.right().onPressDo{ modo.moverseHacia(opcionDerecha) } 
 	keyboard.z().onPressDo{ pausa.pausar() }
 	keyboard.r().onPressDo{ creditos.volver() }
 	
