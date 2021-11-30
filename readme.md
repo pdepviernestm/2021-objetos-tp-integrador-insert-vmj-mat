@@ -21,7 +21,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Clerigo</b></td>
-    <td><img src="../assets/personajes/WhiteMage2F-SW.gif"/></td>
+    <td><img src="assets/personajes/WhiteMage2F-SW.gif"/></td>
     <td>120</td>
     <td>20</td>
     <td>30</td>
@@ -30,7 +30,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Ladron</b></td>
-    <td><img src="../assets/personajes/Thief2M-SW.gif"/></td>
+    <td><img src="assets/personajes/Thief2M-SW.gif"/></td>
     <td>100</td>
     <td>70</td>
     <td>70</td>
@@ -39,7 +39,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Poseidon</b></td>
-    <td><img src="../assets/personajes/Summoner2M-SW.gif"/></td>
+    <td><img src="assets/personajes/Summoner2M-SW.gif"/></td>
     <td>150</td>
     <td>40</td>
     <td>20</td>
@@ -48,7 +48,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Hercules</b></td>
-    <td><img src="../assets/personajes/Knight3M-SW.gif"/></td>
+    <td><img src="assets/personajes/Knight3M-SW.gif"/></td>
     <td>120</td>
     <td>90</td>
     <td>50</td>
@@ -72,7 +72,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Cactroc</b></td>
-    <td><img src="../assets/enemigos/Cactrot.gif"/></td>
+    <td><img src="assets/enemigos/Cactrot.gif"/></td>
     <td>100</td>
     <td>50</td>
     <td>15</td>
@@ -81,7 +81,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Flan</b></td>
-    <td><img src="../assets/enemigos/Flan.gif"/></td>
+    <td><img src="assets/enemigos/Flan.gif"/></td>
     <td>150</td>
     <td>50</td>
     <td>40</td>
@@ -90,7 +90,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Tomberi</b></td>
-    <td><img src="../assets/enemigos/Tonberry.gif"/></td>
+    <td><img src="assets/enemigos/Tonberry.gif"/></td>
     <td>200</td>
     <td>50</td>
     <td>40</td>
@@ -99,7 +99,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Duende</b></td>
-    <td><img src="../assets/enemigos/Goblin2.gif"/></td>
+    <td><img src="assets/enemigos/Goblin2.gif"/></td>
     <td>170</td>
     <td>50</td>
     <td>50</td>
@@ -108,7 +108,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
    <tr>
     <td><b>Pterodon</b></td>
-    <td><img src="../assets/enemigos/Pterodon.gif"/></td>
+    <td><img src="assets/enemigos/Pterodon.gif"/></td>
     <td>500</td>
     <td>100</td>
     <td>15</td>
@@ -117,7 +117,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
    <tr>
     <td><b>Shiva</b></td>
-    <td><img src="../assets/enemigos/12-Shiva.gif"/></td>
+    <td><img src="assets/enemigos/12-Shiva.gif"/></td>
     <td>500</td>
     <td>50</td>
     <td>15</td>
@@ -126,7 +126,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   </tr>
   <tr>
     <td><b>Mago Supremo</b></td>
-    <td><img src="../assets/enemigos/32-Mage-Master.gif"/></td>
+    <td><img src="assets/enemigos/32-Mage-Master.gif"/></td>
     <td>1000</td>
     <td>100</td>
     <td>15</td>
@@ -139,21 +139,21 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
 ## Batallas
 <div align="center">
   <h4>Mapa inicial del Juego.</h4>
-  <img src="../assets/presentacion/mapaJuego.JPG"/>
+  <img src="assets/presentacion/mapaJuego.JPG"/>
   <h4>Batalla en Llanura Perezosa (Dificultad = Facil).</h4>
-  <img src="../assets/presentacion/batallaFacil.JPG"/>
+  <img src="assets/presentacion/batallaFacil.JPG"/>
   <h4>Una vez ganada la batalla en Llanura Perezosa desbloqueamos la segunda batalla.</h4>
-  <img src="../assets/presentacion/mapaJuego2.JPG"/>
+  <img src="assets/presentacion/mapaJuego2.JPG"/>
   <h4>Batalla en el Bosque del Camino Inversible (Dificultad = Dificil). </h4>
-  <img src="../assets/presentacion/BatallaDificil.JPG"/>
+  <img src="assets/presentacion/BatallaDificil.JPG"/>
   <h4>Si ganamos en el bosque, obtenemos la tercera batalla.</h4>
-  <img src="../assets/presentacion/mapajuego3.JPG"/>
+  <img src="assets/presentacion/mapajuego3.JPG"/>
   <h4>Batalla en el Desierto de los Mensajes Perdidos (Dificultad = Legendario). </h4>
-  <img src="../assets/presentacion/batallaAvanzada.JPG"/>
+  <img src="assets/presentacion/batallaAvanzada.JPG"/>
   <h4>Si sobrevivimos al desierto, la batalla final nos espera.</h4>
-  <img src="../assets/presentacion/mapaJuego4.JPG"/>
+  <img src="assets/presentacion/mapaJuego4.JPG"/>
   <h4>Batalla en el abismo del final (Dificultad = Sensei). </h4>
-  <img src="../assets/presentacion/batallaFinal.JPG"/>
+  <img src="assets/presentacion/batallaFinal.JPG"/>
 </div>  
   
 
