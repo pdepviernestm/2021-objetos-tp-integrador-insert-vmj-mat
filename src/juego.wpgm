@@ -6,6 +6,7 @@ import pausa.*
 import tocadiscos.*
 import creditos.*
 import posiciones.*
+import config.*
 
 program juego {
 	
@@ -26,3 +27,4 @@ program juego {
 	game.start()
 
 }
+

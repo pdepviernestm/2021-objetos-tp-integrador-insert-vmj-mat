@@ -4,6 +4,7 @@ import personaje.*
 import turnos.*
 import ataques.*
 import batalla.*
+import config.*
 
 
 class Direccion{
@@ -48,13 +49,7 @@ object izquierda  {
 object derecha  {
 	 method mover(posicion,lugares) = posicion.right(lugares)
 }
-const opcionArriba = new Direccion (lugares = 1,sentido = arriba)
-const opcionAbajo = new Direccion(lugares = 1,sentido= abajo)
-const opcionDerecha = new Direccion(lugares = 3,sentido= derecha)
-const opcionIzquierda = new Direccion(lugares = 3,sentido= izquierda)
-const posicionDeIconos = new Direccion(lugares = 2,sentido= izquierda)
-const posicionEnemigos = new Diagonal(lugares = 1,sentido = menor,opuesto = mayor)
-const posicionHeroes = new Diagonal(lugares = 1,sentido = mayor,opuesto = menor)
+
 
 
 

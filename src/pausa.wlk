@@ -1,10 +1,10 @@
 import wollok.game.*
 import menu.*
 import turnos.*
-import paleta.*
 import pantallaInicio.*
 import mapa.*
 import tocadiscos.*
+import config.*
 
 object pausa {
 	var property pausaHabilitada = false
@@ -23,19 +23,17 @@ object pausa {
 	}
 }
 
-const menuPausa = new Menu(image = "menu/menuBase.png", area = new AreaMenu(inicio = game.at(8, 5), alto = 2, ancho = 1), position = game.at(5, 5), items = [reanudar, volverAlInicio, volverAlMapa])
-
 object reanudar {
-	var property position 
+	var property position = game.origin()
 	method text() = "Reanudar"
-	method textColor() = paleta.blanco()
+	method textColor() = colorHabilitado
 	method pulsar() { pausa.reanudar() }
 }
 
 class VolverAOpcion{
 	var property position = game.origin()
 	method text() 
-	method textColor() = paleta.blanco()
+	method textColor() = colorHabilitado
 	method pulsar() { 
 		tocadiscos.detenerfondo()
 		menuPausa.removerse()
@@ -49,7 +47,7 @@ class VolverAOpcion{
 }
 
 object volverAlInicio inherits VolverAOpcion{
-	method text() = "Volver al inicio"
+	override method text() = "Volver al inicio"
 	override method pulsar() { 
 		super()
 		pantallaInicio.iniciar()
@@ -57,10 +55,13 @@ object volverAlInicio inherits VolverAOpcion{
 }
 
 object volverAlMapa inherits VolverAOpcion{
-	method text() = "Volver al mapa"
+	override method text() = "Volver al mapa"
 	override method pulsar() {
 		super()
 		mapa.display()
 		menuMapa.display()
 	}
 }
+
+/* ELEMENTOS */ 
+const menuPausa = new Menu(image = "menu/menuBase.png", area = new AreaMenu(inicio = game.at(8, 5), alto = 2, ancho = 1), position = game.at(5, 5), items = [reanudar, volverAlInicio, volverAlMapa])

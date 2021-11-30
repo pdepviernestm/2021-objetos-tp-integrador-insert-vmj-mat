@@ -127,7 +127,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
   <tr>
     <td><b>Mago Supremo</b></td>
     <td><img src="../assets/enemigos/32-Mage-Master.gif"/></td>
-    <td>3000</td>
+    <td>1000</td>
     <td>100</td>
     <td>15</td>
     <td>100</td>

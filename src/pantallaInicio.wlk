@@ -3,6 +3,7 @@ import menu.*
 import batalla.*
 import mapa.*
 import tocadiscos.*
+import config.*
 
 object pantallaInicio {
     const property opciones = [comenzar]
@@ -21,7 +22,7 @@ object pantallaInicio {
 
 object comenzar {
     method image() = "menu/comenzar.png"
-    method position() = game.at(8,5)
+    method position() = posicionComenzar
     method pulsar() {
         tocadiscos.tocar(sonidoComenzar)
     	pantallaInicio.removerse()  

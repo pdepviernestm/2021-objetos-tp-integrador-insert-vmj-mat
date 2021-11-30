@@ -6,9 +6,9 @@ import personaje.*
 import ataques.*
 import batalla.*
 import pantallaInicio.*
-import paleta.*
 import tocadiscos.*
 import pausa.*
+import config.*
 
 object turno {
 	var property rutina = []
@@ -19,11 +19,13 @@ object turno {
 	var property proximaAccion
 	var property rutinaAbortada = false
 
+
+
 	method ejecutar() {
 		batalla.removerMenuActivo()
 		pausa.pausaHabilitada(false)
 		self.enemigosVivos().forEach({ enemigo =>
-			self.agregarAccion(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos()))
+			self.agregarAccionEnemigo(enemigo.elegirAtaque(), enemigo, enemigo.elegirObjetivo(self.heroesVivos()))
 		})
 
 		const cantAcciones = rutina.size()
@@ -42,9 +44,7 @@ object turno {
 				self.ganar()
 			}
 			else if(!rutinaAbortada) {
-				heroeActivo.cambiarColor(paleta.blanco())
-				heroeActivo = self.heroesVivos().head()
-				heroeActivo.cambiarColor(paleta.verde())
+				self.cambiarHeroeActivoPor(self.heroesVivos().head())
 				pausa.pausaHabilitada(true)
 				menuBase.display()
 				rutina = []
@@ -52,12 +52,7 @@ object turno {
 				batalla.inhabilitarEnemigos()
 			}
 			else {
-				heroeActivo.cambiarColor(paleta.blanco())
-
-				heroeActivo.cambiarColor(colorHabilitado)
-				heroeActivo = self.heroesVivos().head()
-				heroeActivo.cambiarColor(paleta.verde())
-				heroeActivo.cambiarColor(colorPersonajeActual)
+				self.cambiarHeroeActivoPor(self.heroesVivos().head())				
 				rutina = []
 				batalla.inhabilitarAliados()
 				batalla.inhabilitarEnemigos()
@@ -66,15 +61,20 @@ object turno {
 
 	}
 	
+	method cambiarHeroeActivoPor(nuevoHeroeActivo){
+		heroeActivo.cambiarColor(colorHabilitado)
+		heroeActivo = nuevoHeroeActivo
+		heroeActivo.cambiarColor(colorPersonajeActual)
+	}
 	
 	method iniciar(nuevaBatalla,enemigosBatalla,heroesBatalla){
-		self.batalla(nuevaBatalla)
-    	self.enemigos(enemigosBatalla)
-    	self.heroes(heroesBatalla)
-    	self.heroeActivo(heroes.head())
-        self.heroeActivo().cambiarColor(colorPersonajeActual)
-        self.heroes().drop(1).forEach{ heroe => heroe.cambiarColor(colorHabilitado) }
-        self.rutina([])
+		batalla = nuevaBatalla
+    	enemigos = enemigosBatalla
+    	heroes = heroesBatalla
+    	heroeActivo = heroes.head()
+        heroeActivo.cambiarColor(colorPersonajeActual)
+        heroes.drop(1).forEach{ heroe => heroe.cambiarColor(colorHabilitado) }
+        rutina = []
 	}
 	
 	method ganar() {
@@ -106,10 +106,9 @@ object turno {
 	
 	method heroesMuertos() = heroes.filter{ heroe => heroe.estaMuerto() }
 	method heroesVivos() = heroes.filter{ heroe => !heroe.estaMuerto() }
-
 	method enemigosVivos() = enemigos.filter{ enemigo => !enemigo.estaMuerto() }
 
-	method agregarAccion(accion, enemigoAtacante, heroeAtacado) {
+	method agregarAccionEnemigo(accion, enemigoAtacante, heroeAtacado) {
 		const movimiento = new Movimiento(habilidad = accion, origen = enemigoAtacante, destino = heroeAtacado)
 		rutina.add(movimiento)
 	}
@@ -121,21 +120,21 @@ object turno {
 		batalla.menuActivo().display()
 	}
 
-	method agregarAccion(objetivo) {
+	method agregarAccionHeroe(objetivo) {
 		const movimiento = new Movimiento(habilidad = proximaAccion, origen = heroeActivo, destino = objetivo)
 
 		rutina.add(movimiento)
 		if (heroeActivo == self.heroesVivos().last()) self.ejecutar()
 		else {
 			const indiceActual = self.encontrarActual()
-			heroeActivo.cambiarColor(colorHabilitado)
-			heroeActivo = self.siguienteVivo(indiceActual) // ahora heroeActivo es el próximo héroe vivo
-			heroeActivo.cambiarColor(colorPersonajeActual)
+			self.cambiarHeroeActivoPor(self.siguienteVivo(indiceActual)) // ahora heroeActivo es el próximo héroe vivo
 			batalla.menuActivo().removerse()
 			menuBase.display()
 		}
 	}
-
+	
+	
+	
 	method cantHeroes() = heroes.size()
 
 	method encontrarActual() {

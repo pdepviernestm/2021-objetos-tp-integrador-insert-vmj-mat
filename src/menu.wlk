@@ -5,6 +5,7 @@ import turnos.*
 import ataques.*
 import batalla.*
 import posiciones.*
+import config.*
 
 const punteroInicio = new Puntero(posicionInicial = game.at(8, 5))
  
@@ -23,9 +24,7 @@ class Puntero {
 	method volveAlPrincipio() {
 		position = posicionInicial
 	}
-	
-	//auxiliar
-	 method moverseHacia(donde){
+	method moverseHacia(donde){
 		if (donde.hayElementos(position)){
 			position = donde.mover(position)
 		}
@@ -69,8 +68,6 @@ class AreaMenu {
 		return self.dentroDeArea(posicion) and self.estaLibre(posicion)
 	}
 	
-	
-	//auxiliar
 	method proximaPosicionLibre(){
 	const proximasPosiciones = [proxima.up(distanciaY),proxima.right(distanciaX),proxima.down(distanciaY)]
 	return proximasPosiciones.find{posicion => self.puedePosicionarse(posicion)}
@@ -97,24 +94,16 @@ method posicionarDiagonal(direccion,items){
 method armarDirecciones(direccion,items){
 	const lista = []
 	const direccionOpuesta = direccion.sentidoOpuesto()
-	
 		lista.add(direccionOpuesta)
 		lista.add(direccion)
 		lista.add(direccionOpuesta)
 		lista.add(direccion)
-	
-	
 	return lista
 } 
-
-
-	
-	
 	method posicionarItems(items){
 		proxima = inicio
 		items.forEach{ i => if (self.estaLibre(proxima)) self.posicionarItem(i) proxima = self.proximaPosicionLibre()}
 	}
-	
 	method posicionarItem(i){
 		i.position(proxima)
 	}
@@ -129,20 +118,16 @@ class Interfaz {
 		area.posicionarItems(items)
 		items.forEach({ item => game.addVisual(item) })
 	}
-	
 	method display(){
 		items = self.itemsActuales()
 		game.addVisual(self)
 		self.posicionarItems()
 	}
-	
 	method itemsActuales()
-	
 	method removerse(){
 		game.removeVisual(self)
 		self.removerItems()
 	}
-	
 	method removerItems(){
 		self.itemsActuales().forEach{i => game.removeVisual(i)}
 	}
@@ -160,30 +145,19 @@ class Estadisticas inherits Interfaz {
 		super()
 		self.agregarVida()
 	}
-
-	//auxiliar
-	 method agregarVida(){
+	method agregarVida(){
 		personajes.forEach{ p => p.vida().position(posicionDeIconos.mover(p.icono().position()))
 		game.addVisual(p.vida()) }
 	}
-	//
-	/*method agregarVida(){
-		personajes.forEach{ p => p.vida().position(game.at(p.icono().posX() -2,p.icono().posY()))
-		game.addVisual(p.vida()) }
-	}*/
-	
-	
 	method agregarIcono(p){	
 		game.addVisual(p.icono())
 	}
-	
 	override method removerItems(){
 		personajes.forEach{ item => 
 			game.removeVisual(item.vida())
 			game.removeVisual(item.icono())
 		}
 	}
-	
 }
 
 class Menu inherits Interfaz {
@@ -192,19 +166,15 @@ class Menu inherits Interfaz {
 	var property puntero = new Puntero (posicionInicial = game.at(0,0))
 	
 	method puntero() = puntero
-
 	override method itemsActuales() = items
-	 
 	override method display(){
 		super()	
 		self.agregarPuntero()
 	}
-	
 	override method removerItems() {
 		super()
 		game.removeVisual(puntero)
 	}
-	
 	method agregarPuntero() {
 		puntero.position(items.head().position())
 		game.addVisual(puntero)
@@ -219,7 +189,7 @@ class Objetivos inherits Menu {
 	}
 }
 
-
+/* Menues */
 const estadisticas = new Estadisticas (
 	area = new AreaMenu(inicio = game.at(13,1),
 						alto = 2, ancho = 4, distanciaY = 2), 
@@ -231,7 +201,6 @@ const menuBase =  new MenuHabilidades(
 	image = "menu/MenuBase.png",
 	area = new AreaMenu(inicio = game.at(3,0), alto = 2, ancho = 3)
 )
-
 const menuHeroes = new Objetivos (
 	area = new AreaMenu(inicio = game.at(3,0),
 						alto = 2, ancho = 3),
@@ -246,14 +215,11 @@ const menuEnemigos = new Objetivos (
 	image = "menu/MenuBase.png", 
 	items = new List()
 )
-
-
 const menuBase2 = new MenuHabilidades(
 	position = game.at(1,1),
 	image = "menu/MenuBase.png",
 	area = new AreaMenu(inicio = game.at(3,1), alto = 2, ancho = 3)
 )
-
 class MenuHabilidades inherits Menu {
 	override method itemsActuales() = turno.heroeActivo().habilidades()
 }

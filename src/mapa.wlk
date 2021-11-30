@@ -2,7 +2,7 @@ import wollok.game.*
 import menu.*
 import batalla.*
 import pantallaInicio.*
-import paleta.*
+import config.*
 
 object mapa inherits Interfaz{
 	const property image = "background/mapaLindo.jpg"
@@ -14,25 +14,17 @@ object mapa inherits Interfaz{
 	}
 }
 
-const menuMapa = new Menu (
-	position = game.origin(),
-	image = "menu/menuMapita.png",
-	area = new AreaMenu(inicio = game.at(1, 0), alto = 3, ancho = 1),
-	items = [opcionBatallaFacil, opcionBatallaDificil, opcionBatallaMasDificil, opcionBatallaFinal]
-)
-
-
-
 class Opcion {
     const destino
     const nombre
+	var habilitada = false
     var property position = game.origin()
-    var property textColor = paleta.gris()
+    var property textColor = colorInhabilitado
 	
 	method nombre() = destino.nombre()
 	
     method pulsar() {
-    	if(self.habilitada()) {
+    	if(habilitada) {
 	    	menuMapa.removerse()
 	    	mapa.removerse()
 	        destino.iniciar()
@@ -41,18 +33,30 @@ class Opcion {
     
     method text() = nombre
     
-    method habilitada() = textColor == paleta.blanco()
     
     method habilitar() {
-    	textColor = paleta.blanco()
+    	textColor = colorHabilitado
+    	habilitada = true
     	destino.habilitar()
     }
     
     method inhabilitar() {
-    	textColor = paleta.gris()
+    	textColor = colorInhabilitado
+    	habilitada = false
     	destino.inhabilitar()
     }
 }
+
+/* Menu del mapa */
+
+const menuMapa = new Menu (
+	position = game.origin(),
+	image = "menu/menuMapita.png",
+	area = new AreaMenu(inicio = game.at(1, 0), alto = 3, ancho = 1),
+	items = [opcionBatallaFacil, opcionBatallaDificil, opcionBatallaMasDificil, opcionBatallaFinal]
+)
+
+/* Opciones */
 
 const opcionBatallaFacil = new Opcion(
     destino = batallaFacil,
@@ -74,12 +78,3 @@ const opcionBatallaFinal = new Opcion(
     nombre = "Abismo"
 )
 
-
-class Indice {
-	const property position
-	const nombre
-	const color = paleta.blanco()
-	
-	method text() = nombre
-	method textColor() = color 
-}

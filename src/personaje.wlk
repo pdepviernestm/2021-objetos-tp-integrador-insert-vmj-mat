@@ -1,18 +1,15 @@
 import wollok.game.*
 import enemigo.*
-import menu.*
 import turnos.*	
 import ataques.*
 import tocadiscos.*
-import paleta.*
+import config.*
+import posiciones.*
 
 class Icono{
 	var property position = game.origin()
 	const image
 	method image() = image
-	
-	method posX() = self.position().x()
-	method posY() = self.position().y()
 }
 
 class Hp{
@@ -21,10 +18,6 @@ class Hp{
 	var property position = game.origin()
 	var property textColor = colorHabilitado
 	
-	
-	method posicionar(x,y){
-		self.position(game.at(x,y))
-	}
 		method cambiarColor(color){
 		textColor = color
 	}
@@ -39,13 +32,15 @@ class Personaje {
 	const text
 	const property atributos
 	var property textColor = colorHabilitado
+	
+	const property fuerza 		// ataque fisico
+	const property vigor		// defensa fisica
+	const property intelecto   	// ataque magico
+	const property mente 
 
+	method habilidades() = atributos.habilidades()
 	method text() = text
 	method hp() = atributos.hp()
-	method fuerza() = atributos.fuerza()
-	method vigor() = atributos.vigor()
-	method intelecto() = atributos.intelecto()
-	method mente() = atributos.mente()
 
 	method estaMuerto() = atributos.estaMuerto()
 	method reducirHP(danio) { atributos.reducirHP(danio) }
@@ -54,7 +49,7 @@ class Personaje {
 
 	method pulsar() {
 		if(habilitado) {
-			turno.agregarAccion(self)
+			turno.agregarAccionHeroe(self)
 			if(turno.proximaAccion() == lazaro) {
 				turno.heroesMuertos().forEach{ personaje => personaje.inhabilitar() }
 			}
@@ -99,10 +94,7 @@ class Personaje {
 	method eliminarPersonaje() {
 		game.removeVisual(self.atributos())
 	}
-	
-	method habilidades() = atributos.habilidades()
 	method estaElPersonaje() = game.hasVisual(atributos)
-	
 	method recibirHabilidad(ataque, potencia){
 		if (ataque == lazaro) {
 			self.reset()
@@ -147,19 +139,12 @@ class Atributos {
 	var property position = posicionOriginal
 	var property vida = new Hp(hpInicial = 0, position = game.at(0,0))
 	var property icono
-	var property habilidades
+	const property habilidades
 	const property maxHP
 	var property hp = maxHP
-	
-	const property fuerza 		// ataque fisico
-	const property vigor		// defensa fisica
-	const property intelecto   	// ataque magico
-	const property mente  		// defensa magica
-
 	const property imagenInicial
 	const property imagenAtaque
 	const property imagenMuerto
-
 	var property image = imagenInicial
 	
 	
@@ -170,8 +155,8 @@ class Atributos {
 
 	method posicionOriginal() = posicionOriginal
 
-	method posicionAtaque() = game.at(position.x()-1, position.y())
-
+	method posicionAtaque() = izquierda.mover(position,1)
+	
 	method image() {					// para que se quede muerto
 		if (self.estaMuerto()) 
 			return imagenMuerto
@@ -211,15 +196,16 @@ const ladron = new Personaje (
 
 		maxHP = 100,
 		vida = new Hp(hpInicial = 100),
-		fuerza = 70,
-		vigor = 70,
-		intelecto = 25, 
-		mente = 30,
+
 		
 		habilidades = [ataqueFisico]
 		
 	),
-	text = "Ladron"
+		fuerza = 70,
+		vigor = 70,
+		intelecto = 25, 
+		mente = 30,
+		text = "Ladron"
 )
 
 
@@ -233,14 +219,15 @@ const clerigo = new Personaje (
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120),
-		fuerza = 20,
-		vigor = 30,
-		intelecto = 70,
-		mente = 70,
+		
 		
 		habilidades = [curacion, ataqueMagico, hechizoLazaro]
 		
 		),
+		fuerza = 20,
+		vigor = 30,
+		intelecto = 70,
+		mente = 70,
 	text = "Clerigo"
 )
 
@@ -255,13 +242,14 @@ const poseidon = new Personaje(
 		
 		maxHP = 150,
 		vida = new Hp(hpInicial = 150),
+		
+		
+		habilidades = [ataquePiro, ataqueHielo,ataqueElectro,ataqueAero]
+	),
 		fuerza = 40,
 		vigor = 20,
 		intelecto = 60,
 		mente = 10,
-		
-		habilidades = [ataquePiro, ataqueHielo,ataqueElectro,ataqueAero]
-	),
 	text = "Poseidon"
 )
 
@@ -276,13 +264,14 @@ const hercules = new Personaje(
 		
 		maxHP = 120,
 		vida = new Hp(hpInicial = 120),
+		
+		
+		habilidades = [ataqueFisico,ataqueEspada]
+	),
 		fuerza = 90,
 		vigor = 50,
 		intelecto = 40,
 		mente = 70,
-		
-		habilidades = [ataqueFisico,ataqueEspada]
-	),
 	text = "Hercules"
 )
 

@@ -1,24 +1,20 @@
 import wollok.game.*
-import menu.*
 import personaje.*
 import turnos.*
 import ataques.*
 import tocadiscos.*
+import posiciones.*
 
 class AtributosEnemigo {
 	const property imagenInicial
 	var posicionOriginal = game.origin()
 	var property position = posicionOriginal
-	var property hp = maxHP
 	const property maxHP
+	var property hp = maxHP
 	var property carga = 0
-	var property fuerza 		// ataque fisico
-	const property vigor  		// defensa fisica
-	var property intelecto   	// ataque magico
-	const property mente  		// defensa magica
 	const property formaDeElegirObjetivo
 	const property formaDeElegirAtaque
-	const ataques
+	const property habilidades
 
 	method image() = imagenInicial
 	
@@ -28,8 +24,7 @@ class AtributosEnemigo {
 	}
 	
 	method posicionOriginal() = posicionOriginal
-
-	method posicionAtaque() = game.at(position.x() + 1, position.y())
+	method posicionAtaque() = derecha.mover(position,1)
 	
 	method estaMuerto() = hp <= 0
 	
@@ -42,7 +37,7 @@ class AtributosEnemigo {
 		hp = (hp + restauracion).min(maxHP)
 	}
 	
-	method elegirAtaque() = formaDeElegirAtaque.apply(ataques).tipoHabilidad()
+	method elegirAtaque() = formaDeElegirAtaque.apply(habilidades).tipoHabilidad()
 			
 	method elegirObjetivo(objetivos) = formaDeElegirObjetivo.apply(objetivos)
 	
@@ -61,7 +56,7 @@ class AtributosEnemigo {
 	}
 }
 
-// Formas de elegir objetivo
+ /* Formas de elegir objetivo */
 
 object elegirObjetivoAlAzar {
 	method apply(objetivos) = objetivos.anyOne()
@@ -79,15 +74,14 @@ object elegirObjetivoConMenosMente {
 	method apply(objetivos) = objetivos.min{ objetivo => objetivo.mente() }
 }
 
-// Formas de elegir ataque
+/* Formas de elegir ataque */
 
 class Ciclar {
 	var indice = 0
 	method apply(ataques) {
-		const ataque = ataques.get(indice)
 		if (indice + 1 == ataques.size()) indice = 0
 		else indice++
-		return ataque
+		return ataques.get(indice)
 	} 
 }
 
@@ -109,58 +103,60 @@ class Cargar {
 	} 
 }
 
+/* Enemigos */
+
 const jefeFinal = new Personaje(atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/32-Mage-Master.gif",
 		formaDeElegirObjetivo = elegirObjetivoAlAzar,
 		formaDeElegirAtaque = new Ciclar(),
-		ataques = [ataquePiro, ataqueHielo, ataqueElectro, ataqueAero],
-		maxHP = 700,
+		maxHP = 1000,
+		habilidades = [ataquePiro, ataqueHielo, ataqueElectro, ataqueAero]
+		),
 		fuerza = 100, 
 		vigor = 15, 
 		intelecto = 100, 
-		mente = 15 
-		),
-	text = "Mago Supremo")
+		mente = 15,
+		text = "Mago Supremo")
 	
 const shiva = new Personaje(atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/12-Shiva.gif",
 		formaDeElegirObjetivo = elegirObjetivoConMenosMente,
 		formaDeElegirAtaque = new Ciclar(),
-		ataques = [ataqueHielo, ataqueAero],
-		maxHP = 500,
+		habilidades =  [ataqueHielo, ataqueAero],
+		maxHP = 500
+		),
 		fuerza = 50, 
 		vigor = 15, 
 		intelecto = 100, 
-		mente = 15 
-		),
-	text = "Shiva")
+		mente = 15,
+		text = "Shiva")
 
 const dragoncito = new Personaje(atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Pterodon.gif",
 		formaDeElegirObjetivo = elegirObjetivoConMenosVigor,
 		formaDeElegirAtaque = new Cargar(),
-		ataques = [ataqueFisico, ataquePiro],
-		maxHP = 500,
+		habilidades = [ataquePiro,ataqueFisico],
+		maxHP = 500
+		),
 		fuerza = 100, 
 		vigor = 15, 
 		intelecto = 20, 
-		mente = 15 
-		),
-	text = "Pterodon")
+		mente = 15,
+		text = "Pterodon")
 
 const cactrot = new Personaje(
-	atributos = new AtributosEnemigo(
+		atributos = new AtributosEnemigo(
 		imagenInicial = "enemigos/Cactrot.gif",
 		formaDeElegirObjetivo = elegirObjetivoAlAzar,
 		formaDeElegirAtaque = new Ciclar(),
-		ataques = [ataqueFisico],
-		maxHP = 100,
+		habilidades = [ataqueFisico],
+		maxHP = 100
+		),
 		fuerza = 50, 
 		vigor = 15, 
 		intelecto = 20, 
-		mente = 15 
-		),
-	text = "Cactrot"
+		mente = 15,
+		text = "Cactrot"
 )
 
 const flan = new Personaje(
@@ -168,14 +164,14 @@ const flan = new Personaje(
 		imagenInicial = "enemigos/Flan.gif",
 		formaDeElegirObjetivo = elegirObjetivoAlAzar,
 		formaDeElegirAtaque = new Ciclar(),
-		ataques = [ataqueFisico],
-		maxHP = 150,
-	 	fuerza = 70, 
+		habilidades = [ataqueFisico],
+		maxHP = 150
+		),
+		fuerza = 70, 
 		vigor = 30, 
 		intelecto = 30, 
-		mente = 10 
-		),
-	text = "Flan"
+		mente = 10, 
+		text = "Flan"
 )
 
 const tomberi = new Personaje (
@@ -183,14 +179,14 @@ const tomberi = new Personaje (
 		imagenInicial = "enemigos/Tonberry.gif",
 		formaDeElegirObjetivo = elegirObjetivoConMenosHP,
 		formaDeElegirAtaque = new Cargar(),
-		ataques = [ataqueEspada, ataqueMagico],
-		maxHP = 200,
+		habilidades = [ataqueEspada, ataqueMagico],
+		maxHP = 200
+	), 
 		fuerza = 50, 
 		vigor = 40, 
 		intelecto = 30, 
-		mente = 40
-	), 
-	text = "Tomberi"
+		mente = 40,
+		text = "Tomberi"
 )
 
 const duende = new Personaje (
@@ -198,14 +194,15 @@ const duende = new Personaje (
 		imagenInicial = "enemigos/Goblin2.gif",
 		formaDeElegirObjetivo = elegirObjetivoAlAzar,
 		formaDeElegirAtaque = new Ciclar(),
-		ataques = [ataqueFisico],
-		maxHP = 170,
+		habilidades = [ataqueFisico],
+		maxHP = 170
+	),
+		
 		fuerza = 50, 
 		vigor = 50, 
 		intelecto = 60, 
-		mente = 35 
-	),
-	text = "Duende"
+		mente = 35 ,
+		text = "Duende"
 )
 
 

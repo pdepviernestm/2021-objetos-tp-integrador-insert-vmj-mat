@@ -6,33 +6,32 @@ import pantallaInicio.*
 import ataques.*
 import turnos.*
 import mapa.*
-import paleta.*
 import creditos.*
 import tocadiscos.*
 import pausa.*
 import posiciones.*
+import config.*
+
+/* Nombre que aparece en el mapa */
 
 class NombreBatalla {
 	const property image = "menu/espadita.gif"
 	const property text 
 	const property position 
-	var property textColor = paleta.gris()
+	var property textColor = colorInhabilitado
 		
 	method inhabilitar() {
-		textColor = paleta.gris()
+		textColor = colorInhabilitado
 	}
 	
 	method habilitar() {
-		textColor = paleta.blanco()
+		textColor = colorHabilitado
 	}
 }
 
- 
-
-
 class Batalla {
-	var areaEnemigosBatalla = new AreaMenu(inicio = game.at(3,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15) 
-	var areaHeroesBatalla = new AreaMenu(inicio = game.at(15,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
+	var areaEnemigosBatalla = areaEnemigosPorDefecto
+	var areaHeroesBatalla = areaHeroesPorDefecto
 	const property nombre
     const property heroes = []
     const enemigos = []
@@ -65,8 +64,8 @@ class Batalla {
 	}
 	
     method iniciar() {
-    	areaEnemigosBatalla = new AreaMenu(inicio = game.at(3,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
-    	areaHeroesBatalla = new AreaMenu(inicio = game.at(15,10),distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
+    	areaEnemigosBatalla = new AreaMenu(inicio = radioEnemigos,distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
+    	areaHeroesBatalla = new AreaMenu(inicio = radioHeroes,distanciaX = 2,distanciaY = 1, alto = 10,ancho = 15)
     	game.addVisual(self)
     	turno.iniciar(self,enemigos,heroes)
         menuHeroes.items(heroes)
@@ -94,8 +93,11 @@ class Batalla {
 
 }
 
+
+/* Batallas */
+
 const batallaFacil = new Batalla(
-	nombre = new NombreBatalla(text = "Llanura Perezosa", position = game.at(5,7)),
+	nombre = new NombreBatalla(text = "Llanura Perezosa", position = posicionLlanura),
     heroes = heroesBatallaFacil,
     enemigos = enemigosBatallaFacil,
     image = "background/fondo2.jpeg",
@@ -110,7 +112,7 @@ const batallaFacil = new Batalla(
 )
 
 const batallaDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Bosque del Camino Inversible", position = game.at(13,3)),
+	nombre = new NombreBatalla(text = "Bosque del Camino Inversible", position = posicionBosque),
     heroes = heroesBatallaDificil,
     enemigos = enemigosBatallaDificil, 
     image = "background/bosque.png", 
@@ -125,7 +127,7 @@ const batallaDificil = new Batalla (
 )
 
 const batallaMasDificil = new Batalla (
-	nombre = new NombreBatalla(text = "Desierto de los Mensajes Perdidos", position = game.at(13, 6)),
+	nombre = new NombreBatalla(text = "Desierto de los Mensajes Perdidos", position = posicionDesierto),
 	heroes = heroesBatallaMasDificil,
 	enemigos = enemigosBatallaMasDificil,
 	image = "background/desierto2.png",
@@ -140,7 +142,7 @@ const batallaMasDificil = new Batalla (
 )
 
 const batallaFinal = new Batalla(
-	nombre = new NombreBatalla(text = "Abismo del Final", position = game.at(12,12)),
+	nombre = new NombreBatalla(text = "Abismo del Final", position = posicionAbismo),
     heroes = heroesBatallaFinal,
     enemigos = enemigosBatallaFinal, 
     image = "background/batallaFinal.png",
@@ -150,6 +152,8 @@ const batallaFinal = new Batalla(
     	creditos.mostrar()
     }
 )
+
+/* Personajes por batalla */
 
 const heroesBatallaFacil = [ladron, clerigo]
 const enemigosBatallaFacil = [flan, cactrot]
