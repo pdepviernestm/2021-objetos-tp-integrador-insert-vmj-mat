@@ -89,7 +89,7 @@ El juego Final Fantasy - Insert VMJ es un juego de lucha PvE en donde personajes
    <th>Mente</th>
   </tr>
   <tr>
-    <td><b>Cactroc</b></td>
+    <td><b>Cactrot</b></td>
     <td><img src="assets/enemigos/Cactrot.gif"/></td>
     <td>100</td>
     <td>50</td>
